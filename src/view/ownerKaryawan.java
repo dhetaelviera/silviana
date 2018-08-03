@@ -62,6 +62,20 @@ public class ownerKaryawan extends javax.swing.JFrame {
     public void backListener(ActionListener a) {
         kembali.addActionListener(a);
     }
+    
+    
+    public void transaksiListener(ActionListener a) {
+        transaksi.addActionListener(a);
+    }
+
+    public void karyawanListener(ActionListener a) {
+        karyawan.addActionListener(a);
+    }
+
+    public void barangListener(ActionListener a) {
+        barang.addActionListener(a);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,6 +97,9 @@ public class ownerKaryawan extends javax.swing.JFrame {
         kembali = new javax.swing.JButton();
         tambah = new javax.swing.JButton();
         hapus1 = new javax.swing.JButton();
+        karyawan = new javax.swing.JButton();
+        transaksi = new javax.swing.JButton();
+        barang = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -123,6 +140,15 @@ public class ownerKaryawan extends javax.swing.JFrame {
         hapus1.setText("hapus karyawan");
         getContentPane().add(hapus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, -1, -1));
 
+        karyawan.setText("karyawan");
+        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 120, -1));
+
+        transaksi.setText("transaksi");
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 120, -1));
+
+        barang.setText("barang");
+        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 120, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -162,16 +188,19 @@ public class ownerKaryawan extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton barang;
     private javax.swing.JButton hapus1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton karyawan;
     private javax.swing.JButton kembali;
     private javax.swing.JTextField nama;
     private javax.swing.JTextField password;
     private javax.swing.JTable tabelKaryawan;
     private javax.swing.JButton tambah;
+    private javax.swing.JButton transaksi;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

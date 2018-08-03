@@ -50,7 +50,7 @@ public class barang {
         return false;
     }
 
-    public boolean updateBarang(int idBarang, String namaBarang, int stokBarang, int hargaBarang, int jenis, int merk) {
+    public boolean updateBarang(String idBarang, String namaBarang, int stokBarang, int hargaBarang, int jenis, int merk) {
 
         String query = "UPDATE barang SET namaBarang=?, stokBarang=?,hargaBarang=?,jenis=?, merk=? WHERE idBarang=?";
         System.out.println(query);
@@ -93,7 +93,7 @@ public class barang {
     }
 
     public int getIDBarang2(int idDetail) {
-        String query = "select idbarang from detailtransaksi where iddetail='" + idDetail + "'";
+        String query = "select idbarang from detailtransaksi where iddetail=?";
         int barang = 0;
         try {
             PreparedStatement st = konek.prepareStatement(query);
@@ -421,4 +421,23 @@ public class barang {
         }
         return jenis;
     }
+    
+        public String getMerkBarang(int idBarang) {
+        String query = "SELECT namaMerk"
+                + "  FROM barang b JOIN merk mb ON mb.idMerk=b.idMerk WHERE idBarang=?;";
+        String jtuTerpilih = null;
+        try {
+            PreparedStatement st = konek.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            st.setInt(1, idBarang);
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            jtuTerpilih = rs.getString("namaMerk");
+            System.out.println(jtuTerpilih);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            e.getMessage();
+        }
+        return jtuTerpilih;
+    }
+
 }

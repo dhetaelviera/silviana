@@ -7,6 +7,11 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.barang;
 import model.pembeli;
@@ -36,25 +41,41 @@ public class cOwner {
     private cBarang controllerBarang;
     public static String username;
     public static String abc;
+        private static int idTransaksi;
+    private static String namaPembeli, total;
 
     public cOwner(String username) {
         mUser = new user();
+        mTransaksi=new transaksi();
         owner = new ownerDashboard();
+        this.username=username;
         owner.setVisible(true);
         owner.getID();
         owner.setID(username);
         abc = username;
+        System.out.println(abc);
         owner.setResizable(false);
         owner.setLocationRelativeTo(null);
         owner.barangListener(new barangListener());
         owner.transaksiListener(new transaksiListener());
         owner.karyawanListener(new karyawan());
         owner.logoutListener(new logoutAdmin());
+        owner.kalender(new sortByKal());
+        owner.kalender2(new sortByMonth());
+        owner.kal().setEnabled(false);
+        owner.month().setEnabled(false);
+        owner.detail().setEnabled(false);
+        owner.kalender3(new aktif());
+        owner.reset(new resetTabel());
+        owner.sortByNama(new sortByNama());
+        owner.tabelListener(new selectedTabelManajer());
+        
         owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiOwner());
     }
 
     public cOwner(int a) {
         mUser = new user();
+        mTransaksi=new transaksi();
         karyawan = new ownerKaryawan();
         karyawan.setVisible(true);
         karyawan.setResizable(false);
@@ -64,7 +85,120 @@ public class cOwner {
         karyawan.backListener(new kembali3());
 
     }
+    
+     private class selectedTabelManajer implements MouseListener {
+        
+        public selectedTabelManajer() {
+        }
+        
+        @Override
+        public void mouseClicked(MouseEvent e) {
+//            viewManajer.detail().setEnabled(true);
+            int baris = owner.tabel().getSelectedRow();
+            idTransaksi = Integer.valueOf(String.valueOf(owner.tabel().getValueAt(baris, 0)));
+            namaPembeli = owner.tabel().getValueAt(baris, 1).toString();
+            total = owner.tabel().getValueAt(baris, 3).toString();
+        }
+//<editor-fold defaultstate="collapsed" desc="comment">
 
+        @Override
+        public void mousePressed(MouseEvent e) {
+            
+        }
+        
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            
+        }
+        
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            
+        }
+        
+        @Override
+        public void mouseExited(MouseEvent e) {
+            
+        }
+//</editor-fold>
+    }
+     private class sortByNama implements ActionListener {
+        
+        public sortByNama() {
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            bacaTabelTransaksibyNama();
+        }
+    }
+      private class aktif implements ActionListener {
+        
+        public aktif() {
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            owner.kal().setEnabled(true);
+            owner.month().setEnabled(true);
+        }
+    }
+    
+       private class resetTabel implements ActionListener {
+        
+        public resetTabel() {
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            bacaTabelTransaksi();
+        }
+    }
+    private class sortByMonth implements ActionListener {
+        
+        public sortByMonth() {
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            bacaTabelTransaksiByMonth();
+        }
+    }
+    
+    private class sortByKal implements ActionListener {
+        
+        public sortByKal() {
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            bacaTabelTransaksiByKal();
+        }
+    }
+    
+    
+    private void bacaTabelTransaksibyNama() {
+        String idBarang = owner.getBarang();
+        owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiOwnerbyNama(idBarang));
+    }
+    
+    private void bacaTabelTransaksiByKal() {
+        try {
+            owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiManajerbyDate(owner.gettglBeli()));
+        } catch (ParseException ex) {
+            Logger.getLogger(cUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void bacaTabelTransaksiByMonth() {
+        try {
+            owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiManajerbyMonth(owner.gettglBeli()));
+        } catch (ParseException ex) {
+            Logger.getLogger(cUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+      
+    
     private void bacaTabelTransaksi() {
         owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiOwner());
     }

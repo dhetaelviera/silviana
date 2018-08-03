@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.barang;
+import model.transaksi;
 import model.user;
 
 /**
@@ -29,21 +30,31 @@ public class ownerTransaksi extends javax.swing.JFrame {
      */
     Connection konek;
     barang modelBarang;
+    transaksi modelTransaksi;
     user modelUser;
     String jenis_Barang[][];
     String merk_Barang[][];
     String nama_Barang[][];
+    String kurir[][];
 
     public ownerTransaksi() {
         modelBarang = new barang();
+        modelTransaksi = new transaksi();
         jenisBarang = new JComboBox();
         merkBarang = new JComboBox();
         namaBarang = new JComboBox();
+        pilihkurir = new JComboBox();
 
         jenis_Barang = modelBarang.getJenis();
         merk_Barang = modelBarang.getMerk();
+        kurir=modelTransaksi.getKurir();
 
         initComponents();
+    }
+
+    public String getKurir() {
+        int indeks = pilihkurir.getSelectedIndex();
+        return kurir[0][indeks];
     }
 
     public String getJenis() {
@@ -65,6 +76,10 @@ public class ownerTransaksi extends javax.swing.JFrame {
         return namaPembeli.getText();
     }
 
+    public String getInvoice() {
+        return invoice.getText();
+    }
+
     public String getDiskon() {
         return diskon.getText();
     }
@@ -78,11 +93,18 @@ public class ownerTransaksi extends javax.swing.JFrame {
         this.pegawai.setText(id);
     }
 
-     public String getID() {
+    public String getID() {
         return pegawai.getText();
     }
+
     public JTextField disableNama() {
         return namaPembeli;
+    }
+    public JTextField disableInvoice() {
+        return invoice;
+    }
+    public JComboBox disableKurir() {
+        return pilihkurir;
     }
 
     public void setJumlah(int a) {
@@ -97,18 +119,31 @@ public class ownerTransaksi extends javax.swing.JFrame {
         diskon.setText(a);
     }
 
+    public void setInvoice(String a) {
+        diskon.setText(a);
+    }
+
     public void setTotal(String a) {
         total.setText(a);
     }
+    
+    
+    public void transaksiListener(ActionListener a) {
+        transaksi.addActionListener(a);
+    }
+
+    public void karyawanListener(ActionListener a) {
+        karyawan.addActionListener(a);
+    }
+
+    public void barangListener(ActionListener a) {
+        barang.addActionListener(a);
+    }
+
 
     public void tambahListener(ActionListener a) {
         tambahBarang.addActionListener(a);
-    }
-
-    public void bayarListener(ActionListener a) {
-        bayar.addActionListener(a);
-    }
-
+    } 
     public void hapusListener(ActionListener a) {
         hapusBarang.addActionListener(a);
     }
@@ -131,12 +166,8 @@ public class ownerTransaksi extends javax.swing.JFrame {
 
     public void setTabelPembayaran(DefaultTableModel t) {
         tabelPembayaran.setModel(t);
-    }
-
-    public JButton getBayar() {
-        return bayar;
-    }
-
+    } 
+    
     public JButton getHapus() {
         return hapusBarang;
     }
@@ -199,7 +230,6 @@ public class ownerTransaksi extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         kembali = new javax.swing.JButton();
         tambahBarang = new javax.swing.JButton();
-        bayar = new javax.swing.JButton();
         tambahPembeli = new javax.swing.JButton();
         buatTransaksi = new javax.swing.JButton();
         hapusBarang = new javax.swing.JButton();
@@ -210,58 +240,62 @@ public class ownerTransaksi extends javax.swing.JFrame {
         namaBarang = new javax.swing.JComboBox<String>();
         pegawai = new javax.swing.JLabel();
         pegawai1 = new javax.swing.JLabel();
+        invoice = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        pilihkurir = new javax.swing.JComboBox<>(kurir[1]);
+        karyawan = new javax.swing.JButton();
+        transaksi = new javax.swing.JButton();
+        barang = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(diskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 120, -1));
+        getContentPane().add(diskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 120, -1));
 
-        jLabel1.setText("total:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 40, -1));
+        jLabel1.setText("kurir");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 40, -1));
 
         jLabel2.setText("nama pembeli:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         jLabel3.setText("jenis barang:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
         jLabel4.setText("merk barang:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
 
         jumlahBarang.setFont(new java.awt.Font("Tempus Sans ITC", 0, 12)); // NOI18N
-        getContentPane().add(jumlahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 110, -1));
+        getContentPane().add(jumlahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 110, -1));
 
         jLabel5.setText("nama barang:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
-        getContentPane().add(namaPembeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 170, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+        getContentPane().add(namaPembeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 170, -1));
 
         jLabel6.setText("jumlah:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 50, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, 50, -1));
 
         total.setFont(new java.awt.Font("Tempus Sans ITC", 0, 18)); // NOI18N
         total.setForeground(new java.awt.Color(255, 255, 255));
         total.setText("0");
-        getContentPane().add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 120, 30));
+        getContentPane().add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 120, 30));
 
         jLabel7.setText("diskon:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 50, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 50, -1));
 
         kembali.setText("kembali");
-        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, 110, -1));
+        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 220, 110, -1));
 
         tambahBarang.setText("tambah barang");
-        getContentPane().add(tambahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 30, -1, -1));
-
-        bayar.setText("bayar");
-        getContentPane().add(bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 60, 110, -1));
+        getContentPane().add(tambahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 70, -1, -1));
 
         tambahPembeli.setText("tambah pembeli");
-        getContentPane().add(tambahPembeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, 110, -1));
+        getContentPane().add(tambahPembeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 110, -1));
 
         buatTransaksi.setText("buat transaksi");
-        getContentPane().add(buatTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, 110, -1));
+        getContentPane().add(buatTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, 110, -1));
 
         hapusBarang.setText("hapus barang");
-        getContentPane().add(hapusBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 150, 110, -1));
+        getContentPane().add(hapusBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, 110, -1));
 
         tabelPembayaran.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -276,32 +310,55 @@ public class ownerTransaksi extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tabelPembayaran);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 650, 260));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 650, 260));
 
         jenisBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jenisBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(jenisBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 185, -1));
+        getContentPane().add(jenisBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 185, -1));
 
         merkBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 merkBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(merkBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 185, -1));
+        getContentPane().add(merkBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 185, -1));
 
         namaBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 namaBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(namaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 185, -1));
-        getContentPane().add(pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 170, 20));
+        getContentPane().add(namaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 185, -1));
+        getContentPane().add(pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 170, 20));
 
         pegawai1.setText("pegawai:");
-        getContentPane().add(pegawai1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 70, 20));
+        getContentPane().add(pegawai1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 70, 20));
+        getContentPane().add(invoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, 120, -1));
+
+        jLabel8.setText("total:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 40, -1));
+
+        jLabel9.setText("invoice");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 40, -1));
+
+        pilihkurir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pilihkurirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(pilihkurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, 136, 20));
+
+        karyawan.setText("karyawan");
+        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 120, -1));
+
+        transaksi.setText("transaksi");
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 120, -1));
+
+        barang.setText("barang");
+        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 120, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -327,6 +384,10 @@ public class ownerTransaksi extends javax.swing.JFrame {
     private void namaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaBarangActionPerformed
 
     }//GEN-LAST:event_namaBarangActionPerformed
+
+    private void pilihkurirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihkurirActionPerformed
+
+    }//GEN-LAST:event_pilihkurirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -364,10 +425,11 @@ public class ownerTransaksi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bayar;
+    private javax.swing.JButton barang;
     private javax.swing.JButton buatTransaksi;
     private javax.swing.JTextField diskon;
     private javax.swing.JButton hapusBarang;
+    private javax.swing.JTextField invoice;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -375,18 +437,23 @@ public class ownerTransaksi extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox<String> jenisBarang;
     private javax.swing.JSpinner jumlahBarang;
+    private javax.swing.JButton karyawan;
     private javax.swing.JButton kembali;
     private javax.swing.JComboBox<String> merkBarang;
     private javax.swing.JComboBox<String> namaBarang;
     private javax.swing.JTextField namaPembeli;
     private javax.swing.JLabel pegawai;
     private javax.swing.JLabel pegawai1;
+    private javax.swing.JComboBox<String> pilihkurir;
     private javax.swing.JTable tabelPembayaran;
     private javax.swing.JButton tambahBarang;
     private javax.swing.JButton tambahPembeli;
     private javax.swing.JLabel total;
+    private javax.swing.JButton transaksi;
     // End of variables declaration//GEN-END:variables
 }

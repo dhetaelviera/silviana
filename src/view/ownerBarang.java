@@ -48,6 +48,19 @@ public class ownerBarang extends javax.swing.JFrame {
     public void cariBarangListener(ActionListener a) {
         cariButton.addActionListener(a);
     }
+    
+      
+    public void transaksiListener(ActionListener a) {
+        transaksi.addActionListener(a);
+    }
+
+    public void karyawanListener(ActionListener a) {
+        karyawan.addActionListener(a);
+    }
+
+    public void barangListener(ActionListener a) {
+        barang.addActionListener(a);
+    }
 
     public void kembaliListener(ActionListener a) {
         kembali.addActionListener(a);
@@ -81,6 +94,9 @@ public class ownerBarang extends javax.swing.JFrame {
         cariButton = new javax.swing.JButton();
         tambahBarang = new javax.swing.JButton();
         ubahBarang1 = new javax.swing.JButton();
+        karyawan = new javax.swing.JButton();
+        transaksi = new javax.swing.JButton();
+        barang = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -112,6 +128,15 @@ public class ownerBarang extends javax.swing.JFrame {
 
         ubahBarang1.setText("ubah barang");
         getContentPane().add(ubahBarang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, 110, -1));
+
+        karyawan.setText("karyawan");
+        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 120, -1));
+
+        transaksi.setText("transaksi");
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 120, -1));
+
+        barang.setText("barang");
+        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 120, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -152,12 +177,15 @@ public class ownerBarang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton barang;
     private javax.swing.JTextField cari;
     private javax.swing.JButton cariButton;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton karyawan;
     private javax.swing.JButton kembali;
     private javax.swing.JTable tabelBarang;
     private javax.swing.JButton tambahBarang;
+    private javax.swing.JButton transaksi;
     private javax.swing.JButton ubahBarang1;
     // End of variables declaration//GEN-END:variables
 }

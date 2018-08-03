@@ -27,12 +27,14 @@ public class transaksi {
         konek = new koneksi().getKoneksi();
     }
 
-    public boolean tambahTransaksi1(String idMember, String username) {
-        String query = "insert into `transaksi` (`idMember`,`tanggalBeli`,`pegawai`)VALUES(?,CURRENT_DATE,?)";
+    public boolean tambahTransaksi1(String idMember, String username,String kurir,String invoice) {
+        String query = "insert into `transaksi` (`idMember`,`tanggalBeli`,`pegawai`,`kurir`,`invoice`)VALUES(?,CURRENT_DATE,?,?,?)";
         try {
             PreparedStatement st = konek.prepareStatement(query);
             st.setInt(1, Integer.valueOf(idMember));
             st.setString(2, username);
+            st.setInt(3, Integer.valueOf(kurir));
+            st.setInt(4, Integer.valueOf(invoice));
             int status = st.executeUpdate();
             if (status > 0) {
                 return true;
@@ -70,7 +72,7 @@ public class transaksi {
     }
 
     public boolean hapus(int idDetail) {
-        String query = "DELETE FROM detailtransaksi where idDetail='" + idDetail + "'";
+        String query = "DELETE FROM detailtransaksi where idDetail=?";
         try {
             PreparedStatement st = konek.prepareStatement(query);
             st.setInt(1, idDetail);
@@ -124,7 +126,28 @@ public class transaksi {
         return false;
 
     }
+public String[][] getKurir() {
+        String query = "select idkurir, nama from kurir";
+        String jenis[][] = null;
 
+        try {
+            PreparedStatement st = konek.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = st.executeQuery();
+            rs.last();
+            jenis = new String[2][rs.getRow()];
+            rs.beforeFirst();
+            int i = 0;
+            while (rs.next()) {
+                jenis[0][i] = rs.getString("idkurir");
+                jenis[1][i] = rs.getString("nama");
+                i++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            ex.getMessage();
+        }
+        return jenis;
+    }
     public int getIDTransaksi(String idMember) {
         String query = "select idTransaksi from transaksi where idMember=? LIMIT 1";
         int barang = 0;
@@ -141,7 +164,7 @@ public class transaksi {
         return barang;
     }
 
-    public int getTotalTransaksi(int idTransaksi) {
+    public int getTotalTransaksi(String idTransaksi) {
         String query = "select sum(b.harga*dt.qty*(1-dt.diskon)) as total from barang b join detailtransaksi dt on b.idbarang=dt.idbarang where idtransaksi=?";
         int total = 0;
         try {
@@ -158,13 +181,13 @@ public class transaksi {
         return total;
     }
 
-    public DefaultTableModel bacaTabelTransaksi(int idTransaksi) {
+    public DefaultTableModel bacaTabelTransaksi(String idTransaksi) {
         String query = "select dt.iddetail, b.namabarang, m.namamerk, dt.qty, dt.diskon, b.harga from detailtransaksi dt join barang b on b.idbarang=dt.idbarang join merk m on m.idmerk=b.idmerk where idTransaksi =? ";
         String namaKolom[] = {"ID", "Nama Barang", "Merk", "Quantity", "Diskon", "Harga"};
         DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
         try {
             PreparedStatement st = konek.prepareStatement(query);
-            st.setInt(1, idTransaksi);
+            st.setString(1, idTransaksi);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Object data[] = new Object[7];
@@ -202,7 +225,7 @@ public class transaksi {
                 data[0] = rs.getString(1);
                 data[1] = rs.getString(2);
                 data[2] = rs.getString(3);
-                data[3] = getTotalTransaksi((int) data[0]);
+                data[3] = getTotalTransaksi((String) data[0]);
                 tabel.addRow(data);
             }
 
@@ -229,7 +252,7 @@ public class transaksi {
                 data[0] = rs.getString(1);
                 data[1] = rs.getString(2);
                 data[2] = rs.getString(3);
-                data[3] = getTotalTransaksi((int) data[0]);
+                data[3] = getTotalTransaksi((String) data[0]);
                 tabel.addRow(data);
             }
 
@@ -242,7 +265,7 @@ public class transaksi {
 
     public DefaultTableModel bacaTabelTransaksiManajerbyDate(Date tanggal) throws ParseException {
         String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli"
-                + "  FROM transaksi t JOIN member m ON m.idMember=t.idMember WHERE t.tanggalBeli='" + tanggal + "' ORDER BY t.tanggalBeli desc;";
+                + "  FROM transaksi t JOIN member m ON m.idMember=t.idMember WHERE t.tanggalBeli=? ORDER BY t.tanggalBeli desc;";
         String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "Total Harga"};
         DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
         try {
@@ -260,7 +283,7 @@ public class transaksi {
                 data[0] = rs.getString(1);
                 data[1] = rs.getString(2);
                 data[2] = rs.getString(3);
-                data[3] = getTotalTransaksi((int) data[0]);
+                data[3] = getTotalTransaksi((String) data[0]);
                 tabel.addRow(data);
             }
 
@@ -273,7 +296,7 @@ public class transaksi {
     
         public DefaultTableModel bacaTabelTransaksiManajerbyMonth(Date tanggal) throws ParseException {
         String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli"
-                + "  FROM transaksi t JOIN member m ON m.idMember=t.idMember WHERE date_part('Month', tanggalBeli)='" + tanggal + "' ORDER BY tanggalBeli  desc;";
+                + "  FROM transaksi t JOIN member m ON m.idMember=t.idMember WHERE ('Month', tanggalBeli=?) ORDER BY tanggalBeli  desc;";
         String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "Total Harga"};
         DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
         try {
@@ -294,7 +317,7 @@ public class transaksi {
                 data[0] = rs.getString(1);
                 data[1] = rs.getString(2);
                 data[2] = rs.getString(3);
-                data[3] = getTotalTransaksi((int) data[0]);
+                data[3] = getTotalTransaksi((String) data[0]);
                 tabel.addRow(data);
             }
 

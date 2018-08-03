@@ -188,7 +188,7 @@ public class ownerDashboard extends javax.swing.JFrame {
                 logoutActionPerformed(evt);
             }
         });
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 460, -1, -1));
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 350, -1, -1));
 
         sortDate.setText("sort by date");
         getContentPane().add(sortDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, -1, -1));
@@ -213,13 +213,13 @@ public class ownerDashboard extends javax.swing.JFrame {
         getContentPane().add(merkBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 220, 140, -1));
 
         reset.setText("reset");
-        getContentPane().add(reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(373, 45, -1, -1));
+        getContentPane().add(reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, -1, -1));
 
         transaksi.setText("transaksi");
-        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, 120, -1));
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 120, -1));
 
         eksport.setText("detail transaksi");
-        getContentPane().add(eksport, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, -1, -1));
+        getContentPane().add(eksport, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 310, -1, -1));
 
         calender.setBackground(new java.awt.Color(153, 153, 153));
         calender.addActionListener(new java.awt.event.ActionListener() {
@@ -245,11 +245,11 @@ public class ownerDashboard extends javax.swing.JFrame {
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         karyawan.setText("karyawan");
-        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 340, 120, -1));
+        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 120, -1));
 
         barang.setText("barang");
-        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 400, 120, -1));
-        getContentPane().add(pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 70, 20));
+        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 120, -1));
+        getContentPane().add(pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, 70, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
