@@ -73,6 +73,10 @@ public class ownerBarangTambah extends javax.swing.JFrame {
     public void merkListener(ActionListener a) {
         tambahMerk.addActionListener(a);
     }
+    
+    public JComboBox jenis(){
+        return jenisBarang;
+    }
 
 
     /**

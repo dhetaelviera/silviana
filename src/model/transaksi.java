@@ -276,6 +276,7 @@ public String[][] getKurir() {
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
             System.out.println(sqlDate);
             st.setDate(1, sqlDate);
+            System.out.println(query);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Object data[] = new Object[4];
@@ -296,7 +297,7 @@ public String[][] getKurir() {
     
         public DefaultTableModel bacaTabelTransaksiManajerbyMonth(Date tanggal) throws ParseException {
         String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli"
-                + "  FROM transaksi t JOIN member m ON m.idMember=t.idMember WHERE ('Month', tanggalBeli=?) ORDER BY tanggalBeli  desc;";
+                + "  FROM transaksi t JOIN member m ON m.idMember=t.idMember WHERE SUBSTRING(tanggalBeli,6,2)=? ORDER BY tanggalBeli  desc;";
         String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "Total Harga"};
         DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
         try {
@@ -305,11 +306,12 @@ public String[][] getKurir() {
             java.util.Date date = tanggal;
             System.out.println(date);
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            System.out.println(sqlDate);
+            System.out.println(sqlDate+ " ayam ");
             String tanggal1 = format.format(sqlDate);
             String tanggal2 = tanggal1.substring(5, 7);
-            System.out.println(tanggal2);
-            st.setDouble(1, Double.valueOf(tanggal2));
+            System.out.println(tanggal2+ " ayam22 ");
+            st.setString(1, tanggal2);
+            System.out.println(query);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Object data[] = new Object[4];

@@ -30,17 +30,17 @@ public class cAdmin {
     private transaksi mTransaksi;
     String username;
 
-    public cAdmin(String a) {
+    public cAdmin(String a, adminDashboard admin) {
         mUser = new user();
-        admin = new adminDashboard();
+        this.admin = new adminDashboard();
+        this.admin.setID(a);
+        this.admin.setVisible(true);
+        this.admin.setResizable(false);
+        this.admin.setLocationRelativeTo(null);
+        username=a;
         System.out.println("hai kryawan " + username);
-        admin.setID(mUser.getUser(username));
-        String nana = mUser.getUser(username);
-        admin.setVisible(true);
-        admin.setResizable(false);
-        admin.setLocationRelativeTo(null);
-        admin.transaksiListener(new transaksiListener());
-        admin.logoutListener(new logoutAdmin());
+        this.admin.transaksiListener(new transaksiListener());
+        this.admin.logoutListener(new logoutAdmin());
 
     }
 
@@ -48,25 +48,25 @@ public class cAdmin {
     private class logoutAdmin implements ActionListener {
 
         public logoutAdmin() {
-            new controller.cUser();
-            admin.dispose();
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+            new controller.cUser();
+            admin.dispose();
         }
     }
 
     private class transaksiListener implements ActionListener {
 
         public transaksiListener() {
-            new controller.cBarang(1, username);
-            admin.dispose();
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            new controller.cBarang(1, username);
+            admin.dispose();
 
         }
     }

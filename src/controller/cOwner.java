@@ -210,8 +210,8 @@ public class cOwner {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            new controller.cOwner(username);
             karyawan.dispose();
+            new controller.cOwner(username);
         }
     }
 
@@ -232,7 +232,10 @@ public class cOwner {
                 boolean input = mUser.tambahKaryawan(nama, username, password, level);
                 if (input) {
                     JOptionPane.showMessageDialog(karyawan, "Data berhasil dimasukkan");
-                    new cOwner(1);
+                    karyawan.nama().setText("");
+                    karyawan.username().setText("");
+                    karyawan.pass().setText("");
+                    karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
                 } else {
                     JOptionPane.showMessageDialog(karyawan, "Terjadi kesalahan");
                 }

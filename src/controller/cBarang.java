@@ -13,11 +13,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import model.barang;
 import model.pembeli;
 import model.transaksi;
 import model.user;
+import view.adminDashboard;
 import view.adminTransaksi;
 import view.ownerBarang;
 import view.ownerBarangTambah;
@@ -35,6 +38,7 @@ public class cBarang {
     private ownerBarang viewbarang;
     private ownerTransaksi ownerTransaksi;
     private adminTransaksi adminTransaksi;
+    private adminDashboard admin;
     private user mUser;
     private pembeli mPembeli;
     public static String namaPembeli;
@@ -84,7 +88,7 @@ public class cBarang {
         mPembeli = new pembeli();
         this.username = username;
         adminTransaksi = new adminTransaksi();
-        adminTransaksi.setVisible(true);
+        adminTransaksi.setVisible(false);
         adminTransaksi.setResizable(false);
         adminTransaksi.setLocationRelativeTo(null);
         adminTransaksi.tambahListener(new tambahBarangListener());
@@ -133,7 +137,8 @@ public class cBarang {
         ownerTransaksi.getDiskonVisible().setEnabled(false);
         ownerTransaksi.getJumlahBarang().setEnabled(false);
         ownerTransaksi.getHapus().setEnabled(false);
-        bacaTabelTransaksi2();
+        
+        System.out.println(idMember);
 
     }
 
@@ -285,6 +290,9 @@ public class cBarang {
             String jenis = JOptionPane.showInputDialog("Masukkan jenis barang");
             System.out.println(jenis);
             boolean tambah = mBarang.tambahJenis(jenis);
+            String jenis_Barang[][];
+            jenis_Barang=mBarang.getJenis();
+            tambahbarang.jenis().setModel(new DefaultComboBoxModel<>(jenis_Barang[0]));
         }
     }
 
@@ -489,7 +497,7 @@ public class cBarang {
                 boolean status = mTransaksi.updateStatus(Integer.valueOf(idTransaksi));
                 if (status) {
                     JOptionPane.showMessageDialog(adminTransaksi, "Pembayaran berhasil diverifikasi");
-                    new controller.cAdmin(username);
+                    new controller.cAdmin(username,admin);
                     adminTransaksi.dispose();
                 } else {
                     JOptionPane.showMessageDialog(adminTransaksi, "Terjadi gangguan");
@@ -498,7 +506,7 @@ public class cBarang {
                 boolean status = mTransaksi.updateStatus(Integer.valueOf(idTransaksi));
                 if (status) {
                     JOptionPane.showMessageDialog(adminTransaksi, "Pembayaran berhasil diverifikasi");
-                    new controller.cAdmin(username);
+                    new controller.cAdmin(username,admin);
                     adminTransaksi.dispose();
                 } else {
                     JOptionPane.showMessageDialog(adminTransaksi, "Terjadi gangguan");
@@ -515,7 +523,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            new controller.cAdmin(username);
+            new controller.cAdmin(username,admin);
             adminTransaksi.dispose();
         }
     }
@@ -530,7 +538,7 @@ public class cBarang {
             int pilihan = JOptionPane.showConfirmDialog(adminTransaksi, "selessai ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.YES_OPTION) {
                 new controller.cOwner(username);
-                adminTransaksi.dispose();
+                ownerTransaksi.dispose();
             } else if (pilihan == JOptionPane.NO_OPTION) {
                 bacaTabelTransaksi();
                 bacaTotalTransaksi();
@@ -960,12 +968,10 @@ public class cBarang {
         @Override
         public void actionPerformed(ActionEvent e) {
             namaPembeli = ownerTransaksi.getNamaPembeli();
-            invoice = ownerTransaksi.getInvoice();
-            kurir = ownerTransaksi.getKurir();
+
 
             System.out.println(namaPembeli);
-            System.out.println(kurir);
-            System.out.println(invoice);
+
             if (namaPembeli.equalsIgnoreCase("")) {
                 JOptionPane.showMessageDialog(ownerTransaksi, "Nama pembeli tidak boleh kosong");
             } else {

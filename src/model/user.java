@@ -26,11 +26,11 @@ public class user {
     }
     
      public String getUser(String username ) {
-        String query = "SELECT username FROM user WHERE username='"+username+"' ;";
+        String query = "SELECT username FROM user WHERE username=?";
         String id = "kosong";
         try {
             PreparedStatement st = konek.prepareStatement(query);
-//            st.setString(1, username);
+            st.setString(1, username);
 //            st.setString(2, password);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {

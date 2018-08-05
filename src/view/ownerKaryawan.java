@@ -8,6 +8,7 @@ package view;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -62,8 +63,7 @@ public class ownerKaryawan extends javax.swing.JFrame {
     public void backListener(ActionListener a) {
         kembali.addActionListener(a);
     }
-    
-    
+
     public void transaksiListener(ActionListener a) {
         transaksi.addActionListener(a);
     }
@@ -76,6 +76,17 @@ public class ownerKaryawan extends javax.swing.JFrame {
         barang.addActionListener(a);
     }
 
+    public JTextField nama() {
+        return nama;
+    }
+
+    public JTextField username() {
+        return username;
+    }
+
+    public JTextField pass() {
+        return password;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

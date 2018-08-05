@@ -56,8 +56,8 @@ public cUser(){
                     login.dispose();
                     JOptionPane.showMessageDialog(owner, "Selamat datang sebagai Owner");
                 } else if (level == 2) {
-                    new cAdmin(mUser.getUser(username));
                     login.dispose();
+                    new cAdmin(username,admin);
                     JOptionPane.showMessageDialog(admin, "Selamat datang sebagai Karyawan " + username);
                 }
             }
