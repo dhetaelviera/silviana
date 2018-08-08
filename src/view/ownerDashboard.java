@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -18,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.barang;
+import model.transaksi;
 import model.user;
 import org.jdesktop.swingx.JXTable;
 
@@ -30,6 +33,7 @@ public class ownerDashboard extends javax.swing.JFrame {
     Connection konek;
     barang modelBarang;
     user modelUser;
+    transaksi modelTransaksi;
     String jenis_barang[][];
     String merk_barang[][];
     String nama_barang[][];
@@ -56,6 +60,10 @@ public class ownerDashboard extends javax.swing.JFrame {
         return tgllahir1;
     }
 
+    public String getCari(){
+        return cari.getText();
+    }
+    
     public JLabel getIDLK() {
         return pegawai;
     }
@@ -95,6 +103,16 @@ public class ownerDashboard extends javax.swing.JFrame {
         logout.addActionListener(a);
     }
 
+    public void hapusListener(ActionListener a) {
+        hapus.addActionListener(a);
+    }
+    public void cariListener(ActionListener a) {
+        cariButton.addActionListener(a);
+    }
+    public void cari2Listener(ActionListener a) {
+        cariinvoice.addActionListener(a);
+    }
+
     public void transaksiListener(ActionListener a) {
         transaksi.addActionListener(a);
     }
@@ -107,10 +125,15 @@ public class ownerDashboard extends javax.swing.JFrame {
         barang.addActionListener(a);
     }
 
-    public void eksportListener(ActionListener a) {
-        eksport.addActionListener(a);
+    public void cetakListener(ActionListener a) {
+        cetak.addActionListener(a);
     }
-
+  public int getJumlahBaris() {
+        return tabelTransaksi.getRowCount();
+    }
+ 
+  
+  
     public JButton kal() {
         return sortDate;
     }
@@ -118,9 +141,19 @@ public class ownerDashboard extends javax.swing.JFrame {
     public JButton month() {
         return sortMonth;
     }
+    public JButton hapus() {
+        return hapus;
+    }
 
-    public JButton detail() {
-        return eksport;
+    public JButton cetak() {
+        return cetak;
+    }
+    
+    public JButton cariButton() {
+        return cariButton;
+    }
+    public JButton cariButton2() {
+        return cariinvoice;
     }
 
     public JTable tabel() {
@@ -160,6 +193,7 @@ public class ownerDashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         sortMonth = new javax.swing.JButton();
         logout = new javax.swing.JButton();
         sortDate = new javax.swing.JButton();
@@ -168,13 +202,19 @@ public class ownerDashboard extends javax.swing.JFrame {
         merkBarang = new javax.swing.JComboBox(this.merk_barang[1]);
         reset = new javax.swing.JButton();
         transaksi = new javax.swing.JButton();
-        eksport = new javax.swing.JButton();
+        cetak = new javax.swing.JButton();
         calender = new org.jdesktop.swingx.JXDatePicker();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelTransaksi = new javax.swing.JTable();
         karyawan = new javax.swing.JButton();
         barang = new javax.swing.JButton();
         pegawai = new javax.swing.JLabel();
+        cari = new javax.swing.JTextField();
+        cariButton = new javax.swing.JButton();
+        cariinvoice = new javax.swing.JButton();
+        hapus = new javax.swing.JButton();
+
+        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -218,8 +258,13 @@ public class ownerDashboard extends javax.swing.JFrame {
         transaksi.setText("transaksi");
         getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 120, -1));
 
-        eksport.setText("detail transaksi");
-        getContentPane().add(eksport, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 310, -1, -1));
+        cetak.setText("cetak laporan");
+        cetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cetakActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 310, -1, -1));
 
         calender.setBackground(new java.awt.Color(153, 153, 153));
         calender.addActionListener(new java.awt.event.ActionListener() {
@@ -250,6 +295,16 @@ public class ownerDashboard extends javax.swing.JFrame {
         barang.setText("barang");
         getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 120, -1));
         getContentPane().add(pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, 70, 20));
+        getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 410, 170, -1));
+
+        cariButton.setText("cari pembeli");
+        getContentPane().add(cariButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, -1, -1));
+
+        cariinvoice.setText("cari invoice");
+        getContentPane().add(cariinvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 440, -1, -1));
+
+        hapus.setText("hApus trAnsaksi");
+        getContentPane().add(hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, 130, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -280,6 +335,15 @@ public class ownerDashboard extends javax.swing.JFrame {
         nama_barang = modelBarang.getNamaBarangPilihan(jenis_barang[1][jenisBarang1], merk_barang[0][merkBarang1]);
         namaBarang.setModel(new DefaultComboBoxModel<>(nama_barang[1]));        // TODO add your handling code here:
     }//GEN-LAST:event_merkBarangActionPerformed
+
+    private void cetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakActionPerformed
+  try{
+      modelTransaksi.cetak(this);
+  } catch(Exception e){
+      Logger.getLogger(ownerDashboard.class.getName()).log(Level.SEVERE,null,e);
+  }
+        
+    }//GEN-LAST:event_cetakActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,8 +383,13 @@ public class ownerDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton barang;
     private org.jdesktop.swingx.JXDatePicker calender;
-    private javax.swing.JButton eksport;
+    private javax.swing.JTextField cari;
+    private javax.swing.JButton cariButton;
+    private javax.swing.JButton cariinvoice;
+    private javax.swing.JButton cetak;
+    private javax.swing.JButton hapus;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JComboBox jenisBarang;
     private javax.swing.JButton karyawan;
     private javax.swing.JButton logout;

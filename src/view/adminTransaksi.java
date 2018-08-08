@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.barang;
+import model.transaksi;
 
 /**
  *
@@ -26,26 +27,34 @@ public class adminTransaksi extends javax.swing.JFrame {
     /**
      * Creates new form adminTransaksi
      */
-    
     Connection konek;
     barang modelBarang;
+    transaksi modelTransaksi;
     String jenis_Barang[][];
     String merk_Barang[][];
     String nama_Barang[][];
-    
+    String kurir[][];
+
     public adminTransaksi() {
-        modelBarang=new barang();
-        jenisBarang=new JComboBox();
-        merkBarang=new JComboBox();
-        namaBarang=new JComboBox();
-        
-        jenis_Barang=modelBarang.getJenis();
-        merk_Barang=modelBarang.getMerk();
-        
+        modelBarang = new barang();
+        modelTransaksi = new transaksi();
+        jenisBarang = new JComboBox();
+        merkBarang = new JComboBox();
+        namaBarang = new JComboBox();
+        pilihkurir = new JComboBox();
+
+        jenis_Barang = modelBarang.getJenis();
+        merk_Barang = modelBarang.getMerk();
+        kurir = modelTransaksi.getKurir();
+
         initComponents();
     }
 
-        public String getJenis() {
+    public void setID(String id) {
+        this.id.setText(id);
+    }
+
+    public String getJenis() {
         int indeks = jenisBarang.getSelectedIndex();
         return jenis_Barang[1][indeks];
     }
@@ -77,6 +86,23 @@ public class adminTransaksi extends javax.swing.JFrame {
         return namaPembeli;
     }
 
+    public JTextField disableInvoice() {
+        return invoice;
+    }
+
+    public JComboBox disableKurir() {
+        return pilihkurir;
+    }
+
+    public String getInvoice() {
+        return invoice.getText();
+    }
+
+    public String getKurir() {
+        int indeks = pilihkurir.getSelectedIndex();
+        return kurir[0][indeks];
+    }
+
     public void setJumlah(int a) {
         jumlahBarang.setValue(a);
     }
@@ -93,16 +119,16 @@ public class adminTransaksi extends javax.swing.JFrame {
         tambahBarang.addActionListener(a);
     }
 
-    public void bayarListener(ActionListener a) {
-        bayar.addActionListener(a);
-    }
-
     public void hapusListener(ActionListener a) {
         hapusBarang.addActionListener(a);
     }
 
     public void tambahPembeliListener(ActionListener a) {
         tambahPembeli.addActionListener(a);
+    }
+
+    public void selesaiListener(ActionListener a) {
+        selesai.addActionListener(a);
     }
 
     public void backListener(ActionListener a) {
@@ -121,10 +147,6 @@ public class adminTransaksi extends javax.swing.JFrame {
         tabelPembayaran.setModel(t);
     }
 
-    public JButton getBayar() {
-        return bayar;
-    }
-
     public JButton getHapus() {
         return hapusBarang;
     }
@@ -139,6 +161,10 @@ public class adminTransaksi extends javax.swing.JFrame {
 
     public JButton getBuatTransaksi() {
         return buatTransaksi;
+    }
+
+    public JButton getSelesai() {
+        return selesai;
     }
 
     public JComboBox<String> getNamaBarang() {
@@ -176,11 +202,8 @@ public class adminTransaksi extends javax.swing.JFrame {
 
         diskon = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        namaBarang = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        jenisBarang = new javax.swing.JComboBox(jenis_Barang[0]);
         jLabel3 = new javax.swing.JLabel();
-        merkBarang = new javax.swing.JComboBox(merk_Barang[0]);
         jLabel4 = new javax.swing.JLabel();
         jumlahBarang = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
@@ -190,44 +213,33 @@ public class adminTransaksi extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         kembali = new javax.swing.JButton();
         tambahBarang = new javax.swing.JButton();
-        bayar = new javax.swing.JButton();
         tambahPembeli = new javax.swing.JButton();
         buatTransaksi = new javax.swing.JButton();
         hapusBarang = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelPembayaran = new javax.swing.JTable();
+        id = new javax.swing.JLabel();
+        invoice = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        pilihkurir = new javax.swing.JComboBox<>(kurir[1]);
+        jenisBarang = new javax.swing.JComboBox(jenis_Barang[0]);
+        merkBarang = new javax.swing.JComboBox(merk_Barang[1]);
+        namaBarang = new javax.swing.JComboBox<String>();
+        selesai = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(diskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 120, -1));
 
-        jLabel1.setText("total:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 40, -1));
-
-        namaBarang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(namaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 160, -1));
+        jLabel1.setText("kurir:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 40, -1));
 
         jLabel2.setText("nama pembeli:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
-        jenisBarang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jenisBarang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jenisBarangActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jenisBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 160, -1));
-
         jLabel3.setText("jenis barang:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
-
-        merkBarang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        merkBarang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                merkBarangActionPerformed(evt);
-            }
-        });
-        getContentPane().add(merkBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 160, -1));
 
         jLabel4.setText("merk barang:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
@@ -256,9 +268,6 @@ public class adminTransaksi extends javax.swing.JFrame {
         tambahBarang.setText("tambah barang");
         getContentPane().add(tambahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 30, -1, -1));
 
-        bayar.setText("bayar");
-        getContentPane().add(bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 60, 110, -1));
-
         tambahPembeli.setText("tambah pembeli");
         getContentPane().add(tambahPembeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, 110, -1));
 
@@ -281,19 +290,63 @@ public class adminTransaksi extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tabelPembayaran);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 650, 260));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 650, 260));
+
+        id.setText(" ");
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 110, 20));
+        getContentPane().add(invoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 120, -1));
+
+        jLabel8.setText("total:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 40, -1));
+
+        jLabel9.setText("invoice:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 40, -1));
+
+        pilihkurir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pilihkurirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(pilihkurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 136, 20));
+
+        jenisBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jenisBarangActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jenisBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 185, -1));
+
+        merkBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                merkBarangActionPerformed(evt);
+            }
+        });
+        getContentPane().add(merkBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 185, -1));
+
+        namaBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                namaBarangActionPerformed(evt);
+            }
+        });
+        getContentPane().add(namaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 185, -1));
+
+        selesai.setText("selesai transaksi");
+        getContentPane().add(selesai, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 60, 110, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void pilihkurirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihkurirActionPerformed
+
+    }//GEN-LAST:event_pilihkurirActionPerformed
+
     private void jenisBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisBarangActionPerformed
-       int jenisBarang1 = jenisBarang.getSelectedIndex();
+        int jenisBarang1 = jenisBarang.getSelectedIndex();
         int merkBarang1 = merkBarang.getSelectedIndex();
         System.out.println(jenisBarang1);
         System.out.println(merkBarang1);
         nama_Barang = modelBarang.getNamaBarangPilihan(jenis_Barang[1][jenisBarang1], merk_Barang[0][merkBarang1]);
-        namaBarang.setModel(new DefaultComboBoxModel<>(nama_Barang[1])); 
-        // TODO add your handling code here:
+        namaBarang.setModel(new DefaultComboBoxModel<>(nama_Barang[1]));        // TODO add your handling code here:
     }//GEN-LAST:event_jenisBarangActionPerformed
 
     private void merkBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_merkBarangActionPerformed
@@ -302,9 +355,12 @@ public class adminTransaksi extends javax.swing.JFrame {
         System.out.println(jenisBarang1);
         System.out.println(merkBarang1);
         nama_Barang = modelBarang.getNamaBarangPilihan(jenis_Barang[1][jenisBarang1], merk_Barang[0][merkBarang1]);
-        namaBarang.setModel(new DefaultComboBoxModel<>(nama_Barang[1]));  
-        // TODO add your handling code here:
+        namaBarang.setModel(new DefaultComboBoxModel<>(nama_Barang[1]));         // TODO add your handling code here:
     }//GEN-LAST:event_merkBarangActionPerformed
+
+    private void namaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaBarangActionPerformed
+
+    }//GEN-LAST:event_namaBarangActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,10 +398,11 @@ public class adminTransaksi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bayar;
     private javax.swing.JButton buatTransaksi;
     private javax.swing.JTextField diskon;
     private javax.swing.JButton hapusBarang;
+    private javax.swing.JLabel id;
+    private javax.swing.JTextField invoice;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -353,13 +410,17 @@ public class adminTransaksi extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JComboBox jenisBarang;
+    private javax.swing.JComboBox<String> jenisBarang;
     private javax.swing.JSpinner jumlahBarang;
     private javax.swing.JButton kembali;
-    private javax.swing.JComboBox merkBarang;
-    private javax.swing.JComboBox namaBarang;
+    private javax.swing.JComboBox<String> merkBarang;
+    private javax.swing.JComboBox<String> namaBarang;
     private javax.swing.JTextField namaPembeli;
+    private javax.swing.JComboBox<String> pilihkurir;
+    private javax.swing.JButton selesai;
     private javax.swing.JTable tabelPembayaran;
     private javax.swing.JButton tambahBarang;
     private javax.swing.JButton tambahPembeli;

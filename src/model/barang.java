@@ -245,6 +245,49 @@ public class barang {
         }
         return tabel;
     }
+    
+    public DefaultTableModel bacaTabelMerk() {
+        String query = "SELECT idmerk, namamerk from merk";
+        String namaKolom[] = {"ID Merk", "Merk Barang"};
+        DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Object data[] = new Object[2];
+                data[0] = rs.getString(1);
+                data[1] = rs.getString(2);
+
+                tabel.addRow(data);
+            }
+
+        } catch (SQLException e) {
+            e.getMessage();
+            e.printStackTrace();
+        }
+        return tabel;
+    }
+    
+    public DefaultTableModel bacaTabelJenis() {
+        String query = "SELECT idjenis, namajenis from jenis";
+        String namaKolom[] = {"ID Jenis", "Jenis Barang"};
+        DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Object data[] = new Object[2];
+                data[0] = rs.getString(1);
+                data[1] = rs.getString(2);
+                tabel.addRow(data);
+            }
+
+        } catch (SQLException e) {
+            e.getMessage();
+            e.printStackTrace();
+        }
+        return tabel;
+    }
 
     public DefaultTableModel bacaTabelBarangByNama(String idBarang) {
         String query = "SELECT b.idbarang, b.namabarang, b.stokbarang, jb.namajenis, m.namamerk, b.harga "

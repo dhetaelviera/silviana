@@ -25,6 +25,10 @@ public class ownerBarang extends javax.swing.JFrame {
         initComponents();
     }
     
+    public void setID(String n){
+         id.setText(n);
+    } 
+    
      public String getPencarianBarang() {
         return cari.getText();
     }
@@ -65,6 +69,14 @@ public class ownerBarang extends javax.swing.JFrame {
     public void kembaliListener(ActionListener a) {
         kembali.addActionListener(a);
     }
+    
+    public void jenisListener(ActionListener a) {
+        jenis.addActionListener(a);
+    }
+
+    public void merkListener(ActionListener a) {
+        barang.addActionListener(a);
+    }
 
     public JTable getTabelBarang() {
         return tabelBarang;
@@ -97,6 +109,9 @@ public class ownerBarang extends javax.swing.JFrame {
         karyawan = new javax.swing.JButton();
         transaksi = new javax.swing.JButton();
         barang = new javax.swing.JButton();
+        jenis = new javax.swing.JButton();
+        merk = new javax.swing.JButton();
+        id = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -137,6 +152,15 @@ public class ownerBarang extends javax.swing.JFrame {
 
         barang.setText("barang");
         getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 120, -1));
+
+        jenis.setText("daftar jenis");
+        getContentPane().add(jenis, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, 130, -1));
+
+        merk.setText("daftar merk");
+        getContentPane().add(merk, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 130, -1));
+
+        id.setText(" ");
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 60, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -180,9 +204,12 @@ public class ownerBarang extends javax.swing.JFrame {
     private javax.swing.JButton barang;
     private javax.swing.JTextField cari;
     private javax.swing.JButton cariButton;
+    private javax.swing.JLabel id;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jenis;
     private javax.swing.JButton karyawan;
     private javax.swing.JButton kembali;
+    private javax.swing.JButton merk;
     private javax.swing.JTable tabelBarang;
     private javax.swing.JButton tambahBarang;
     private javax.swing.JButton transaksi;

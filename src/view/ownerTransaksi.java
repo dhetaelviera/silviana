@@ -131,6 +131,10 @@ public class ownerTransaksi extends javax.swing.JFrame {
     public void transaksiListener(ActionListener a) {
         transaksi.addActionListener(a);
     }
+    
+    public void selesaiListener(ActionListener a) {
+        selesai.addActionListener(a);
+    }
 
     public void karyawanListener(ActionListener a) {
         karyawan.addActionListener(a);
@@ -170,6 +174,10 @@ public class ownerTransaksi extends javax.swing.JFrame {
     
     public JButton getHapus() {
         return hapusBarang;
+    }
+    
+    public JButton getSelesai() {
+        return selesai;
     }
 
     public JButton getTambahBarang() {
@@ -247,6 +255,7 @@ public class ownerTransaksi extends javax.swing.JFrame {
         karyawan = new javax.swing.JButton();
         transaksi = new javax.swing.JButton();
         barang = new javax.swing.JButton();
+        selesai = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -360,6 +369,9 @@ public class ownerTransaksi extends javax.swing.JFrame {
         barang.setText("barang");
         getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 120, -1));
 
+        selesai.setText("selesai transaksi");
+        getContentPane().add(selesai, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, 110, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -450,6 +462,7 @@ public class ownerTransaksi extends javax.swing.JFrame {
     private javax.swing.JLabel pegawai;
     private javax.swing.JLabel pegawai1;
     private javax.swing.JComboBox<String> pilihkurir;
+    private javax.swing.JButton selesai;
     private javax.swing.JTable tabelPembayaran;
     private javax.swing.JButton tambahBarang;
     private javax.swing.JButton tambahPembeli;

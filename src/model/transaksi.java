@@ -5,6 +5,8 @@
  */
 package model;
 
+import controller.NewInterface;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,27 +16,40 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import view.ownerDashboard;
 
 /**
  *
  * @author Dheta
  */
-public class transaksi {
+public class transaksi implements NewInterface{
 
     Connection konek;
-
+    JasperReport jasperReport;
+    JasperDesign jasperDesign;
+    JasperPrint jasperPrint;
     public transaksi() {
         konek = new koneksi().getKoneksi();
     }
 
-    public boolean tambahTransaksi1(String idMember, String username,String kurir,String invoice) {
+    
+    
+    public boolean tambahTransaksi1(String idMember, String username, String kurir, String invoice) {
         String query = "insert into `transaksi` (`idMember`,`tanggalBeli`,`pegawai`,`kurir`,`invoice`)VALUES(?,CURRENT_DATE,?,?,?)";
         try {
             PreparedStatement st = konek.prepareStatement(query);
             st.setInt(1, Integer.valueOf(idMember));
             st.setString(2, username);
             st.setInt(3, Integer.valueOf(kurir));
-            st.setInt(4, Integer.valueOf(invoice));
+            st.setString(4, invoice);
             int status = st.executeUpdate();
             if (status > 0) {
                 return true;
@@ -89,6 +104,42 @@ public class transaksi {
         return false;
     }
 
+    public boolean hapusTransaksi(int idTransaksi) {
+        String query = "DELETE FROM detailtransaksi where idTransaksi=?";
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            st.setInt(1, idTransaksi);
+            int status = st.executeUpdate();
+            if (status > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            e.getMessage();
+        }
+        return false;
+    }
+
+    public boolean hapusTransaksi2(int idTransaksi) {
+        String query = "DELETE FROM transaksi where idTransaksi=?";
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            st.setInt(1, idTransaksi);
+            int status = st.executeUpdate();
+            if (status > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            e.getMessage();
+        }
+        return false;
+    }
+
     public boolean updateStatus(int idTransaksi) {
         String query = "UPDATE transaksi set status=1 where idtransaksi='" + idTransaksi + "'";
         try {
@@ -126,7 +177,8 @@ public class transaksi {
         return false;
 
     }
-public String[][] getKurir() {
+
+    public String[][] getKurir() {
         String query = "select idkurir, nama from kurir";
         String jenis[][] = null;
 
@@ -148,6 +200,7 @@ public String[][] getKurir() {
         }
         return jenis;
     }
+
     public int getIDTransaksi(String idMember) {
         String query = "select idTransaksi from transaksi where idMember=? LIMIT 1";
         int barang = 0;
@@ -212,20 +265,47 @@ public String[][] getKurir() {
     }
 
     public DefaultTableModel bacaTabelTransaksiOwner() {
-        String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli"
+        String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli, t.invoice"
                 + "  FROM transaksi t JOIN member m ON m.idmember=t.idMember ORDER BY tanggalBeli desc";
-        String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "Total Harga"};
+        String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "invoice", "Total Harga"};
         DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
         try {
             PreparedStatement st = konek.prepareStatement(query);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Object data[] = new Object[4];
+                Object data[] = new Object[5];
 
                 data[0] = rs.getString(1);
                 data[1] = rs.getString(2);
                 data[2] = rs.getString(3);
-                data[3] = getTotalTransaksi((String) data[0]);
+                data[3] = rs.getString(4);
+                data[4] = getTotalTransaksi((String) data[0]);
+                tabel.addRow(data);
+            }
+
+        } catch (SQLException e) {
+            e.getMessage();
+            e.printStackTrace();
+        }
+        return tabel;
+    }
+
+    public DefaultTableModel bacaTabelTransaksiAdmin() {
+        String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli, t.pegawai"
+                + "  FROM transaksi t JOIN member m ON m.idmember=t.idMember ORDER BY tanggalBeli desc";
+        String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "Pegawai", "Total Harga"};
+        DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Object data[] = new Object[5];
+
+                data[0] = rs.getString(1);
+                data[1] = rs.getString(2);
+                data[2] = rs.getString(3);
+                data[3] = rs.getString(4);
+                data[4] = getTotalTransaksi((String) data[0]);
                 tabel.addRow(data);
             }
 
@@ -294,8 +374,49 @@ public String[][] getKurir() {
         }
         return tabel;
     }
+
+    public DefaultTableModel bacaTabelTransaksiManajerbyDateRange(Date tanggal1, Date tanggal2) throws ParseException {
+        String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli"
+                + "  FROM transaksi t JOIN member m ON m.idMember=t.idMember "
+                + "WHERE t.tanggalBeli beetween t.tanggalbeli=? and t.tanggalbeli=?  ORDER BY t.tanggalBeli desc;";
+        String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "Total Harga"};
+        DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date1 = tanggal1;
+            System.out.println(date1);
+            java.sql.Date sqlDate1 = new java.sql.Date(date1.getTime());
+            System.out.println(sqlDate1);
+
+            DateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date2 = tanggal2;
+            System.out.println(date2);
+            java.sql.Date sqlDate2 = new java.sql.Date(date2.getTime());
+            System.out.println(sqlDate2);
+
+            st.setDate(1, sqlDate1);
+            st.setDate(2, sqlDate2);
+            System.out.println(query);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Object data[] = new Object[4];
+
+                data[0] = rs.getString(1);
+                data[1] = rs.getString(2);
+                data[2] = rs.getString(3);
+                data[3] = getTotalTransaksi((String) data[0]);
+                tabel.addRow(data);
+            }
+
+        } catch (SQLException e) {
+            e.getMessage();
+            e.printStackTrace();
+        }
+        return tabel;
+    }
     
-        public DefaultTableModel bacaTabelTransaksiManajerbyMonth(Date tanggal) throws ParseException {
+    public DefaultTableModel bacaTabelTransaksiManajerbyMonth(Date tanggal) throws ParseException {
         String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli"
                 + "  FROM transaksi t JOIN member m ON m.idMember=t.idMember WHERE SUBSTRING(tanggalBeli,6,2)=? ORDER BY tanggalBeli  desc;";
         String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "Total Harga"};
@@ -306,10 +427,10 @@ public String[][] getKurir() {
             java.util.Date date = tanggal;
             System.out.println(date);
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            System.out.println(sqlDate+ " ayam ");
+            System.out.println(sqlDate + " ayam ");
             String tanggal1 = format.format(sqlDate);
             String tanggal2 = tanggal1.substring(5, 7);
-            System.out.println(tanggal2+ " ayam22 ");
+            System.out.println(tanggal2 + " ayam22 ");
             st.setString(1, tanggal2);
             System.out.println(query);
             ResultSet rs = st.executeQuery();
@@ -329,4 +450,77 @@ public String[][] getKurir() {
         }
         return tabel;
     }
+
+    public DefaultTableModel cariPembeli(String cari) {
+        String query = "SELECT t.idtransaksi, m.nama, t.tanggalbeli, t.invoice, t.pegawai  FROM transaksi t join member m on m.idmember=t.idmember "
+                + "WHERE (m.nama LIKE '" + cari + "%' or m.nama LIKE '%" + cari + "%' or m.nama LIKE '%" + cari + "')";
+        String namaKolom[] = {"ID Transaski", "Nama pembeli", "Tanggal beli", "invoice", "pegawai", "total harga"};
+        DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
+        System.out.println(query);
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                Object data[] = new Object[6];
+                int i = 0;
+                
+                data[0] = rs.getString(1);
+                data[1] = rs.getString(2);
+                data[2] = rs.getString(3);
+                data[3] = rs.getString(4);
+                data[4] = rs.getString(5);
+                data[5] = getTotalTransaksi(String.valueOf(data[0]));
+
+                tabel.addRow(data);
+            }
+
+        } catch (SQLException e) {
+            e.getMessage();
+            e.printStackTrace();
+        }
+        return tabel;
     }
+    public DefaultTableModel cariInvoice(String cari) {
+        String query = "SELECT t.idtransaksi, m.nama, t.tanggalbeli, t.invoice, t.pegawai  FROM transaksi t join member m on m.idmember=t.idmember "
+                + "WHERE (t.invoice LIKE '" + cari + "%' or t.invoice LIKE '%" + cari + "%' or t.invoice LIKE '%" + cari + "')";
+        String namaKolom[] = {"ID Transaski", "Nama pembeli", "Tanggal beli", "invoice", "pegawai", "total harga"};
+        DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
+        System.out.println(query);
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                Object data[] = new Object[6];
+                int i = 0;
+                
+                data[0] = rs.getString(1);
+                data[1] = rs.getString(2);
+                data[2] = rs.getString(3);
+                data[3] = rs.getString(4);
+                data[4] = rs.getString(5);
+                data[5] = getTotalTransaksi(String.valueOf(data[0]));
+
+                tabel.addRow(data);
+            }
+
+        } catch (SQLException e) {
+            e.getMessage();
+            e.printStackTrace();
+        }
+        return tabel;
+    }
+
+    public void cetak(ownerDashboard od) throws SQLException {
+        try {
+            File report_file=new File("src/report/report1.jrxml");
+            jasperDesign=JRXmlLoader.load(report_file);
+            jasperReport=JasperCompileManager.compileReport(jasperDesign);
+            jasperPrint = JasperFillManager.fillReport(jasperReport,null,konek);
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}

@@ -44,33 +44,36 @@ public class cOwner {
         private static int idTransaksi;
     private static String namaPembeli, total;
 
-    public cOwner(String username) {
+    public cOwner(String username, ownerDashboard owner) {
         mUser = new user();
         mTransaksi=new transaksi();
-        owner = new ownerDashboard();
+        this.owner = new ownerDashboard();
         this.username=username;
-        owner.setVisible(true);
-        owner.getID();
-        owner.setID(username);
+        this.owner.setVisible(true);
+        this.owner.getID();
+        this.owner.setID(username);
         abc = username;
         System.out.println(abc);
-        owner.setResizable(false);
-        owner.setLocationRelativeTo(null);
-        owner.barangListener(new barangListener());
-        owner.transaksiListener(new transaksiListener());
-        owner.karyawanListener(new karyawan());
-        owner.logoutListener(new logoutAdmin());
-        owner.kalender(new sortByKal());
-        owner.kalender2(new sortByMonth());
-        owner.kal().setEnabled(false);
-        owner.month().setEnabled(false);
-        owner.detail().setEnabled(false);
-        owner.kalender3(new aktif());
-        owner.reset(new resetTabel());
-        owner.sortByNama(new sortByNama());
-        owner.tabelListener(new selectedTabelManajer());
+        this.owner.setResizable(false);
+        this.owner.setLocationRelativeTo(null);
+        this.owner.barangListener(new barangListener());
+        this.owner.transaksiListener(new transaksiListener());
+        this.owner.karyawanListener(new karyawan());
+        this.owner.logoutListener(new logoutAdmin());
+        this.owner.hapusListener(new hapustransaksi());
+        this.owner.cariListener(new pembeliSearchEngine());
+        this.owner.cari2Listener(new invoiceSearchEngine());
+        this.owner.kalender(new sortByKal());
+        this.owner.kalender2(new sortByMonth());
+        this.owner.kal().setEnabled(false);
+        this.owner.month().setEnabled(false);
         
-        owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiOwner());
+        this.owner.kalender3(new aktif());
+        this.owner.reset(new resetTabel());
+        this.owner.sortByNama(new sortByNama());
+        this.owner.tabelListener(new selectedTabelManajer());
+//        
+        this.owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiOwner());
     }
 
     public cOwner(int a) {
@@ -84,6 +87,73 @@ public class cOwner {
         karyawan.tambahKaryawanListener(new karyawanListener());
         karyawan.backListener(new kembali3());
 
+    }
+    
+     private void bacaTabelCariNama() {
+        String cari = owner.getCari();
+        System.out.println(cari);
+        if (cari.equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(owner, "Masukkan kata yang dicari");
+        } else {
+        owner.setTabelPembayaran(mTransaksi.cariPembeli(cari));
+           
+        }
+    }
+     private void bacaTabelCariInvoice() {
+        String cari = owner.getCari();
+        System.out.println(cari);
+        if (cari.equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(owner, "Masukkan kata yang dicari");
+        } else {
+        owner.setTabelPembayaran(mTransaksi.cariInvoice(cari));
+           
+        }
+    }
+
+    private class hapustransaksi implements ActionListener {
+
+        public hapustransaksi() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+     int baris = ownerDashboard.getTableTransaksi().getSelectedRow();
+            idDetail =  ownerDashboard.getTableTransaksi().getValueAt(baris, 0).toString();
+            qty2 = (int) ownerDashboarrd.getTableTransaksi().getValueAt(baris, 3);
+            idBarang2 = mBarang.getIDBarang2(Integer.valueOf(idDetail));
+            ownerDashboard.hapus().setEnabled(true);
+        }
+    }
+     
+    private class pembeliSearchEngine implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            bacaTabelCariNama();
+            int data = owner.getJumlahBaris();
+            if (data == 0) {
+                JOptionPane.showMessageDialog(owner, "Data Yang Dicari Kosong");
+              bacaTabelTransaksi();
+            }
+
+        }
+    }
+    
+    
+    private class invoiceSearchEngine implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            bacaTabelCariInvoice();
+            int data = owner.getJumlahBaris();
+            if (data == 0) {
+                JOptionPane.showMessageDialog(owner, "Data Yang Dicari Kosong");
+              bacaTabelTransaksi();
+            }
+
+        }
     }
     
      private class selectedTabelManajer implements MouseListener {
@@ -211,7 +281,7 @@ public class cOwner {
         @Override
         public void actionPerformed(ActionEvent e) {
             karyawan.dispose();
-            new controller.cOwner(username);
+            new controller.cOwner(username,owner);
         }
     }
 
@@ -288,7 +358,7 @@ public class cOwner {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            new controller.cBarang();
+            new controller.cBarang(abc);
             owner.dispose();
         }
     }
