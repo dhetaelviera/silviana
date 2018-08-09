@@ -7,10 +7,14 @@ package view;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -22,6 +26,15 @@ import javax.swing.table.DefaultTableModel;
 import model.barang;
 import model.transaksi;
 import model.user;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import org.jdesktop.swingx.JXTable;
 
 /**
@@ -59,15 +72,15 @@ public class ownerDashboard extends javax.swing.JFrame {
         Date tgllahir1 = (calender.getDate());
         return tgllahir1;
     }
-    
-    public JTable tabel(){
+
+    public JTable tabel() {
         return tabelTransaksi;
     }
 
-    public String getCari(){
+    public String getCari() {
         return cari.getText();
     }
-    
+
     public JLabel getIDLK() {
         return pegawai;
     }
@@ -110,9 +123,11 @@ public class ownerDashboard extends javax.swing.JFrame {
     public void hapusListener(ActionListener a) {
         hapus.addActionListener(a);
     }
+
     public void cariListener(ActionListener a) {
         cariButton.addActionListener(a);
     }
+
     public void cari2Listener(ActionListener a) {
         cariinvoice.addActionListener(a);
     }
@@ -132,12 +147,11 @@ public class ownerDashboard extends javax.swing.JFrame {
     public void cetakListener(ActionListener a) {
         cetak.addActionListener(a);
     }
-  public int getJumlahBaris() {
+
+    public int getJumlahBaris() {
         return tabelTransaksi.getRowCount();
     }
- 
-  
-  
+
     public JButton kal() {
         return sortDate;
     }
@@ -145,6 +159,7 @@ public class ownerDashboard extends javax.swing.JFrame {
     public JButton month() {
         return sortMonth;
     }
+
     public JButton hapus() {
         return hapus;
     }
@@ -152,23 +167,23 @@ public class ownerDashboard extends javax.swing.JFrame {
     public JButton cetak() {
         return cetak;
     }
-    
+
     public JButton cariButton() {
         return cariButton;
     }
+
     public JButton cariButton2() {
         return cariinvoice;
     }
-    
-    public JButton range(){
+
+    public JButton range() {
         return range;
     }
- 
 
     public void kalender(ActionListener a) {
         sortDate.addActionListener(a);
     }
-    
+
     public void kalenderrange(ActionListener a) {
         range.addActionListener(a);
     }
@@ -188,7 +203,6 @@ public class ownerDashboard extends javax.swing.JFrame {
 //    public void sortByNama(ActionListener a) {
 //        namaBarang.addActionListener(a);
 //    }
-
     public void reset(ActionListener a) {
         reset.addActionListener(a);
     }
@@ -309,12 +323,49 @@ public class ownerDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_calenderActionPerformed
 
     private void cetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakActionPerformed
-  try{
-      modelTransaksi.cetak(this);
-  } catch(Exception e){
-      Logger.getLogger(ownerDashboard.class.getName()).log(Level.SEVERE,null,e);
-  }
-        
+//        try {
+//            File report_file = new File("src/report/report1.jrxml");
+//            JasperDesign jasperDesign = JRXmlLoader.load(report_file);
+//            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+//            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, konek);
+//            JasperViewer.viewReport(jasperPrint, false);
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+        JasperReport jasperReport;
+        JasperPrint jasperPrint = null;
+        try {
+            JasperDesign jd = JRXmlLoader.load("src/report/report1.jrxml");
+            String query = "SELECT\n" +
+"     transaksi.`idTransaksi` AS ID_Transaksi,\n" +
+"     member.`nama` AS nama,\n" +
+"     transaksi.`tanggalBeli` AS tanggalBeli,\n" +
+"     transaksi.`pegawai` AS pegawai,\n" +
+"     kurir.`nama` AS transaksi_kurir,\n" +
+"     transaksi.`invoice` AS transaksi_invoice\n" +
+"     \n" +
+"FROM\n" +
+"     `transaksi` transaksi join\n" +
+"     `member` member on member.`idMember`= transaksi.`idMember`  join\n" +
+"     `kurir` kurir on kurir.`idKurir`=transaksi.`kurir`";
+            JRDesignQuery runquery = new JRDesignQuery();
+            runquery.setText(query);
+            jd.setQuery(runquery);
+            jasperReport = JasperCompileManager.compileReport(jd);
+            try {
+                jasperPrint = JasperFillManager.fillReport(
+                        jasperReport, new HashMap(), DriverManager.getConnection("jdbc:mysql://localhost:3306/silviana", "root", ""));
+            } catch (SQLException ex) {
+                Logger.getLogger(ownerDashboard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JasperViewer.viewReport(jasperPrint, false);
+//            JasperExportManager.exportReportToPdfFile(jasperPrint, "src/main/java/com/blegoh/kasir/views/laporan/simple_report.pdf");
+            System.out.println("lalalala");
+        } catch (JRException e) {
+            System.err.println("asuasuasu" + e);
+        }
+
+
     }//GEN-LAST:event_cetakActionPerformed
 
     /**

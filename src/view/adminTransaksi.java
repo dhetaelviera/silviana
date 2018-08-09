@@ -142,6 +142,10 @@ public class adminTransaksi extends javax.swing.JFrame {
     public void buatTransaksiListener(ActionListener a) {
         buatTransaksi.addActionListener(a);
     }
+    
+    public void logoutListener(ActionListener a) {
+        logout.addActionListener(a);
+    }
 
     public void setTabelPembayaran(DefaultTableModel t) {
         tabelPembayaran.setModel(t);
@@ -201,6 +205,7 @@ public class adminTransaksi extends javax.swing.JFrame {
     private void initComponents() {
 
         diskon = new javax.swing.JTextField();
+        logout = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -231,6 +236,9 @@ public class adminTransaksi extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(diskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 120, -1));
+
+        logout.setText("log out");
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 210, 110, -1));
 
         jLabel1.setText("kurir:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 40, -1));
@@ -416,6 +424,7 @@ public class adminTransaksi extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jenisBarang;
     private javax.swing.JSpinner jumlahBarang;
     private javax.swing.JButton kembali;
+    private javax.swing.JButton logout;
     private javax.swing.JComboBox<String> merkBarang;
     private javax.swing.JComboBox<String> namaBarang;
     private javax.swing.JTextField namaPembeli;

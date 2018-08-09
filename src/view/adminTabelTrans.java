@@ -42,6 +42,9 @@ public class adminTabelTrans extends javax.swing.JFrame {
     public void buatListener(ActionListener a) {
         transaksi.addActionListener(a);
     }
+    public void logoutListener(ActionListener a) {
+        logout.addActionListener(a);
+    }
 
      public void tabelListener(MouseListener a) {
         tabel.addMouseListener(a);
@@ -77,10 +80,12 @@ public class adminTabelTrans extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tabel = new javax.swing.JTable();
+        logout = new javax.swing.JButton();
         transaksi = new javax.swing.JButton();
         hapus = new javax.swing.JButton();
         kembali = new javax.swing.JButton();
         id = new javax.swing.JLabel();
+        kembali2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -100,6 +105,9 @@ public class adminTabelTrans extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 380));
 
+        logout.setText("log out");
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, -1, -1));
+
         transaksi.setText("buat transaksi");
         getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, -1));
 
@@ -109,6 +117,9 @@ public class adminTabelTrans extends javax.swing.JFrame {
         kembali.setText("kembali");
         getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, -1, -1));
         getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 80, 20));
+
+        kembali2.setText("kembali");
+        getContentPane().add(kembali2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -153,6 +164,8 @@ public class adminTabelTrans extends javax.swing.JFrame {
     private javax.swing.JLabel id;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton kembali;
+    private javax.swing.JButton kembali2;
+    private javax.swing.JButton logout;
     private javax.swing.JTable tabel;
     private javax.swing.JButton transaksi;
     // End of variables declaration//GEN-END:variables

@@ -160,6 +160,7 @@ public class cBarang {
         this.adminTransaksi.tabelListener(new tabelListener());
         this.adminTransaksi.backListener(new kembaliAdmin());
         this.adminTransaksi.selesaiListener(new selesaiAdmin());
+        this.adminTransaksi.logoutListener(new logoutAdmin());
         this.adminTransaksi.getSelesai().setEnabled(false);
         this.adminTransaksi.getTambahBarang().setEnabled(false);
         this.adminTransaksi.getBuatTransaksi().setEnabled(false);
@@ -241,6 +242,24 @@ public class cBarang {
 
     private void bacaTabelBarang1() {
         ownerTransaksi.setTabelBarang(mTransaksi.bacaTabelTransaksi(idTransaksi));
+    }
+
+    private class logoutAdmin implements ActionListener {
+
+        public logoutAdmin() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+       int pilihan = JOptionPane.showConfirmDialog(adminTransaksi, "Apakah anda yakin keluar ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+            bacaTotalTransaksi();
+            bacaTabelTransaksi();
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+                new controller.cUser();
+                adminTransaksi.dispose();
+            }
+        }
     }
 
     private class transaksikekaryawan implements ActionListener {

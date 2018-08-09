@@ -64,7 +64,25 @@ public class cAdmin {
         this.vtabelTrans.hapus().setEnabled(false);
         this.vtabelTrans.tabelListener(new selectedTabel());
         this.vtabelTrans.hapusListener(new hapustransaksi());
+        this.vtabelTrans.logoutListener(new logout());
         this.vtabelTrans.setTabel(mTransaksi.bacaTabelTransaksiAdmin());
+    }
+
+    private class logout implements ActionListener {
+
+        public logout() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int pilihan = JOptionPane.showConfirmDialog(vtabelTrans, "Apakah anda yakin keluar ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+                vtabelTrans.setTabel(mTransaksi.bacaTabelTransaksiAdmin());
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+                new controller.cUser();
+                vtabelTrans.dispose();
+            }
+        }
     }
 
     private class selectedTabel implements MouseListener {
