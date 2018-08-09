@@ -7,6 +7,7 @@ package view;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -40,6 +41,10 @@ public String getmerk(){
     public void tambahMerkListener(ActionListener a) {
         tambah.addActionListener(a);
     }
+    
+    public void logoutListener(ActionListener a) {
+        logout.addActionListener(a);
+    }
 
     public void backListener(ActionListener a) {
         kembali.addActionListener(a);
@@ -60,6 +65,14 @@ public String getmerk(){
     public JTextField jenis() {
         return merk;
     }
+    
+    public JButton barang(){
+        return barang;
+    }
+    
+    public void setID(String h){
+        id.setText(h);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,14 +85,16 @@ public String getmerk(){
 
         karyawan = new javax.swing.JButton();
         transaksi = new javax.swing.JButton();
+        tambah = new javax.swing.JButton();
+        logout = new javax.swing.JButton();
         barang = new javax.swing.JButton();
         kembali = new javax.swing.JButton();
         hapus1 = new javax.swing.JButton();
-        tambah = new javax.swing.JButton();
         merk = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelMerk = new javax.swing.JTable();
+        id = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -90,17 +105,20 @@ public String getmerk(){
         transaksi.setText("transaksi");
         getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 120, -1));
 
+        tambah.setText("tambah merk");
+        getContentPane().add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
+
+        logout.setText("lg out");
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 90, -1));
+
         barang.setText("barang");
         getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 120, -1));
 
         kembali.setText("kembali");
-        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, -1, -1));
+        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 90, -1));
 
         hapus1.setText("hapus merk");
         getContentPane().add(hapus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, -1));
-
-        tambah.setText("tambah merk");
-        getContentPane().add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
         getContentPane().add(merk, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 140, 20));
 
         jLabel1.setText("merk:");
@@ -120,6 +138,9 @@ public String getmerk(){
         jScrollPane1.setViewportView(tabelMerk);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 430, 200));
+
+        id.setText(" ");
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 44, 80, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -162,10 +183,12 @@ public String getmerk(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton barang;
     private javax.swing.JButton hapus1;
+    private javax.swing.JLabel id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton karyawan;
     private javax.swing.JButton kembali;
+    private javax.swing.JButton logout;
     private javax.swing.JTextField merk;
     private javax.swing.JTable tabelMerk;
     private javax.swing.JButton tambah;

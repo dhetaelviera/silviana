@@ -5,11 +5,14 @@
  */
 package controller;
 
+import static controller.cBarang.username;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -41,14 +44,14 @@ public class cOwner {
     private cBarang controllerBarang;
     public static String username;
     public static String abc;
-        private static int idTransaksi;
+    private static int idTransaksi;
     private static String namaPembeli, total;
 
     public cOwner(String username, ownerDashboard owner) {
         mUser = new user();
-        mTransaksi=new transaksi();
+        mTransaksi = new transaksi();
         this.owner = new ownerDashboard();
-        this.username=username;
+        this.username = username;
         this.owner.setVisible(true);
         this.owner.getID();
         this.owner.setID(username);
@@ -60,53 +63,131 @@ public class cOwner {
         this.owner.transaksiListener(new transaksiListener());
         this.owner.karyawanListener(new karyawan());
         this.owner.logoutListener(new logoutAdmin());
+        this.owner.tabelListener(new selectedTabelManajer());
         this.owner.hapusListener(new hapustransaksi());
         this.owner.cariListener(new pembeliSearchEngine());
         this.owner.cari2Listener(new invoiceSearchEngine());
         this.owner.kalender(new sortByKal());
         this.owner.kalender2(new sortByMonth());
+        this.owner.kalenderrange(new sortbyrange());
         this.owner.kal().setEnabled(false);
         this.owner.month().setEnabled(false);
-        
+        this.owner.hapus().setEnabled(false);
         this.owner.kalender3(new aktif());
         this.owner.reset(new resetTabel());
-        this.owner.sortByNama(new sortByNama());
-        this.owner.tabelListener(new selectedTabelManajer());
+//        this.owner.sortByNama(new sortByNama());
 //        
         this.owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiOwner());
     }
 
-    public cOwner(int a) {
+    public cOwner(int a, String k) {
         mUser = new user();
-        mTransaksi=new transaksi();
+        mTransaksi = new transaksi();
         karyawan = new ownerKaryawan();
+        this.username = username;
+        username = k;
+        System.out.println(k);
         karyawan.setVisible(true);
         karyawan.setResizable(false);
         karyawan.setLocationRelativeTo(null);
+        karyawan.setID(k);
         karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
         karyawan.tambahKaryawanListener(new karyawanListener());
         karyawan.backListener(new kembali3());
+        karyawan.logoutListener(new logoutkaryawan());
+        karyawan.kary().setEnabled(false);
+        karyawan.barangListener(new karyawankebarang());
+        karyawan.transaksiListener(new karyawanketransaksi());
+        
 
     }
-    
-     private void bacaTabelCariNama() {
+
+    private void bacaTabelCariNama() {
         String cari = owner.getCari();
         System.out.println(cari);
         if (cari.equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(owner, "Masukkan kata yang dicari");
         } else {
-        owner.setTabelPembayaran(mTransaksi.cariPembeli(cari));
-           
+            owner.setTabelPembayaran(mTransaksi.cariPembeli(cari));
+
         }
     }
-     private void bacaTabelCariInvoice() {
+
+    private void bacaTabelCariInvoice() {
         String cari = owner.getCari();
         System.out.println(cari);
         if (cari.equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(owner, "Masukkan kata yang dicari");
         } else {
-        owner.setTabelPembayaran(mTransaksi.cariInvoice(cari));
-           
+            owner.setTabelPembayaran(mTransaksi.cariInvoice(cari));
+
+        }
+    }
+
+    private class logoutkaryawan implements ActionListener {
+
+        public logoutkaryawan() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+      int pilihan = JOptionPane.showConfirmDialog(karyawan, "Apakah anda ingin yakin meninggalkan halaman ini ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+                karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+                karyawan.dispose();
+                new controller.cUser();
+
+            }
+        }
+    }
+
+    private class karyawanketransaksi implements ActionListener {
+
+        public karyawanketransaksi() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+       
+                karyawan.dispose();
+                new controller.cBarang(1,1,abc);
+
+                
+        }
+    }
+
+    private class karyawankebarang implements ActionListener {
+
+        public karyawankebarang() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+      
+            karyawan.dispose();
+                new controller.cBarang(abc);
+
+            }
+        
+        
+    }
+
+    private class sortbyrange implements ActionListener {
+
+        public sortbyrange() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                String tanggal1 = JOptionPane.showInputDialog("Masukkan tanggal awal dengn format yyyy-mm-dd");
+                String tanggal2 = JOptionPane.showInputDialog("Masukkan tanggal akhir dengn format yyyy-mm-dd");
+                owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiManajerbyDateRange(tanggal1, tanggal2));
+            } catch (ParseException ex) {
+                Logger.getLogger(cOwner.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
     }
 
@@ -117,14 +198,25 @@ public class cOwner {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-     int baris = ownerDashboard.getTableTransaksi().getSelectedRow();
-            idDetail =  ownerDashboard.getTableTransaksi().getValueAt(baris, 0).toString();
-            qty2 = (int) ownerDashboarrd.getTableTransaksi().getValueAt(baris, 3);
-            idBarang2 = mBarang.getIDBarang2(Integer.valueOf(idDetail));
-            ownerDashboard.hapus().setEnabled(true);
+            int pilihan = JOptionPane.showConfirmDialog(owner, "Apakah anda ingin yakin menghapus pemesanan dengan id: "
+                    + "" + idTransaksi + " ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+                bacaTabelTransaksi();
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+                boolean status = mTransaksi.hapusTransaksi2(Integer.valueOf(idTransaksi));
+                if (status) {
+                    JOptionPane.showMessageDialog(owner, "Berhasil Dihapus");
+                    bacaTabelTransaksi();
+
+                } else {
+                    JOptionPane.showMessageDialog(owner, "Kesalahan jaringan");
+                    bacaTabelTransaksi();
+                }
+
+            }
         }
     }
-     
+
     private class pembeliSearchEngine implements ActionListener {
 
         @Override
@@ -134,13 +226,12 @@ public class cOwner {
             int data = owner.getJumlahBaris();
             if (data == 0) {
                 JOptionPane.showMessageDialog(owner, "Data Yang Dicari Kosong");
-              bacaTabelTransaksi();
+                bacaTabelTransaksi();
             }
 
         }
     }
-    
-    
+
     private class invoiceSearchEngine implements ActionListener {
 
         @Override
@@ -150,17 +241,17 @@ public class cOwner {
             int data = owner.getJumlahBaris();
             if (data == 0) {
                 JOptionPane.showMessageDialog(owner, "Data Yang Dicari Kosong");
-              bacaTabelTransaksi();
+                bacaTabelTransaksi();
             }
 
         }
     }
-    
-     private class selectedTabelManajer implements MouseListener {
-        
+
+    private class selectedTabelManajer implements MouseListener {
+
         public selectedTabelManajer() {
         }
-        
+
         @Override
         public void mouseClicked(MouseEvent e) {
 //            viewManajer.detail().setEnabled(true);
@@ -168,90 +259,91 @@ public class cOwner {
             idTransaksi = Integer.valueOf(String.valueOf(owner.tabel().getValueAt(baris, 0)));
             namaPembeli = owner.tabel().getValueAt(baris, 1).toString();
             total = owner.tabel().getValueAt(baris, 3).toString();
+            owner.hapus().setEnabled(true);
         }
 //<editor-fold defaultstate="collapsed" desc="comment">
 
         @Override
         public void mousePressed(MouseEvent e) {
-            
+
         }
-        
+
         @Override
         public void mouseReleased(MouseEvent e) {
-            
+
         }
-        
+
         @Override
         public void mouseEntered(MouseEvent e) {
-            
+
         }
-        
+
         @Override
         public void mouseExited(MouseEvent e) {
-            
+
         }
 //</editor-fold>
     }
-     private class sortByNama implements ActionListener {
-        
-        public sortByNama() {
-        }
-        
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            bacaTabelTransaksibyNama();
-        }
-    }
-      private class aktif implements ActionListener {
-        
+//     private class sortByNama implements ActionListener {
+//        
+//        public sortByNama() {
+//        }
+//        
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            bacaTabelTransaksibyNama();
+//        }
+//    }
+
+    private class aktif implements ActionListener {
+
         public aktif() {
         }
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             owner.kal().setEnabled(true);
             owner.month().setEnabled(true);
         }
     }
-    
-       private class resetTabel implements ActionListener {
-        
+
+    private class resetTabel implements ActionListener {
+
         public resetTabel() {
         }
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             bacaTabelTransaksi();
         }
     }
+
     private class sortByMonth implements ActionListener {
-        
+
         public sortByMonth() {
         }
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             bacaTabelTransaksiByMonth();
         }
     }
-    
+
     private class sortByKal implements ActionListener {
-        
+
         public sortByKal() {
         }
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             bacaTabelTransaksiByKal();
         }
     }
-    
-    
-    private void bacaTabelTransaksibyNama() {
-        String idBarang = owner.getBarang();
-        owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiOwnerbyNama(idBarang));
-    }
-    
+
+//    private void bacaTabelTransaksibyNama() {
+//        String idBarang = owner.getBarang();
+//        owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiOwnerbyNama(idBarang));
+//    }
     private void bacaTabelTransaksiByKal() {
         try {
             owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiManajerbyDate(owner.gettglBeli()));
@@ -259,7 +351,7 @@ public class cOwner {
             Logger.getLogger(cUser.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private void bacaTabelTransaksiByMonth() {
         try {
             owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiManajerbyMonth(owner.gettglBeli()));
@@ -267,8 +359,7 @@ public class cOwner {
             Logger.getLogger(cUser.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-      
-    
+
     private void bacaTabelTransaksi() {
         owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiOwner());
     }
@@ -280,8 +371,15 @@ public class cOwner {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            int pilihan = JOptionPane.showConfirmDialog(karyawan, "Apakah anda ingin yakin meninggalkan halaman ini ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+                karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
+            } else if (pilihan == JOptionPane.YES_OPTION) {
             karyawan.dispose();
-            new controller.cOwner(username,owner);
+            new controller.cOwner(username, owner);
+
+            
+            }
         }
     }
 
@@ -321,7 +419,7 @@ public class cOwner {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            new controller.cOwner(1);
+            new controller.cOwner(1, abc);
             owner.dispose();
         }
     }
@@ -333,8 +431,15 @@ public class cOwner {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+             int pilihan = JOptionPane.showConfirmDialog(karyawan, "Apakah anda ingin yakin ingin keluar ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+                karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
+            } else if (pilihan == JOptionPane.YES_OPTION) {
             new controller.cUser();
             owner.dispose();
+
+            
+            }
         }
     }
 

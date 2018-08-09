@@ -44,12 +44,12 @@ public class ownerDashboard extends javax.swing.JFrame {
      */
     public ownerDashboard() {
         modelBarang = new barang();
-        jenisBarang = new JComboBox();
-        merkBarang = new JComboBox();
-        namaBarang = new JComboBox();
-
-        jenis_barang = modelBarang.getJenis();
-        merk_barang = modelBarang.getMerk();
+//        jenisBarang = new JComboBox();
+//        merkBarang = new JComboBox();
+//        namaBarang = new JComboBox();
+//
+//        jenis_barang = modelBarang.getJenis();
+//        merk_barang = modelBarang.getMerk();
         date = new SimpleDateFormat("yyyy-MM-dd");
         this.date = DateFormat.getDateInstance();
         initComponents();
@@ -58,6 +58,10 @@ public class ownerDashboard extends javax.swing.JFrame {
     public Date gettglBeli() {
         Date tgllahir1 = (calender.getDate());
         return tgllahir1;
+    }
+    
+    public JTable tabel(){
+        return tabelTransaksi;
     }
 
     public String getCari(){
@@ -75,21 +79,21 @@ public class ownerDashboard extends javax.swing.JFrame {
     public void setID(String id) {
         this.pegawai.setText(id);
     }
-
-    public String getJenis() {
-        int indeks = jenisBarang.getSelectedIndex();
-        return jenis_barang[1][indeks];
-    }
-
-    public String getMerk() {
-        int indeks = merkBarang.getSelectedIndex();
-        return merk_barang[0][indeks];
-    }
-
-    public String getBarang() {
-        int indeks = namaBarang.getSelectedIndex();
-        return nama_barang[0][indeks];
-    }
+//
+//    public String getJenis() {
+//        int indeks = jenisBarang.getSelectedIndex();
+//        return jenis_barang[1][indeks];
+//    }
+//
+//    public String getMerk() {
+//        int indeks = merkBarang.getSelectedIndex();
+//        return merk_barang[0][indeks];
+//    }
+//
+//    public String getBarang() {
+//        int indeks = namaBarang.getSelectedIndex();
+//        return nama_barang[0][indeks];
+//    }
 
     public void setTabelPembayaran(DefaultTableModel t) {
         tabelTransaksi.setModel(t);
@@ -155,13 +159,18 @@ public class ownerDashboard extends javax.swing.JFrame {
     public JButton cariButton2() {
         return cariinvoice;
     }
-
-    public JTable tabel() {
-        return tabelTransaksi;
+    
+    public JButton range(){
+        return range;
     }
+ 
 
     public void kalender(ActionListener a) {
         sortDate.addActionListener(a);
+    }
+    
+    public void kalenderrange(ActionListener a) {
+        range.addActionListener(a);
     }
 
     public void tabelListener(MouseListener a) {
@@ -176,9 +185,9 @@ public class ownerDashboard extends javax.swing.JFrame {
         calender.addActionListener(a);
     }
 
-    public void sortByNama(ActionListener a) {
-        namaBarang.addActionListener(a);
-    }
+//    public void sortByNama(ActionListener a) {
+//        namaBarang.addActionListener(a);
+//    }
 
     public void reset(ActionListener a) {
         reset.addActionListener(a);
@@ -197,9 +206,6 @@ public class ownerDashboard extends javax.swing.JFrame {
         sortMonth = new javax.swing.JButton();
         logout = new javax.swing.JButton();
         sortDate = new javax.swing.JButton();
-        namaBarang = new javax.swing.JComboBox();
-        jenisBarang = new javax.swing.JComboBox(jenis_barang[0]);
-        merkBarang = new javax.swing.JComboBox(this.merk_barang[1]);
         reset = new javax.swing.JButton();
         transaksi = new javax.swing.JButton();
         cetak = new javax.swing.JButton();
@@ -213,6 +219,7 @@ public class ownerDashboard extends javax.swing.JFrame {
         cariButton = new javax.swing.JButton();
         cariinvoice = new javax.swing.JButton();
         hapus = new javax.swing.JButton();
+        range = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -232,25 +239,6 @@ public class ownerDashboard extends javax.swing.JFrame {
 
         sortDate.setText("sort by date");
         getContentPane().add(sortDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, -1, -1));
-
-        namaBarang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(namaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 250, 140, -1));
-
-        jenisBarang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jenisBarang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jenisBarangActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jenisBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 140, -1));
-
-        merkBarang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        merkBarang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                merkBarangActionPerformed(evt);
-            }
-        });
-        getContentPane().add(merkBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 220, 140, -1));
 
         reset.setText("reset");
         getContentPane().add(reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, -1, -1));
@@ -306,6 +294,9 @@ public class ownerDashboard extends javax.swing.JFrame {
         hapus.setText("hApus trAnsaksi");
         getContentPane().add(hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, 130, -1));
 
+        range.setText("range");
+        getContentPane().add(range, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 100, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -316,25 +307,6 @@ public class ownerDashboard extends javax.swing.JFrame {
     private void calenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calenderActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_calenderActionPerformed
-
-    private void jenisBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisBarangActionPerformed
-        int jenisBarang1 = jenisBarang.getSelectedIndex();
-        int merkBarang1 = merkBarang.getSelectedIndex();
-        System.out.println(jenisBarang1);
-        System.out.println(merkBarang1);
-        nama_barang = modelBarang.getNamaBarangPilihan(jenis_barang[1][jenisBarang1], merk_barang[0][merkBarang1]);
-        namaBarang.setModel(new DefaultComboBoxModel<>(nama_barang[1]));        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jenisBarangActionPerformed
-
-    private void merkBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_merkBarangActionPerformed
-        int jenisBarang1 = jenisBarang.getSelectedIndex();
-        int merkBarang1 = merkBarang.getSelectedIndex();
-        System.out.println(jenisBarang1);
-        System.out.println(merkBarang1);
-        nama_barang = modelBarang.getNamaBarangPilihan(jenis_barang[1][jenisBarang1], merk_barang[0][merkBarang1]);
-        namaBarang.setModel(new DefaultComboBoxModel<>(nama_barang[1]));        // TODO add your handling code here:
-    }//GEN-LAST:event_merkBarangActionPerformed
 
     private void cetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakActionPerformed
   try{
@@ -390,12 +362,10 @@ public class ownerDashboard extends javax.swing.JFrame {
     private javax.swing.JButton hapus;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JComboBox jenisBarang;
     private javax.swing.JButton karyawan;
     private javax.swing.JButton logout;
-    private javax.swing.JComboBox merkBarang;
-    private javax.swing.JComboBox namaBarang;
     private javax.swing.JLabel pegawai;
+    private javax.swing.JButton range;
     private javax.swing.JButton reset;
     private javax.swing.JButton sortDate;
     private javax.swing.JButton sortMonth;

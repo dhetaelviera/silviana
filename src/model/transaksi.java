@@ -21,7 +21,6 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import view.ownerDashboard;
@@ -36,6 +35,8 @@ public class transaksi implements NewInterface{
     JasperReport jasperReport;
     JasperDesign jasperDesign;
     JasperPrint jasperPrint;
+    
+    
     public transaksi() {
         konek = new koneksi().getKoneksi();
     }
@@ -375,28 +376,29 @@ public class transaksi implements NewInterface{
         return tabel;
     }
 
-    public DefaultTableModel bacaTabelTransaksiManajerbyDateRange(Date tanggal1, Date tanggal2) throws ParseException {
-        String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli"
-                + "  FROM transaksi t JOIN member m ON m.idMember=t.idMember "
-                + "WHERE t.tanggalBeli beetween t.tanggalbeli=? and t.tanggalbeli=?  ORDER BY t.tanggalBeli desc;";
+    public DefaultTableModel bacaTabelTransaksiManajerbyDateRange(String tanggal1, String tanggal2) throws ParseException {
+        String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli  FROM transaksi t JOIN member m ON m.idMember=t.idMember"
+                + " WHERE t.tanggalBeli BETWEEN ? and ?  ORDER BY t.tanggalBeli desc;";
         String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "Total Harga"};
         DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
         try {
             PreparedStatement st = konek.prepareStatement(query);
-            DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date date1 = tanggal1;
-            System.out.println(date1);
-            java.sql.Date sqlDate1 = new java.sql.Date(date1.getTime());
-            System.out.println(sqlDate1);
+//            DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+//            java.util.Date date1 = tanggal1;
+//            System.out.println(date1);
+//            java.sql.Date sqlDate1 = new java.sql.Date(date1.getTime());
+//            System.out.println(sqlDate1);
 
-            DateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date date2 = tanggal2;
-            System.out.println(date2);
-            java.sql.Date sqlDate2 = new java.sql.Date(date2.getTime());
-            System.out.println(sqlDate2);
-
-            st.setDate(1, sqlDate1);
-            st.setDate(2, sqlDate2);
+//            DateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+//            java.util.Date date2 = tanggal2;
+//            System.out.println(date2);
+//            java.sql.Date sqlDate2 = new java.sql.Date(date2.getTime());
+//            System.out.println(sqlDate2);
+            System.out.println(tanggal1);
+            System.out.println(tanggal2);
+            
+            st.setString(1, tanggal1);
+            st.setString(2, tanggal2);
             System.out.println(query);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {

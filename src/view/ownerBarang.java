@@ -52,6 +52,10 @@ public class ownerBarang extends javax.swing.JFrame {
     public void cariBarangListener(ActionListener a) {
         cariButton.addActionListener(a);
     }
+   
+    public void logoutListener(ActionListener a) {
+        logout.addActionListener(a);
+    }
     
       
     public void transaksiListener(ActionListener a) {
@@ -65,10 +69,14 @@ public class ownerBarang extends javax.swing.JFrame {
     public void barangListener(ActionListener a) {
         barang.addActionListener(a);
     }
+    public JButton barang(){
+        return barang;
+    }
 
     public void kembaliListener(ActionListener a) {
         kembali.addActionListener(a);
     }
+    
     
     public void jenisListener(ActionListener a) {
         jenis.addActionListener(a);
@@ -103,6 +111,7 @@ public class ownerBarang extends javax.swing.JFrame {
         kembali = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelBarang = new javax.swing.JTable();
+        logout = new javax.swing.JButton();
         cariButton = new javax.swing.JButton();
         tambahBarang = new javax.swing.JButton();
         ubahBarang1 = new javax.swing.JButton();
@@ -134,6 +143,9 @@ public class ownerBarang extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabelBarang);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 380, 300));
+
+        logout.setText("logout");
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, 80, -1));
 
         cariButton.setText("cari");
         getContentPane().add(cariButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, -1, -1));
@@ -209,6 +221,7 @@ public class ownerBarang extends javax.swing.JFrame {
     private javax.swing.JButton jenis;
     private javax.swing.JButton karyawan;
     private javax.swing.JButton kembali;
+    private javax.swing.JButton logout;
     private javax.swing.JButton merk;
     private javax.swing.JTable tabelBarang;
     private javax.swing.JButton tambahBarang;

@@ -7,6 +7,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 import model.transaksi;
 import model.user;
@@ -31,6 +33,8 @@ public class cAdmin {
     private user mUser;
     private transaksi mTransaksi;
     String username;
+    private static int idTransaksi;
+    private static String namaPembeli, total;
 
     public cAdmin(String a, adminDashboard admin) {
         mUser = new user();
@@ -49,14 +53,80 @@ public class cAdmin {
     public cAdmin(String u, adminTabelTrans vtabeltrans) {
         mUser = new user();
         mTransaksi = new transaksi();
-        username=u;
+        username = u;
         this.vtabelTrans = new adminTabelTrans();
         this.vtabelTrans.setVisible(true);
+        this.vtabelTrans.setID(u);
         this.vtabelTrans.setResizable(false);
         this.vtabelTrans.setLocationRelativeTo(null);
         this.vtabelTrans.backListener(new kembali());
         this.vtabelTrans.buatListener(new buatTransaksi());
+        this.vtabelTrans.hapus().setEnabled(false);
+        this.vtabelTrans.tabelListener(new selectedTabel());
+        this.vtabelTrans.hapusListener(new hapustransaksi());
         this.vtabelTrans.setTabel(mTransaksi.bacaTabelTransaksiAdmin());
+    }
+
+    private class selectedTabel implements MouseListener {
+
+        public selectedTabel() {
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+//            viewManajer.detail().setEnabled(true);
+            int baris = vtabelTrans.tabel().getSelectedRow();
+            idTransaksi = Integer.valueOf(String.valueOf(vtabelTrans.tabel().getValueAt(baris, 0)));
+            namaPembeli = vtabelTrans.tabel().getValueAt(baris, 1).toString();
+            total = vtabelTrans.tabel().getValueAt(baris, 3).toString();
+            vtabelTrans.hapus().setEnabled(true);
+        }
+//<editor-fold defaultstate="collapsed" desc="comment">
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+//</editor-fold>
+    }
+
+    private class hapustransaksi implements ActionListener {
+
+        public hapustransaksi() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int pilihan = JOptionPane.showConfirmDialog(vtabelTrans, "Apakah anda ingin yakin menghapus pemesanan dengan id: "
+                    + "" + idTransaksi + " ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+                vtabelTrans.setTabel(mTransaksi.bacaTabelTransaksiAdmin());
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+                boolean status = mTransaksi.hapusTransaksi2(Integer.valueOf(idTransaksi));
+                if (status) {
+                    JOptionPane.showMessageDialog(vtabelTrans, "Berhasil Dihapus");
+                    vtabelTrans.setTabel(mTransaksi.bacaTabelTransaksiAdmin());
+                } else {
+                    JOptionPane.showMessageDialog(vtabelTrans, "Kesalahan jaringan");
+                    vtabelTrans.setTabel(mTransaksi.bacaTabelTransaksiAdmin());
+                }
+            }
+        }
     }
 
     private class buatTransaksi implements ActionListener {
@@ -104,7 +174,7 @@ public class cAdmin {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-          new cAdmin(username, vtabelTrans);
+            new cAdmin(username, vtabelTrans);
             admin.dispose();
 
         }

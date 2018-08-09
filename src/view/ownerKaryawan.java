@@ -36,6 +36,10 @@ public class ownerKaryawan extends javax.swing.JFrame {
         return password.getText();
     }
 
+    public void setID(String a) {
+        id.setText(a);
+    }
+
     public void setNama(String a) {
         nama.setText(a);
     }
@@ -75,6 +79,10 @@ public class ownerKaryawan extends javax.swing.JFrame {
     public void barangListener(ActionListener a) {
         barang.addActionListener(a);
     }
+    
+    public void logoutListener(ActionListener a) {
+        logout.addActionListener(a);
+    }
 
     public JTextField nama() {
         return nama;
@@ -86,6 +94,10 @@ public class ownerKaryawan extends javax.swing.JFrame {
 
     public JTextField pass() {
         return password;
+    }
+
+    public JButton kary() {
+        return karyawan;
     }
 
     /**
@@ -105,12 +117,14 @@ public class ownerKaryawan extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelKaryawan = new javax.swing.JTable();
+        logout = new javax.swing.JButton();
         kembali = new javax.swing.JButton();
         tambah = new javax.swing.JButton();
         hapus1 = new javax.swing.JButton();
         karyawan = new javax.swing.JButton();
         transaksi = new javax.swing.JButton();
         barang = new javax.swing.JButton();
+        id = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -142,8 +156,11 @@ public class ownerKaryawan extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 430, 200));
 
+        logout.setText("logout");
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 120, -1));
+
         kembali.setText("kembali");
-        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, -1, -1));
+        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 120, -1));
 
         tambah.setText("tambah karyawan");
         getContentPane().add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
@@ -159,6 +176,9 @@ public class ownerKaryawan extends javax.swing.JFrame {
 
         barang.setText("barang");
         getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 120, -1));
+
+        id.setText(" ");
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 14, 50, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -201,12 +221,14 @@ public class ownerKaryawan extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton barang;
     private javax.swing.JButton hapus1;
+    private javax.swing.JLabel id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton karyawan;
     private javax.swing.JButton kembali;
+    private javax.swing.JButton logout;
     private javax.swing.JTextField nama;
     private javax.swing.JTextField password;
     private javax.swing.JTable tabelKaryawan;

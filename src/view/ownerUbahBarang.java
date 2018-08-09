@@ -7,6 +7,7 @@ package view;
 
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import model.barang;
 
@@ -50,6 +51,9 @@ public class ownerUbahBarang extends javax.swing.JFrame {
         stokBarang.setValue(stok);
     }
     
+    public void setID(String k){
+        id.setText(k);
+    }
     
     public JComboBox<String> setJenisBarang() {
         return jenisBarang;
@@ -86,6 +90,10 @@ public class ownerUbahBarang extends javax.swing.JFrame {
     public void inputListener(ActionListener a) {
         simpan.addActionListener(a);
     }
+    
+    public void logoutListener(ActionListener a) {
+        logout.addActionListener(a);
+    }
 
     public void kembaliListener(ActionListener a) {
         kembali.addActionListener(a);
@@ -98,7 +106,21 @@ public class ownerUbahBarang extends javax.swing.JFrame {
     public void merkListener(ActionListener a) {
         tambahMerk.addActionListener(a);
     }
+    
+    public void transaksiListener(ActionListener a) {
+        transaksi.addActionListener(a);
+    }
 
+    public void karyawanListener(ActionListener a) {
+        karyawan.addActionListener(a);
+    }
+
+    public void barangListener(ActionListener a) {
+        barang.addActionListener(a);
+    }
+    public JButton barang(){
+        return barang;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -122,6 +144,11 @@ public class ownerUbahBarang extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         namaBarang = new javax.swing.JTextField();
+        logout = new javax.swing.JButton();
+        karyawan = new javax.swing.JButton();
+        transaksi = new javax.swing.JButton();
+        barang = new javax.swing.JButton();
+        id = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -164,6 +191,19 @@ public class ownerUbahBarang extends javax.swing.JFrame {
         jLabel2.setText("nama barang:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
         getContentPane().add(namaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 120, -1));
+
+        logout.setText("logout");
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 120, -1));
+
+        karyawan.setText("karyawan");
+        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, -1));
+
+        transaksi.setText("transaksi");
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 120, -1));
+
+        barang.setText("barang");
+        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 120, -1));
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(314, 40, 70, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -208,19 +248,24 @@ public class ownerUbahBarang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton barang;
     private javax.swing.JTextField hargaBarang;
+    private javax.swing.JLabel id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JComboBox<String> jenisBarang;
+    private javax.swing.JButton karyawan;
     private javax.swing.JButton kembali;
+    private javax.swing.JButton logout;
     private javax.swing.JComboBox<String> merkBarang;
     private javax.swing.JTextField namaBarang;
     private javax.swing.JButton simpan;
     private javax.swing.JSpinner stokBarang;
     private javax.swing.JButton tambahJenis;
     private javax.swing.JButton tambahMerk;
+    private javax.swing.JButton transaksi;
     // End of variables declaration//GEN-END:variables
 }

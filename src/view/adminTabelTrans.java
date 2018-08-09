@@ -6,7 +6,10 @@
 package view;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.sql.Connection;
+import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.transaksi;
 import model.user;
@@ -33,10 +36,36 @@ public class adminTabelTrans extends javax.swing.JFrame {
     public void backListener(ActionListener a) {
         kembali.addActionListener(a);
     }
+    public void hapusListener(ActionListener a) {
+        hapus.addActionListener(a);
+    }
     public void buatListener(ActionListener a) {
         transaksi.addActionListener(a);
     }
 
+     public void tabelListener(MouseListener a) {
+        tabel.addMouseListener(a);
+    }
+     
+     public  JTable tabel(){
+         return tabel;
+     }
+     
+     public JButton tambah(){
+         return transaksi;
+     }
+     
+     public JButton kembali(){
+         return kembali;
+     }
+     
+     public JButton hapus(){
+         return hapus;
+     }
+     
+     public void setID(String a){
+         id.setText(a);
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,7 +78,9 @@ public class adminTabelTrans extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabel = new javax.swing.JTable();
         transaksi = new javax.swing.JButton();
+        hapus = new javax.swing.JButton();
         kembali = new javax.swing.JButton();
+        id = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -72,8 +103,12 @@ public class adminTabelTrans extends javax.swing.JFrame {
         transaksi.setText("buat transaksi");
         getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, -1));
 
+        hapus.setText("hapus transaksi");
+        getContentPane().add(hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, -1, -1));
+
         kembali.setText("kembali");
         getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, -1, -1));
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 80, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -114,6 +149,8 @@ public class adminTabelTrans extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton hapus;
+    private javax.swing.JLabel id;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton kembali;
     private javax.swing.JTable tabel;

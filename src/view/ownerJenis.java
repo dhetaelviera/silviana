@@ -7,6 +7,7 @@ package view;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,6 +32,13 @@ public class ownerJenis extends javax.swing.JFrame {
 
     public void setID(String a) {
         id.setText(a);
+    }
+    
+    public JButton logout(){
+     return logout;   
+    }
+    public JButton barang(){
+     return barang;   
     }
 
     public void setTabelJenis(DefaultTableModel t) {
