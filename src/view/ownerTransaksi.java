@@ -234,16 +234,10 @@ public class ownerTransaksi extends javax.swing.JFrame {
     private void initComponents() {
 
         diskon = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jumlahBarang = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
         namaPembeli = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         total = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         kembali = new javax.swing.JButton();
         tambahBarang = new javax.swing.JButton();
         tambahPembeli = new javax.swing.JButton();
@@ -255,65 +249,45 @@ public class ownerTransaksi extends javax.swing.JFrame {
         merkBarang = new javax.swing.JComboBox(merk_Barang[1]);
         namaBarang = new javax.swing.JComboBox<String>();
         pegawai = new javax.swing.JLabel();
-        pegawai1 = new javax.swing.JLabel();
         invoice = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         pilihkurir = new javax.swing.JComboBox<>(kurir[1]);
         karyawan = new javax.swing.JButton();
         transaksi = new javax.swing.JButton();
         barang = new javax.swing.JButton();
         selesai = new javax.swing.JButton();
         logout = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(diskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 120, -1));
-
-        jLabel1.setText("kurir");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 40, -1));
-
-        jLabel2.setText("nama pembeli:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
-
-        jLabel3.setText("jenis barang:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
-
-        jLabel4.setText("merk barang:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+        getContentPane().add(diskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 290, 120, -1));
 
         jumlahBarang.setFont(new java.awt.Font("Tempus Sans ITC", 0, 12)); // NOI18N
-        getContentPane().add(jumlahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 110, -1));
+        getContentPane().add(jumlahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 140, 110, -1));
 
         jLabel5.setText("nama barang:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
-        getContentPane().add(namaPembeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 170, -1));
-
-        jLabel6.setText("jumlah:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, 50, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 360, -1, -1));
+        getContentPane().add(namaPembeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 130, -1));
 
         total.setFont(new java.awt.Font("Tempus Sans ITC", 0, 18)); // NOI18N
         total.setForeground(new java.awt.Color(255, 255, 255));
         total.setText("0");
-        getContentPane().add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 120, 30));
-
-        jLabel7.setText("diskon:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 50, -1));
+        getContentPane().add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 120, 30));
 
         kembali.setText("kembali");
-        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 220, 110, -1));
+        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 530, 110, -1));
 
         tambahBarang.setText("tambah barang");
-        getContentPane().add(tambahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 70, -1, -1));
+        getContentPane().add(tambahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 200, -1, -1));
 
         tambahPembeli.setText("tambah pembeli");
-        getContentPane().add(tambahPembeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 110, -1));
+        getContentPane().add(tambahPembeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 150, 110, -1));
 
         buatTransaksi.setText("buat transaksi");
-        getContentPane().add(buatTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, 110, -1));
+        getContentPane().add(buatTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 400, 110, -1));
 
         hapusBarang.setText("hapus barang");
-        getContentPane().add(hapusBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, 110, -1));
+        getContentPane().add(hapusBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 240, 110, -1));
 
         tabelPembayaran.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -328,61 +302,55 @@ public class ownerTransaksi extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tabelPembayaran);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 650, 260));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 610, 200));
 
         jenisBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jenisBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(jenisBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 185, -1));
+        getContentPane().add(jenisBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(565, 200, 150, -1));
 
         merkBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 merkBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(merkBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 185, -1));
+        getContentPane().add(merkBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 250, 140, -1));
 
         namaBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 namaBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(namaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 185, -1));
-        getContentPane().add(pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 170, 20));
-
-        pegawai1.setText("pegawai:");
-        getContentPane().add(pegawai1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 70, 20));
-        getContentPane().add(invoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, 120, -1));
-
-        jLabel8.setText("total:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 40, -1));
-
-        jLabel9.setText("invoice");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 40, -1));
+        getContentPane().add(namaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 360, 120, -1));
+        getContentPane().add(pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 50, 110, 20));
+        getContentPane().add(invoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 120, -1));
 
         pilihkurir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pilihkurirActionPerformed(evt);
             }
         });
-        getContentPane().add(pilihkurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, 136, 20));
+        getContentPane().add(pilihkurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 136, 20));
 
         karyawan.setText("karyawan");
-        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 120, -1));
+        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 120, -1));
 
         transaksi.setText("transaksi");
-        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 120, -1));
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 120, -1));
 
         barang.setText("barang");
-        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 120, -1));
+        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 120, -1));
 
         selesai.setText("selesai transaksi");
-        getContentPane().add(selesai, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, 110, -1));
+        getContentPane().add(selesai, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 530, 110, -1));
 
         logout.setText("logout");
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, 100, -1));
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 30, 100, -1));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/07. owner tambah transaksi.png"))); // NOI18N
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -454,15 +422,8 @@ public class ownerTransaksi extends javax.swing.JFrame {
     private javax.swing.JTextField diskon;
     private javax.swing.JButton hapusBarang;
     private javax.swing.JTextField invoice;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox<String> jenisBarang;
     private javax.swing.JSpinner jumlahBarang;
@@ -473,7 +434,6 @@ public class ownerTransaksi extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> namaBarang;
     private javax.swing.JTextField namaPembeli;
     private javax.swing.JLabel pegawai;
-    private javax.swing.JLabel pegawai1;
     private javax.swing.JComboBox<String> pilihkurir;
     private javax.swing.JButton selesai;
     private javax.swing.JTable tabelPembayaran;

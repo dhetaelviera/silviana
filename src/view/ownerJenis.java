@@ -90,7 +90,6 @@ public class ownerJenis extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelJenis = new javax.swing.JTable();
         jenis = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         logout = new javax.swing.JButton();
         tambah = new javax.swing.JButton();
         hapus1 = new javax.swing.JButton();
@@ -98,8 +97,8 @@ public class ownerJenis extends javax.swing.JFrame {
         karyawan = new javax.swing.JButton();
         transaksi = new javax.swing.JButton();
         barang = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         id = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -117,36 +116,34 @@ public class ownerJenis extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabelJenis);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 430, 200));
-        getContentPane().add(jenis, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 140, 20));
-
-        jLabel1.setText("jenis :");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 430, 200));
+        getContentPane().add(jenis, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 140, 20));
 
         logout.setText("log out");
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 90, -1));
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 40, 90, -1));
 
         tambah.setText("tambah jenis");
-        getContentPane().add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
+        getContentPane().add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 500, -1, -1));
 
         hapus1.setText("hapus jenis");
-        getContentPane().add(hapus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, -1));
+        getContentPane().add(hapus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, -1, -1));
 
         kembali.setText("kembali");
-        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 90, -1));
+        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 500, 90, -1));
 
         karyawan.setText("karyawan");
-        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 120, -1));
+        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 120, -1));
 
         transaksi.setText("transaksi");
-        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 120, -1));
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 120, -1));
 
         barang.setText("barang");
-        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 120, -1));
+        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 120, -1));
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, 80, 20));
 
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, -1, -1));
-        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 80, 20));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/04. owner tambah jenis barang.png"))); // NOI18N
+        jLabel2.setText(" ");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -190,9 +187,8 @@ public class ownerJenis extends javax.swing.JFrame {
     private javax.swing.JButton barang;
     private javax.swing.JButton hapus1;
     private javax.swing.JLabel id;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jenis;
     private javax.swing.JButton karyawan;
     private javax.swing.JButton kembali;

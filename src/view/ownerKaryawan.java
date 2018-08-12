@@ -112,9 +112,6 @@ public class ownerKaryawan extends javax.swing.JFrame {
         password = new javax.swing.JTextField();
         nama = new javax.swing.JTextField();
         username = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelKaryawan = new javax.swing.JTable();
         logout = new javax.swing.JButton();
@@ -125,21 +122,22 @@ public class ownerKaryawan extends javax.swing.JFrame {
         transaksi = new javax.swing.JButton();
         barang = new javax.swing.JButton();
         id = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 140, 20));
-        getContentPane().add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 140, 20));
-        getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 140, 20));
 
-        jLabel1.setText("password:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+        password.setBorder(null);
+        password.setOpaque(false);
+        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 250, 30));
 
-        jLabel2.setText("nama:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        nama.setBorder(null);
+        nama.setOpaque(false);
+        getContentPane().add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 250, 30));
 
-        jLabel3.setText("username:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+        username.setBorder(null);
+        username.setOpaque(false);
+        getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 250, 30));
 
         tabelKaryawan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -154,31 +152,50 @@ public class ownerKaryawan extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabelKaryawan);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 430, 200));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 510, 200));
 
+        logout.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\logout.png")); // NOI18N
         logout.setText("logout");
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 120, -1));
+        logout.setBorder(null);
+        logout.setBorderPainted(false);
+        logout.setContentAreaFilled(false);
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 150, 60));
 
         kembali.setText("kembali");
-        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 120, -1));
+        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 530, 120, -1));
 
         tambah.setText("tambah karyawan");
-        getContentPane().add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
+        getContentPane().add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 530, -1, -1));
 
         hapus1.setText("hapus karyawan");
-        getContentPane().add(hapus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, -1, -1));
+        getContentPane().add(hapus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 530, -1, -1));
 
-        karyawan.setText("karyawan");
-        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 120, -1));
+        karyawan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\karyawan.png")); // NOI18N
+        karyawan.setBorder(null);
+        karyawan.setBorderPainted(false);
+        karyawan.setContentAreaFilled(false);
+        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 140, 60));
 
+        transaksi.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\transaksi.png")); // NOI18N
         transaksi.setText("transaksi");
-        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 120, -1));
+        transaksi.setBorder(null);
+        transaksi.setBorderPainted(false);
+        transaksi.setContentAreaFilled(false);
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 140, -1));
 
-        barang.setText("barang");
-        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 120, -1));
+        barang.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\barang.png")); // NOI18N
+        barang.setBorder(null);
+        barang.setBorderPainted(false);
+        barang.setContentAreaFilled(false);
+        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 150, 80));
 
+        id.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
         id.setText(" ");
-        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 14, 50, 20));
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 50, 50, 20));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/06. owner tambah karyawan.png"))); // NOI18N
+        jLabel4.setText(" ");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -222,9 +239,7 @@ public class ownerKaryawan extends javax.swing.JFrame {
     private javax.swing.JButton barang;
     private javax.swing.JButton hapus1;
     private javax.swing.JLabel id;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton karyawan;
     private javax.swing.JButton kembali;

@@ -85,7 +85,7 @@ public class adminTabelTrans extends javax.swing.JFrame {
         hapus = new javax.swing.JButton();
         kembali = new javax.swing.JButton();
         id = new javax.swing.JLabel();
-        kembali2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -103,23 +103,34 @@ public class adminTabelTrans extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabel);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 380));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 520, 380));
 
-        logout.setText("log out");
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, -1, -1));
+        logout.setBorder(null);
+        logout.setBorderPainted(false);
+        logout.setContentAreaFilled(false);
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 130, 40));
 
-        transaksi.setText("buat transaksi");
-        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, -1));
+        transaksi.setBorderPainted(false);
+        transaksi.setContentAreaFilled(false);
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 480, 140, 40));
 
-        hapus.setText("hapus transaksi");
-        getContentPane().add(hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, -1, -1));
+        hapus.setBorder(null);
+        hapus.setBorderPainted(false);
+        hapus.setContentAreaFilled(false);
+        getContentPane().add(hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 480, 150, 40));
 
-        kembali.setText("kembali");
-        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, -1, -1));
-        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 80, 20));
+        kembali.setToolTipText("");
+        kembali.setBorder(null);
+        kembali.setBorderPainted(false);
+        kembali.setContentAreaFilled(false);
+        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 480, 140, 40));
 
-        kembali2.setText("kembali");
-        getContentPane().add(kembali2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, -1, -1));
+        id.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        id.setForeground(new java.awt.Color(102, 0, 0));
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 80, 20));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/09. admin tabel transaksi.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -162,9 +173,9 @@ public class adminTabelTrans extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton hapus;
     private javax.swing.JLabel id;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton kembali;
-    private javax.swing.JButton kembali2;
     private javax.swing.JButton logout;
     private javax.swing.JTable tabel;
     private javax.swing.JButton transaksi;

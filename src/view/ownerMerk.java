@@ -91,38 +91,53 @@ public String getmerk(){
         kembali = new javax.swing.JButton();
         hapus1 = new javax.swing.JButton();
         merk = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelMerk = new javax.swing.JTable();
         id = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        karyawan.setText("karyawan");
-        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 120, -1));
+        karyawan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\karyawan.png")); // NOI18N
+        karyawan.setBorder(null);
+        karyawan.setBorderPainted(false);
+        karyawan.setContentAreaFilled(false);
+        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 140, -1));
 
-        transaksi.setText("transaksi");
-        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 120, -1));
+        transaksi.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\transaksi.png")); // NOI18N
+        transaksi.setBorder(null);
+        transaksi.setBorderPainted(false);
+        transaksi.setContentAreaFilled(false);
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 120, -1));
 
-        tambah.setText("tambah merk");
-        getContentPane().add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
+        tambah.setBorder(null);
+        tambah.setContentAreaFilled(false);
+        getContentPane().add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 480, 150, 30));
 
-        logout.setText("lg out");
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 90, -1));
+        logout.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\logout.png")); // NOI18N
+        logout.setBorder(null);
+        logout.setBorderPainted(false);
+        logout.setContentAreaFilled(false);
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 150, -1));
 
-        barang.setText("barang");
-        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 120, -1));
+        barang.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\barang.png")); // NOI18N
+        barang.setBorder(null);
+        barang.setBorderPainted(false);
+        barang.setContentAreaFilled(false);
+        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 150, 40));
 
-        kembali.setText("kembali");
-        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 90, -1));
+        kembali.setBorder(null);
+        kembali.setBorderPainted(false);
+        kembali.setContentAreaFilled(false);
+        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 480, 150, 30));
 
         hapus1.setText("hapus merk");
-        getContentPane().add(hapus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, -1));
-        getContentPane().add(merk, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 140, 20));
+        getContentPane().add(hapus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 480, -1, -1));
 
-        jLabel1.setText("merk:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+        merk.setBorder(null);
+        merk.setOpaque(false);
+        getContentPane().add(merk, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 230, 30));
 
         tabelMerk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,10 +152,15 @@ public String getmerk(){
         ));
         jScrollPane1.setViewportView(tabelMerk);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 430, 200));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 430, 200));
 
+        id.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        id.setForeground(new java.awt.Color(102, 0, 0));
         id.setText(" ");
-        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 44, 80, 20));
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 80, 20));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/05. owner tambah merk barang.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 580));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -184,7 +204,7 @@ public String getmerk(){
     private javax.swing.JButton barang;
     private javax.swing.JButton hapus1;
     private javax.swing.JLabel id;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton karyawan;
     private javax.swing.JButton kembali;

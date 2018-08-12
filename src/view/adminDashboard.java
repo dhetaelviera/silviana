@@ -43,18 +43,22 @@ public class adminDashboard extends javax.swing.JFrame {
         logout = new javax.swing.JButton();
         transaksi = new javax.swing.JButton();
         admin = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         logout.setText("log out");
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, -1, -1));
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, -1, -1));
 
         transaksi.setText("transksi");
-        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, -1));
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, -1, -1));
 
         admin.setText(" ");
-        getContentPane().add(admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 54, 80, 20));
+        getContentPane().add(admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, 120, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/08. admin dashboard.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 620));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -96,6 +100,7 @@ public class adminDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel admin;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton logout;
     private javax.swing.JButton transaksi;
     // End of variables declaration//GEN-END:variables
