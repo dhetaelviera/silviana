@@ -241,37 +241,43 @@ public class ownerDashboard extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        sortMonth.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\bulan.png")); // NOI18N
+        sortMonth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/button/bulan.png"))); // NOI18N
         sortMonth.setBorder(null);
+        sortMonth.setBorderPainted(false);
+        sortMonth.setContentAreaFilled(false);
         sortMonth.setOpaque(false);
-        getContentPane().add(sortMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(739, 287, 130, -1));
+        getContentPane().add(sortMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(739, 288, 130, 30));
 
-        logout.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\logout.png")); // NOI18N
         logout.setBorder(null);
+        logout.setBorderPainted(false);
+        logout.setContentAreaFilled(false);
         logout.setOpaque(false);
         logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 logoutActionPerformed(evt);
             }
         });
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, -1, -1));
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 130, 40));
 
-        sortDate.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\tanggal.png")); // NOI18N
+        sortDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/button/tanggal.png"))); // NOI18N
         sortDate.setBorder(null);
+        sortDate.setBorderPainted(false);
+        sortDate.setContentAreaFilled(false);
         sortDate.setOpaque(false);
-        getContentPane().add(sortDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 240, -1, 30));
+        getContentPane().add(sortDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 240, 140, 40));
 
-        reset.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\reset.png")); // NOI18N
         reset.setBorder(null);
         reset.setContentAreaFilled(false);
         getContentPane().add(reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 460, 130, 30));
 
-        transaksi.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\transaksi.png")); // NOI18N
+        transaksi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/button/transaksi.png"))); // NOI18N
         transaksi.setBorder(null);
+        transaksi.setBorderPainted(false);
+        transaksi.setContentAreaFilled(false);
+        transaksi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         transaksi.setOpaque(false);
-        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 120, -1));
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 120, 30));
 
-        cetak.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\cetak laporan.png")); // NOI18N
         cetak.setBorder(null);
         cetak.setContentAreaFilled(false);
         cetak.addActionListener(new java.awt.event.ActionListener() {
@@ -304,16 +310,17 @@ public class ownerDashboard extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, -1, 390));
 
-        karyawan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\karyawan.png")); // NOI18N
+        karyawan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/button/karyawan.png"))); // NOI18N
         karyawan.setBorder(null);
         karyawan.setContentAreaFilled(false);
-        karyawan.setOpaque(false);
-        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 77, 120, 40));
+        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 140, 60));
 
-        barang.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\barang.png")); // NOI18N
+        barang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/button/barang.png"))); // NOI18N
         barang.setBorder(null);
+        barang.setBorderPainted(false);
+        barang.setContentAreaFilled(false);
         barang.setOpaque(false);
-        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 130, -1));
+        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, -1, 60));
 
         pegawai.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
         pegawai.setForeground(new java.awt.Color(102, 0, 0));
@@ -323,28 +330,26 @@ public class ownerDashboard extends javax.swing.JFrame {
         cari.setOpaque(false);
         getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 250, 20));
 
-        cariButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\cari pembeli.png")); // NOI18N
+        cariButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/button/cari pembeli.png"))); // NOI18N
         cariButton.setBorder(null);
+        cariButton.setBorderPainted(false);
         cariButton.setContentAreaFilled(false);
-        cariButton.setOpaque(false);
-        getContentPane().add(cariButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 130, 30));
+        getContentPane().add(cariButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 120, 30));
 
-        cariinvoice.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\cari invoice.png")); // NOI18N
+        cariinvoice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/button/cari invoice.png"))); // NOI18N
         cariinvoice.setBorder(null);
+        cariinvoice.setBorderPainted(false);
+        cariinvoice.setContentAreaFilled(false);
         cariinvoice.setOpaque(false);
-        getContentPane().add(cariinvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, -1, -1));
+        getContentPane().add(cariinvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 120, 60));
 
-        hapus.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\hapus transaksi.png")); // NOI18N
         hapus.setBorder(null);
         hapus.setContentAreaFilled(false);
-        hapus.setOpaque(false);
-        getContentPane().add(hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(733, 420, -1, -1));
+        getContentPane().add(hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(733, 420, 140, 30));
 
-        range.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\range.png")); // NOI18N
         range.setBorder(null);
         range.setContentAreaFilled(false);
-        range.setOpaque(false);
-        getContentPane().add(range, new org.netbeans.lib.awtextra.AbsoluteConstraints(723, 330, 150, -1));
+        getContentPane().add(range, new org.netbeans.lib.awtextra.AbsoluteConstraints(733, 331, 140, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\src\\view\\png\\01. owner dashboard.png")); // NOI18N
         jLabel1.setText(" ");
