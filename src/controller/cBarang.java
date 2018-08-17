@@ -58,7 +58,7 @@ public class cBarang {
     private ownerUbahBarang ubahbarang;
     private ownerJenis jenisbarang;
     private ownerMerk merkbarang;
-    String idBarang;
+    String idBarang, idMerk, idJenis;
 
     public cBarang(String username) {
         mUser = new user();
@@ -71,14 +71,20 @@ public class cBarang {
         viewbarang.setResizable(false);
         viewbarang.setLocationRelativeTo(null);
         viewbarang.barang().setEnabled(false);
+        viewbarang.hapus().setEnabled(false);
+        viewbarang.ubah().setEnabled(false);
+        viewbarang.cariBarangListener(new cariBarang());
         viewbarang.transaksiListener(new barangketransaksi());
         viewbarang.karyawanListener(new barangkekaryawan());
+//        viewbarang.berandaListener(new barangkeberanda());
         viewbarang.logoutListener(new logoutbarang());
         viewbarang.tambahBarangListener(new viewTambah());
-        viewbarang.ubahBarangListener(new ubahBarang());
+        viewbarang.hapusListener(new hapusBarang());
+        viewbarang.ubahBarangListener(new barangkeubah());
         viewbarang.kembaliListener(new kembali2());
         viewbarang.jenisListener(new jenis());
         viewbarang.tabelListener(new setSelectedTabelBarang());
+        viewbarang.resetTabelListener(new resetTabelBarang());
         bacaTabelBarang();
 
     }
@@ -94,12 +100,16 @@ public class cBarang {
         jenisbarang.setResizable(false);
         jenisbarang.setLocationRelativeTo(null);
         jenisbarang.barang().setEnabled(false);
+        jenisbarang.hapus().setEnabled(false);
+        jenisbarang.tabelListener(new setSelectedTabelJenis());
         jenisbarang.tambahJenisListener(new tambahjenislistener());
-        jenisbarang.setTabelJenis(mBarang.bacaTabelJenis());
+        jenisbarang.hapusListener(new hapusJenis());
+        jenisbarang.berandaListener(new jeniskeberanda());
         jenisbarang.backListener(new kembalikebarang());
         jenisbarang.transaksiListener(new jenisketransaksi());
         jenisbarang.karyawanListener(new jeniskekaryawan());
         jenisbarang.logoutListener(new jenislogout());
+        jenisbarang.setTabelJenis(mBarang.bacaTabelJenis());
 
     }
 
@@ -107,16 +117,20 @@ public class cBarang {
         mUser = new user();
         mBarang = new barang();
         merkbarang = new ownerMerk();
-        this.username=username;
+        this.username = username;
         merkbarang.setVisible(true);
         merkbarang.setResizable(false);
         merkbarang.setLocationRelativeTo(null);
         merkbarang.setID(username);
         merkbarang.barang().setEnabled(false);
+        merkbarang.hapus().setEnabled(false);
         merkbarang.tambahMerkListener(new tambahmerklistener());
+        merkbarang.tabelListener(new setSelectedTabelMerk());
+        merkbarang.hapusListener(new hapusmerk());
         merkbarang.setTabelMerk(mBarang.bacaTabelMerk());
-        jenisbarang.transaksiListener(new merkketransaksi());
-        jenisbarang.karyawanListener(new merkkekaryawan());
+        merkbarang.transaksiListener(new merkketransaksi());
+        merkbarang.karyawanListener(new merkkekaryawan());
+        merkbarang.berandaListener(new merkkeberanda());
         merkbarang.backListener(new kembalimerkkebarang());
         merkbarang.setTabelMerk(mBarang.bacaTabelMerk());
     }
@@ -131,6 +145,7 @@ public class cBarang {
         tambahbarang.setLocationRelativeTo(null);
         tambahbarang.barang().setEnabled(false);
         tambahbarang.transaksiListener(new barangtambahketransaksi());
+        tambahbarang.berandaListener(new barangtambahberanda());
         tambahbarang.karyawanListener(new barangtambahkekaryawan());
         tambahbarang.logoutListener(new logoutbarangtambah());
         tambahbarang.inputListener(new tambahBarang());
@@ -153,6 +168,7 @@ public class cBarang {
         username = a;
         this.adminTransaksi.setResizable(false);
         this.adminTransaksi.setLocationRelativeTo(null);
+        this.adminTransaksi.kurirListener(new tambahkurirAdmin());
         this.adminTransaksi.tambahListener(new tambahBarangListener());
         this.adminTransaksi.tambahPembeliListener(new tambahPembeliListener());
         this.adminTransaksi.buatTransaksiListener(new buatTransaksiListener());
@@ -187,7 +203,9 @@ public class cBarang {
         System.out.println("99999" + cOwner.abc);
         ownerTransaksi.setResizable(false);
         ownerTransaksi.setLocationRelativeTo(null);
+        ownerTransaksi.kurirListener(new tambahkurirOwner());
         ownerTransaksi.barangListener(new transaksikebarang());
+        ownerTransaksi.berandaListener(new transaksikeberanda());
         ownerTransaksi.karyawanListener(new transaksikekaryawan());
         ownerTransaksi.tambahListener(new tambahBarangListener2());
         ownerTransaksi.tambahPembeliListener(new tambahPembeliListener2());
@@ -211,29 +229,32 @@ public class cBarang {
 
     }
 
-    public cBarang(String idBarang, int l, String username) {
+    public cBarang(String idBarang, int l, String username, ownerUbahBarang ubahbarang) {
         mBarang = new barang();
         mUser = new user();
-        ubahbarang = new ownerUbahBarang();
-        this.username=username;
-        ubahbarang.setVisible(true);
-        ubahbarang.setResizable(false);
-        ubahbarang.setLocationRelativeTo(null);
-        ubahbarang.setID(username);
-        ubahbarang.kembaliListener(new backToBarang());
+        this.ubahbarang = new ownerUbahBarang();
+        this.username = username;
+        this.ubahbarang.setVisible(true);
+        this.ubahbarang.setResizable(false);
+        this.ubahbarang.setLocationRelativeTo(null);
+        this.ubahbarang.setID(username);
+        this.ubahbarang.setIDBarang(idBarang);
+        this.ubahbarang.kembaliListener(new backToBarang());
         String namaBarang = mBarang.getNamaBarang(Integer.valueOf(idBarang));
         int stok = Integer.valueOf(mBarang.getStokBarang(Integer.valueOf(idBarang)));
         int harga = Integer.valueOf(mBarang.getHargaBarang(Integer.valueOf(idBarang)));
-        ubahbarang.setNamaBarang(namaBarang);
-        ubahbarang.setStokBarang(stok);
-        ubahbarang.setHargaBarang(harga);
-        ubahbarang.barang().setEnabled(false);
-        ubahbarang.transaksiListener(new ubahketransaksi());
-        ubahbarang.karyawanListener(new ubahkekaryawan());
-        ubahbarang.logoutListener(new logoutubah());
-        ubahbarang.setJenisBarang().setSelectedItem(mBarang.getJenisBarang(Integer.valueOf(idBarang)));
-        ubahbarang.setJMerkBarang().setSelectedItem(mBarang.getMerkBarang(Integer.valueOf(idBarang)));
-        ubahbarang.inputListener(new updateBarangListener());
+        this.ubahbarang.setNamaBarang(namaBarang);
+        this.ubahbarang.setStokBarang(stok);
+        this.ubahbarang.setHargaBarang(harga);
+        this.ubahbarang.barang().setEnabled(false);
+
+        this.ubahbarang.transaksiListener(new ubahketransaksi());
+        this.ubahbarang.berandaListener(new ubahkeberanda());
+        this.ubahbarang.karyawanListener(new ubahkekaryawan());
+        this.ubahbarang.logoutListener(new logoutubah());
+        this.ubahbarang.setJenisBarang().setSelectedItem(mBarang.getJenisBarang(Integer.valueOf(idBarang)));
+        this.ubahbarang.setJMerkBarang().setSelectedItem(mBarang.getMerkBarang(Integer.valueOf(idBarang)));
+        this.ubahbarang.inputListener(new updateBarangListener());
     }
 
     private void bacaTabelBarang() {
@@ -244,6 +265,254 @@ public class cBarang {
         ownerTransaksi.setTabelBarang(mTransaksi.bacaTabelTransaksi(idTransaksi));
     }
 
+    private void bacaTabelCariNama() {
+        String cari = viewbarang.getPencarianBarang();
+        System.out.println(cari);
+        if (cari.equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(owner, "Masukkan nama pembeli atau invoice yang ingin dicari");
+        } else {
+            viewbarang.setTabelBarang(mBarang.bacaTabelBarangCari(cari));
+
+        }
+    }
+
+    private class cariBarang implements ActionListener {
+
+        public cariBarang() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            bacaTabelCariNama();
+            int data = viewbarang.getJumlahBaris();
+            if (data == 0) {
+                JOptionPane.showMessageDialog(owner, "Data Yang Dicari Kosong");
+                bacaTabelBarang();
+            }
+
+        }
+
+    }
+
+    private class resetTabelBarang implements ActionListener {
+
+        public resetTabelBarang() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            bacaTabelBarang();
+        }
+
+    }
+
+    private class barangkeubah implements ActionListener {
+
+        public barangkeubah() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            viewbarang.dispose();
+            System.out.println("berhasil");
+        }
+    }
+
+    private class ubahkeberanda implements ActionListener {
+
+        public ubahkeberanda() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Apakah anda ingin pindah halaman ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+                ubahbarang.dispose();
+                new controller.cOwner(username, owner);
+
+            }
+        }
+    }
+
+    private class transaksikeberanda implements ActionListener {
+
+        public transaksikeberanda() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            ownerTransaksi.dispose();
+            new controller.cOwner(username, owner);
+
+        }
+    }
+
+    private class jeniskeberanda implements ActionListener {
+
+        public jeniskeberanda() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            jenisbarang.dispose();
+            new controller.cOwner(username, owner);
+        }
+    }
+
+    private class barangtambahberanda implements ActionListener {
+
+        public barangtambahberanda() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            tambahbarang.dispose();
+            new controller.cOwner(username, owner);
+        }
+    }
+
+    private class merkkeberanda implements ActionListener {
+
+        public merkkeberanda() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            merkbarang.dispose();
+            new controller.cOwner(username, owner);
+        }
+    }
+
+    private class barangkeberanda implements ActionListener {
+
+        public barangkeberanda() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            viewbarang.dispose();
+            new controller.cOwner(username, owner);
+        }
+    }
+
+    private class hapusBarang implements ActionListener {
+
+        public hapusBarang() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Apakah anda ingin yakin menghapus barang ini ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+                bacaTabelBarang();
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+                boolean status = mBarang.hapusBarang(Integer.valueOf(idBarang));
+                if (status) {
+                    JOptionPane.showMessageDialog(ownerTransaksi, "Berhasil Dihapus");
+                    bacaTabelBarang();
+                }
+            }
+        }
+    }
+
+    private class hapusJenis implements ActionListener {
+
+        public hapusJenis() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Apakah anda ingin yakin menghapus jenis ini ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+                jenisbarang.setTabelJenis(mBarang.bacaTabelJenis());
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+                boolean status = mBarang.hapusJenis(Integer.valueOf(idJenis));
+                if (status) {
+                    JOptionPane.showMessageDialog(ownerTransaksi, "Berhasil Dihapus");
+                    jenisbarang.setTabelJenis(mBarang.bacaTabelJenis());
+
+                }
+            }
+        }
+    }
+
+    private class hapusmerk implements ActionListener {
+
+        public hapusmerk() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Apakah anda ingin yakin menghapus merk ini ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+                merkbarang.setTabelMerk(mBarang.bacaTabelMerk());
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+                boolean status = mBarang.hapusMerk(Integer.valueOf(idMerk));
+                if (status) {
+                    JOptionPane.showMessageDialog(ownerTransaksi, "Berhasil Dihapus");
+                    merkbarang.setTabelMerk(mBarang.bacaTabelMerk());
+
+                }
+            }
+        }
+    }
+
+    private class hapusjenis implements ActionListener {
+
+        public hapusjenis() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Apakah anda ingin yakin menghapus merk ini ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+                merkbarang.setTabelMerk(mBarang.bacaTabelMerk());
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+                boolean status = mBarang.hapusMerk(Integer.valueOf(idMerk));
+                if (status) {
+                    JOptionPane.showMessageDialog(ownerTransaksi, "Berhasil Dihapus");
+                    merkbarang.setTabelMerk(mBarang.bacaTabelMerk());
+
+                }
+            }
+        }
+    }
+
+    private class tambahkurirOwner implements ActionListener {
+
+        public tambahkurirOwner() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String kurir = JOptionPane.showInputDialog("Masukkan kurir tambahan");
+            System.out.println(kurir);
+            boolean tambah = mBarang.tambahKurir(kurir);
+            String pilihkurir[][];
+            pilihkurir = mBarang.getKurir();
+            ownerTransaksi.kurir().setModel(new DefaultComboBoxModel<>(pilihkurir[0]));
+        }
+    }
+
+    private class tambahkurirAdmin implements ActionListener {
+
+        public tambahkurirAdmin() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String kurir = JOptionPane.showInputDialog("Masukkan kurir tambahan");
+            System.out.println(kurir);
+            boolean tambah = mBarang.tambahKurir(kurir);
+            String pilihkurir[][];
+            pilihkurir = mBarang.getKurir();
+            adminTransaksi.kurir().setModel(new DefaultComboBoxModel<>(pilihkurir[0]));
+        }
+    }
+
     private class logoutAdmin implements ActionListener {
 
         public logoutAdmin() {
@@ -251,10 +520,10 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-       int pilihan = JOptionPane.showConfirmDialog(adminTransaksi, "Apakah anda yakin keluar ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(adminTransaksi, "Apakah anda yakin keluar ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
-            bacaTotalTransaksi();
-            bacaTabelTransaksi();
+                bacaTotalTransaksi();
+                bacaTabelTransaksi();
             } else if (pilihan == JOptionPane.YES_OPTION) {
                 new controller.cUser();
                 adminTransaksi.dispose();
@@ -269,18 +538,17 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-       int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Pindah menu ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Pindah menu ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
                 bacaTabelTransaksi2();
                 bacaTotalTransaksi2();
-;            } else if (pilihan == JOptionPane.YES_OPTION) {
+                ;
+            } else if (pilihan == JOptionPane.YES_OPTION) {
                 ownerTransaksi.dispose();
                 new controller.cOwner(5, username);
             }
         }
-        }
-    
-    
+    }
 
     private class transaksikebarang implements ActionListener {
 
@@ -289,7 +557,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-       int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Pindah menu ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Pindah menu ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
                 bacaTabelTransaksi2();
                 bacaTotalTransaksi2();
@@ -297,10 +565,9 @@ public class cBarang {
                 ownerTransaksi.dispose();
                 new controller.cBarang(username);
             }
-       
+
         }
     }
-    
 
     private class merkkekaryawan implements ActionListener {
 
@@ -309,7 +576,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-        int pilihan = JOptionPane.showConfirmDialog(merkbarang, "Pindah menu ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(merkbarang, "Pindah menu ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
 
             } else if (pilihan == JOptionPane.YES_OPTION) {
@@ -326,32 +593,31 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-       int pilihan = JOptionPane.showConfirmDialog(merkbarang, "Pindah menu ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(merkbarang, "Pindah menu ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
 
             } else if (pilihan == JOptionPane.YES_OPTION) {
                 merkbarang.dispose();
-                new controller.cBarang(3, 4, username);  
+                new controller.cBarang(3, 4, username);
+            }
         }
     }
-        }
-     
 
-    private  class jenisketransaksi implements ActionListener {
+    private class jenisketransaksi implements ActionListener {
 
         public jenisketransaksi() {
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-          int pilihan = JOptionPane.showConfirmDialog(jenisbarang, "Pindah menu ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(jenisbarang, "Pindah menu ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
 
             } else if (pilihan == JOptionPane.YES_OPTION) {
                 jenisbarang.dispose();
-                new controller.cBarang(3, 4, username);  
+                new controller.cBarang(3, 4, username);
+            }
         }
-    }
     }
 
     private class logoutubah implements ActionListener {
@@ -637,9 +903,72 @@ public class cBarang {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            viewbarang.getUbahBarang().setEnabled(true);
+            viewbarang.ubah().setEnabled(true);
+            viewbarang.hapus().setEnabled(true);
             int baris = viewbarang.getTabelBarang().getSelectedRow();
             idBarang = viewbarang.getTabelBarang().getValueAt(baris, 0).toString();
+        }
+
+        //<editor-fold defaultstate="collapsed" desc="comment">
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
+//</editor-fold>
+    }
+
+    private class setSelectedTabelMerk implements MouseListener {
+
+        public setSelectedTabelMerk() {
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            merkbarang.hapus().setEnabled(true);
+            int baris = merkbarang.getTabel().getSelectedRow();
+            idMerk = merkbarang.getTabel().getValueAt(baris, 0).toString();
+        }
+
+        //<editor-fold defaultstate="collapsed" desc="comment">
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
+//</editor-fold>
+    }
+
+    private class setSelectedTabelJenis implements MouseListener {
+
+        public setSelectedTabelJenis() {
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            jenisbarang.hapus().setEnabled(true);
+            int baris = jenisbarang.getTabel().getSelectedRow();
+            idJenis = jenisbarang.getTabel().getValueAt(baris, 0).toString();
         }
 
         //<editor-fold defaultstate="collapsed" desc="comment">
@@ -685,6 +1014,8 @@ public class cBarang {
             int harga = Integer.valueOf(ubahbarang.getHargaBarang());
             int idJenis = Integer.valueOf(ubahbarang.getJenis());
             int idMerk = Integer.valueOf(ubahbarang.getMerk());
+            int idBar = Integer.valueOf(ubahbarang.getIDBarang());
+            String idBarang = String.valueOf(idBar);
             boolean status1 = mBarang.updateBarang(idBarang, namaBarang, stok, harga, idJenis, idMerk);
             if (status1) {
                 JOptionPane.showMessageDialog(ubahbarang, "Data berhasil diperbarui");
@@ -692,17 +1023,6 @@ public class cBarang {
                 new cBarang(username);
             }
 
-        }
-    }
-
-    private class ubahBarang implements ActionListener {
-
-        public ubahBarang() {
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            new controller.cBarang(idBarang);
         }
     }
 
@@ -929,18 +1249,19 @@ public class cBarang {
                 bacaTabelTransaksi();
                 bacaTotalTransaksi();
             } else if (pilihan == JOptionPane.YES_OPTION) {
+                System.out.println(idTransaksi);
                 boolean hapus = mTransaksi.hapusTransaksi(Integer.valueOf(idTransaksi));
                 boolean hapusjuga = mTransaksi.hapusTransaksi2(Integer.valueOf(idTransaksi));
-                if (hapus && hapusjuga) {
-                    JOptionPane.showMessageDialog(adminTransaksi, "Transaksi batal masuk coy");
-                    new controller.cAdmin(username, vtabeladmin);
-                    adminTransaksi.dispose();
-                } else {
-                    System.out.println(idTransaksi);
-                    JOptionPane.showMessageDialog(adminTransaksi, "Kesalahan jaringan");
-                    bacaTabelTransaksi();
-                    bacaTotalTransaksi();
-                }
+
+                JOptionPane.showMessageDialog(adminTransaksi, "Transaksi batal masuk coy");
+                new controller.cAdmin(username, vtabeladmin);
+                adminTransaksi.dispose();
+            } else {
+                System.out.println(idTransaksi);
+                JOptionPane.showMessageDialog(adminTransaksi, "Kesalahan jaringan");
+                bacaTabelTransaksi();
+                bacaTotalTransaksi();
+
             }
         }
     }
@@ -961,16 +1282,15 @@ public class cBarang {
             } else if (pilihan == JOptionPane.YES_OPTION) {
                 boolean hapus = mTransaksi.hapusTransaksi(Integer.valueOf(idTransaksi));
                 boolean hapusjuga = mTransaksi.hapusTransaksi2(Integer.valueOf(idTransaksi));
-                if (hapus && hapusjuga) {
-                    JOptionPane.showMessageDialog(ownerTransaksi, "Transaksi batal masuk coy");
-                    new controller.cOwner(username, owner);
-                    ownerTransaksi.dispose();
-                } else {
-                    System.out.println(idTransaksi);
-                    JOptionPane.showMessageDialog(ownerTransaksi, "Kesalahan jaringan");
-                    bacaTabelTransaksi2();
-                    bacaTotalTransaksi2();
-                }
+                JOptionPane.showMessageDialog(ownerTransaksi, "Transaksi batal masuk coy");
+                new controller.cOwner(username, owner);
+                ownerTransaksi.dispose();
+            } else {
+                System.out.println(idTransaksi);
+                JOptionPane.showMessageDialog(ownerTransaksi, "Kesalahan jaringan");
+                bacaTabelTransaksi2();
+                bacaTotalTransaksi2();
+
             }
 
         }
@@ -1194,7 +1514,6 @@ public class cBarang {
                 if (diskon2.equalsIgnoreCase("")) {
                     JOptionPane.showMessageDialog(ownerTransaksi, "Diskon tidak boleh kosong");
                 } else {
-                    mTransaksi.tambahTransaksi1(idMember, username, kurir, invoice);
                     int idTransaksi = Integer.valueOf(mTransaksi.getIDTransaksi(idMember));
                     String idBarang = ownerTransaksi.getBarang();
                     double diskon = Integer.valueOf(ownerTransaksi.getDiskon());
@@ -1367,13 +1686,19 @@ public class cBarang {
         @Override
         public void actionPerformed(ActionEvent e) {
             namaPembeli = adminTransaksi.getNamaPembeli();
+            String username1 = adminTransaksi.getID();
+            mPembeli.tambahPembeli(namaPembeli);
+            namaPembeli = adminTransaksi.getNamaPembeli();
+            idMember = mPembeli.getID(namaPembeli);
+            invoice = adminTransaksi.getInvoice();
+            kurir = adminTransaksi.getKurir();
 
             System.out.println(namaPembeli);
             if (namaPembeli.equalsIgnoreCase("")) {
                 JOptionPane.showMessageDialog(adminTransaksi, "Nama pembeli tidak boleh kosong");
             } else {
                 System.out.println(namaPembeli);
-                mPembeli.tambahPembeli(namaPembeli);
+                mTransaksi.tambahTransaksi1(idMember, username, kurir, invoice);
                 JOptionPane.showMessageDialog(adminTransaksi, "Silahkan masukkan barang yang dibeli");
                 adminTransaksi.disableNama().setEditable(false);
                 adminTransaksi.getBuatTransaksi().setEnabled(true);
@@ -1397,6 +1722,12 @@ public class cBarang {
         @Override
         public void actionPerformed(ActionEvent e) {
             namaPembeli = ownerTransaksi.getNamaPembeli();
+            String username1 = ownerTransaksi.getID();
+            mPembeli.tambahPembeli(namaPembeli);
+            namaPembeli = ownerTransaksi.getNamaPembeli();
+            idMember = mPembeli.getID(namaPembeli);
+            invoice = ownerTransaksi.getInvoice();
+            kurir = ownerTransaksi.getKurir();
 
             System.out.println(namaPembeli);
 
@@ -1404,7 +1735,7 @@ public class cBarang {
                 JOptionPane.showMessageDialog(ownerTransaksi, "Nama pembeli tidak boleh kosong");
             } else {
                 System.out.println(namaPembeli);
-                mPembeli.tambahPembeli(namaPembeli);
+                mTransaksi.tambahTransaksi1(idMember, username1, kurir, invoice);
                 JOptionPane.showMessageDialog(ownerTransaksi, "Silahkan masukkan barang yang dibeli");
                 ownerTransaksi.disableNama().setEditable(false);
                 ownerTransaksi.disableInvoice().setEditable(false);

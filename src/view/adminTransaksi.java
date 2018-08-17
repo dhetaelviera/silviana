@@ -97,7 +97,9 @@ public class adminTransaksi extends javax.swing.JFrame {
     public String getInvoice() {
         return invoice.getText();
     }
-
+ public String getID() {
+        return id.getText();
+    }
     public String getKurir() {
         int indeks = pilihkurir.getSelectedIndex();
         return kurir[0][indeks];
@@ -147,6 +149,10 @@ public class adminTransaksi extends javax.swing.JFrame {
         logout.addActionListener(a);
     }
 
+    public void kurirListener(ActionListener a) {
+        tambahKurir.addActionListener(a);
+    }
+
     public void setTabelPembayaran(DefaultTableModel t) {
         tabelPembayaran.setModel(t);
     }
@@ -194,6 +200,9 @@ public class adminTransaksi extends javax.swing.JFrame {
     public JTable getTableTransaksi() {
         return tabelPembayaran;
     }
+     public JComboBox kurir() {
+        return pilihkurir;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -222,6 +231,7 @@ public class adminTransaksi extends javax.swing.JFrame {
         jenisBarang = new javax.swing.JComboBox(jenis_Barang[0]);
         merkBarang = new javax.swing.JComboBox(merk_Barang[1]);
         namaBarang = new javax.swing.JComboBox<String>();
+        tambahKurir = new javax.swing.JButton();
         selesai = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
 
@@ -280,7 +290,7 @@ public class adminTransaksi extends javax.swing.JFrame {
                 pilihkurirActionPerformed(evt);
             }
         });
-        getContentPane().add(pilihkurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 136, 20));
+        getContentPane().add(pilihkurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 100, 20));
 
         jenisBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,6 +312,12 @@ public class adminTransaksi extends javax.swing.JFrame {
             }
         });
         getContentPane().add(namaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 230, 130, -1));
+
+        tambahKurir.setBackground(new java.awt.Color(27, 179, 133));
+        tambahKurir.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        tambahKurir.setForeground(new java.awt.Color(255, 255, 255));
+        tambahKurir.setText("+");
+        getContentPane().add(tambahKurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 30, 20));
 
         selesai.setText("selesai transaksi");
         getContentPane().add(selesai, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 250, 110, -1));
@@ -392,6 +408,7 @@ public class adminTransaksi extends javax.swing.JFrame {
     private javax.swing.JButton selesai;
     private javax.swing.JTable tabelPembayaran;
     private javax.swing.JButton tambahBarang;
+    private javax.swing.JButton tambahKurir;
     private javax.swing.JButton tambahPembeli;
     private javax.swing.JLabel total;
     // End of variables declaration//GEN-END:variables

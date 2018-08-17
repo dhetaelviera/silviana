@@ -65,7 +65,7 @@ public class cAdmin {
         this.vtabelTrans.tabelListener(new selectedTabel());
         this.vtabelTrans.hapusListener(new hapustransaksi());
         this.vtabelTrans.logoutListener(new logout());
-        this.vtabelTrans.setTabel(mTransaksi.bacaTabelTransaksiAdmin());
+        this.vtabelTrans.setTabel(mTransaksi.bacaTabelAdmin(username));
     }
 
     private class logout implements ActionListener {
@@ -77,7 +77,7 @@ public class cAdmin {
         public void actionPerformed(ActionEvent e) {
             int pilihan = JOptionPane.showConfirmDialog(vtabelTrans, "Apakah anda yakin keluar ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
-                vtabelTrans.setTabel(mTransaksi.bacaTabelTransaksiAdmin());
+                vtabelTrans.setTabel(mTransaksi.bacaTabelAdmin(username));
             } else if (pilihan == JOptionPane.YES_OPTION) {
                 new controller.cUser();
                 vtabelTrans.dispose();
@@ -133,15 +133,15 @@ public class cAdmin {
             int pilihan = JOptionPane.showConfirmDialog(vtabelTrans, "Apakah anda ingin yakin menghapus pemesanan dengan id: "
                     + "" + idTransaksi + " ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
-                vtabelTrans.setTabel(mTransaksi.bacaTabelTransaksiAdmin());
+                vtabelTrans.setTabel(mTransaksi.bacaTabelAdmin(username));
             } else if (pilihan == JOptionPane.YES_OPTION) {
                 boolean status = mTransaksi.hapusTransaksi2(Integer.valueOf(idTransaksi));
                 if (status) {
                     JOptionPane.showMessageDialog(vtabelTrans, "Berhasil Dihapus");
-                    vtabelTrans.setTabel(mTransaksi.bacaTabelTransaksiAdmin());
+                    vtabelTrans.setTabel(mTransaksi.bacaTabelAdmin(username));
                 } else {
                     JOptionPane.showMessageDialog(vtabelTrans, "Kesalahan jaringan");
-                    vtabelTrans.setTabel(mTransaksi.bacaTabelTransaksiAdmin());
+                    vtabelTrans.setTabel(mTransaksi.bacaTabelAdmin(username));
                 }
             }
         }

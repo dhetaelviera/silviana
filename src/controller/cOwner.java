@@ -5,6 +5,7 @@
  */
 package controller;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import static controller.cBarang.username;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +26,8 @@ import view.ownerBarangTambah;
 import view.ownerDashboard;
 import view.ownerKaryawan;
 import view.ownerTransaksi;
+import view.rentangwaktu;
+
 
 /**
  *
@@ -34,6 +37,7 @@ public class cOwner {
 
     private ownerDashboard owner;
     private ownerBarang barang;
+    private rentangwaktu tanggal;
     private ownerBarangTambah tambahbarang;
     private ownerKaryawan karyawan;
     private ownerTransaksi transaksi;
@@ -66,10 +70,10 @@ public class cOwner {
         this.owner.tabelListener(new selectedTabelManajer());
         this.owner.hapusListener(new hapustransaksi());
         this.owner.cariListener(new pembeliSearchEngine());
-        this.owner.cari2Listener(new invoiceSearchEngine());
         this.owner.kalender(new sortByKal());
         this.owner.kalender2(new sortByMonth());
         this.owner.kalenderrange(new sortbyrange());
+        this.owner.beranda().setEnabled(false);
         this.owner.kal().setEnabled(false);
         this.owner.month().setEnabled(false);
         this.owner.hapus().setEnabled(false);
@@ -98,6 +102,7 @@ public class cOwner {
         karyawan.kary().setEnabled(false);
         karyawan.barangListener(new karyawankebarang());
         karyawan.transaksiListener(new karyawanketransaksi());
+        karyawan.berandaListener(new karyawankeberanda());
         
 
     }
@@ -106,23 +111,13 @@ public class cOwner {
         String cari = owner.getCari();
         System.out.println(cari);
         if (cari.equalsIgnoreCase("")) {
-            JOptionPane.showMessageDialog(owner, "Masukkan kata yang dicari");
+            JOptionPane.showMessageDialog(owner, "Masukkan nama pembeli atau invoice yang ingin dicari");
         } else {
             owner.setTabelPembayaran(mTransaksi.cariPembeli(cari));
 
         }
     }
-
-    private void bacaTabelCariInvoice() {
-        String cari = owner.getCari();
-        System.out.println(cari);
-        if (cari.equalsIgnoreCase("")) {
-            JOptionPane.showMessageDialog(owner, "Masukkan kata yang dicari");
-        } else {
-            owner.setTabelPembayaran(mTransaksi.cariInvoice(cari));
-
-        }
-    }
+    
 
     private class logoutkaryawan implements ActionListener {
 
@@ -141,7 +136,17 @@ public class cOwner {
             }
         }
     }
+    private class karyawankeberanda implements ActionListener {
 
+        public karyawankeberanda() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            karyawan.dispose();
+            new cOwner(abc, owner);
+        }
+    }
     private class karyawanketransaksi implements ActionListener {
 
         public karyawanketransaksi() {
@@ -231,21 +236,7 @@ public class cOwner {
 
         }
     }
-
-    private class invoiceSearchEngine implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            bacaTabelCariInvoice();
-            int data = owner.getJumlahBaris();
-            if (data == 0) {
-                JOptionPane.showMessageDialog(owner, "Data Yang Dicari Kosong");
-                bacaTabelTransaksi();
-            }
-
-        }
-    }
+    
 
     private class selectedTabelManajer implements MouseListener {
 
@@ -351,6 +342,14 @@ public class cOwner {
             Logger.getLogger(cUser.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+//    private void bacaTabelTransaksiByRentangWaktu() {
+//        try {
+//        date date1    
+//        } catch (ParseException ex) {
+//            Logger.getLogger(cUser.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
     private void bacaTabelTransaksiByMonth() {
         try {
@@ -463,8 +462,8 @@ public class cOwner {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            new controller.cBarang(abc);
             owner.dispose();
+            new controller.cBarang(abc);
         }
     }
 

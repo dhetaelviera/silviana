@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -217,6 +218,22 @@ public class transaksi implements NewInterface{
         }
         return barang;
     }
+    
+    public int getIDMember() {
+        String query = "select idMember from member order by idMember desc";
+        int barang = 0;
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            barang = rs.getInt("idMember");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            ex.getMessage();
+        }
+        return barang;
+    }
 
     public int getTotalTransaksi(String idTransaksi) {
         String query = "select sum(b.harga*dt.qty*(1-dt.diskon)) as total from barang b join detailtransaksi dt on b.idbarang=dt.idbarang where idtransaksi=?";
@@ -290,10 +307,41 @@ public class transaksi implements NewInterface{
         }
         return tabel;
     }
+    public DefaultTableModel bacaTabelAdmin(String username) {
 
-    public DefaultTableModel bacaTabelTransaksiAdmin() {
+        
+        String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "Pegawai", "Total Harga"};
+       
+        
+        DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
+        for (int i = tabel.getRowCount() - 1; i >= 0; i--) {
+            tabel.removeRow(i);
+        }
         String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli, t.pegawai"
-                + "  FROM transaksi t JOIN member m ON m.idmember=t.idMember ORDER BY tanggalBeli desc";
+                + "  FROM transaksi t JOIN member m ON m.idmember=t.idMember where t.pegawai='"+username+"' ORDER BY tanggalBeli desc";
+        try {
+            Statement st = konek.createStatement();
+            ResultSet rs = st.executeQuery(query);
+             while (rs.next()) {
+                Object data[] = new Object[5];
+
+                data[0] = rs.getString(1);
+                data[1] = rs.getString(2);
+                data[2] = rs.getString(3);
+                data[3] = rs.getString(4);
+                data[4] = getTotalTransaksi((String) data[0]);
+                tabel.addRow(data);
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+            e.printStackTrace();
+        }
+        return tabel;
+    }
+
+    public DefaultTableModel bacaTabelTransaksiAdmin(String username) {
+        String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli, t.pegawai"
+                + "  FROM transaksi t JOIN member m ON m.idmember=t.idMember where t.pegawai=? ORDER BY tanggalBeli desc";
         String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "Pegawai", "Total Harga"};
         DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
         try {
@@ -375,6 +423,46 @@ public class transaksi implements NewInterface{
         }
         return tabel;
     }
+    
+        public DefaultTableModel bacaTabelTransaksiRentangWaktu(Date tanggal1, Date tanggal2) throws ParseException {
+        String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli"
+                + "  FROM transaksi t JOIN member m ON m.idMember=t.idMember WHERE t.tanggalBeli=? ORDER BY t.tanggalBeli desc;";
+        String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "Total Harga"};
+        DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date1 = tanggal1;
+            System.out.println(date1);
+            java.sql.Date sqlDate1 = new java.sql.Date(date1.getTime());
+            System.out.println(sqlDate1);
+            
+            java.util.Date date2 = tanggal2;
+            System.out.println(date2);
+            java.sql.Date sqlDate2 = new java.sql.Date(date2.getTime());
+            System.out.println(sqlDate2);
+            
+            st.setDate(1, sqlDate1);
+            st.setDate(2, sqlDate2);
+            System.out.println(query);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Object data[] = new Object[4];
+
+                data[0] = rs.getString(1);
+                data[1] = rs.getString(2);
+                data[2] = rs.getString(3);
+                data[3] = getTotalTransaksi((String) data[0]);
+                tabel.addRow(data);
+            }
+
+        } catch (SQLException e) {
+            e.getMessage();
+            e.printStackTrace();
+        }
+        return tabel;
+    }
+
 
     public DefaultTableModel bacaTabelTransaksiManajerbyDateRange(String tanggal1, String tanggal2) throws ParseException {
         String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli  FROM transaksi t JOIN member m ON m.idMember=t.idMember"
@@ -455,7 +543,8 @@ public class transaksi implements NewInterface{
 
     public DefaultTableModel cariPembeli(String cari) {
         String query = "SELECT t.idtransaksi, m.nama, t.tanggalbeli, t.invoice, t.pegawai  FROM transaksi t join member m on m.idmember=t.idmember "
-                + "WHERE (m.nama LIKE '" + cari + "%' or m.nama LIKE '%" + cari + "%' or m.nama LIKE '%" + cari + "')";
+                + "WHERE (m.nama LIKE '" + cari + "%' or m.nama LIKE '%" + cari + "%' or m.nama LIKE '%" + cari + "' or "
+                + "t.invoice LIKE '" + cari + "%' or t.invoice LIKE '%" + cari + "%' or t.invoice LIKE '%" + cari + "')";
         String namaKolom[] = {"ID Transaski", "Nama pembeli", "Tanggal beli", "invoice", "pegawai", "total harga"};
         DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
         System.out.println(query);
@@ -483,6 +572,7 @@ public class transaksi implements NewInterface{
         }
         return tabel;
     }
+
     public DefaultTableModel cariInvoice(String cari) {
         String query = "SELECT t.idtransaksi, m.nama, t.tanggalbeli, t.invoice, t.pegawai  FROM transaksi t join member m on m.idmember=t.idmember "
                 + "WHERE (t.invoice LIKE '" + cari + "%' or t.invoice LIKE '%" + cari + "%' or t.invoice LIKE '%" + cari + "')";

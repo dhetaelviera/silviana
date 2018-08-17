@@ -8,6 +8,7 @@ package view;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,9 +24,11 @@ public class ownerJenis extends javax.swing.JFrame {
     public ownerJenis() {
         initComponents();
     }
-    public String getjenis(){
+
+    public String getjenis() {
         return jenis.getText();
     }
+
     public void setJenis(String a) {
         jenis.setText(a);
     }
@@ -33,12 +36,17 @@ public class ownerJenis extends javax.swing.JFrame {
     public void setID(String a) {
         id.setText(a);
     }
-    
-    public JButton logout(){
-     return logout;   
+
+    public JButton logout() {
+        return logout;
     }
-    public JButton barang(){
-     return barang;   
+
+    public JButton barang() {
+        return barang;
+    }
+    
+    public JButton beranda() {
+        return beranda;
     }
 
     public void setTabelJenis(DefaultTableModel t) {
@@ -53,10 +61,18 @@ public class ownerJenis extends javax.swing.JFrame {
         tambah.addActionListener(a);
     }
 
+    public void berandaListener(ActionListener a) {
+        beranda.addActionListener(a);
+    }
+    
     public void backListener(ActionListener a) {
         kembali.addActionListener(a);
     }
-    
+
+    public void hapusListener(ActionListener a) {
+        hapus.addActionListener(a);
+    }
+
     public void logoutListener(ActionListener a) {
         logout.addActionListener(a);
     }
@@ -76,7 +92,16 @@ public class ownerJenis extends javax.swing.JFrame {
     public JTextField jenis() {
         return jenis;
     }
+    
 
+    public JButton hapus() {
+        return hapus;
+
+    }
+
+    public JTable getTabel() {
+        return tabelJenis;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -92,11 +117,12 @@ public class ownerJenis extends javax.swing.JFrame {
         jenis = new javax.swing.JTextField();
         logout = new javax.swing.JButton();
         tambah = new javax.swing.JButton();
-        hapus1 = new javax.swing.JButton();
+        hapus = new javax.swing.JButton();
         kembali = new javax.swing.JButton();
+        beranda = new javax.swing.JButton();
         karyawan = new javax.swing.JButton();
-        transaksi = new javax.swing.JButton();
         barang = new javax.swing.JButton();
+        transaksi = new javax.swing.JButton();
         id = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -116,37 +142,77 @@ public class ownerJenis extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabelJenis);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 430, 200));
-        getContentPane().add(jenis, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 140, 20));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 560, 200));
+        getContentPane().add(jenis, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 230, 30));
 
-        logout.setText("log out");
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 40, 90, -1));
+        logout.setBorderPainted(false);
+        logout.setContentAreaFilled(false);
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 29, 130, 40));
 
+        tambah.setBackground(new java.awt.Color(27, 179, 133));
+        tambah.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        tambah.setForeground(new java.awt.Color(255, 255, 255));
         tambah.setText("tambah jenis");
-        getContentPane().add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 500, -1, -1));
+        tambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahActionPerformed(evt);
+            }
+        });
+        getContentPane().add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 490, -1, 30));
 
-        hapus1.setText("hapus jenis");
-        getContentPane().add(hapus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, -1, -1));
+        hapus.setBackground(new java.awt.Color(153, 0, 0));
+        hapus.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        hapus.setForeground(new java.awt.Color(255, 255, 204));
+        hapus.setText("hapus jenis");
+        getContentPane().add(hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 490, 110, 30));
 
+        kembali.setBackground(new java.awt.Color(248, 215, 85));
+        kembali.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        kembali.setForeground(new java.awt.Color(102, 0, 0));
         kembali.setText("kembali");
-        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 500, 90, -1));
+        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 490, 110, 30));
 
+        beranda.setBackground(new java.awt.Color(255, 75, 109));
+        beranda.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        beranda.setForeground(new java.awt.Color(255, 255, 255));
+        beranda.setText("beranda");
+        beranda.setBorder(null);
+        beranda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(beranda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 90, 30));
+
+        karyawan.setBackground(new java.awt.Color(255, 75, 109));
+        karyawan.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        karyawan.setForeground(new java.awt.Color(255, 255, 255));
         karyawan.setText("karyawan");
-        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 120, -1));
+        karyawan.setBorder(null);
+        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 90, 30));
 
-        transaksi.setText("transaksi");
-        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 120, -1));
-
+        barang.setBackground(new java.awt.Color(255, 75, 109));
+        barang.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        barang.setForeground(new java.awt.Color(255, 255, 255));
         barang.setText("barang");
-        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 120, -1));
+        barang.setBorder(null);
+        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 90, 30));
+
+        transaksi.setBackground(new java.awt.Color(255, 75, 109));
+        transaksi.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        transaksi.setForeground(new java.awt.Color(255, 255, 255));
+        transaksi.setText("transaksi");
+        transaksi.setBorder(null);
+        transaksi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 90, 30));
         getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, 80, 20));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/04. owner tambah jenis barang.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/04. owner tambah jenis barang 2.png"))); // NOI18N
         jLabel2.setText(" ");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tambahActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,7 +251,8 @@ public class ownerJenis extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton barang;
-    private javax.swing.JButton hapus1;
+    private javax.swing.JButton beranda;
+    private javax.swing.JButton hapus;
     private javax.swing.JLabel id;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

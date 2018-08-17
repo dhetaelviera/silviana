@@ -10,7 +10,8 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import org.jdesktop.swingx.JXTable;
+
+
 
 /**
  *
@@ -45,8 +46,16 @@ public class ownerBarang extends javax.swing.JFrame {
         tambahBarang.addActionListener(a);
     }
 
+    public void resetTabelListener(ActionListener a) {
+        reset.addActionListener(a);
+    }
+
     public void ubahBarangListener(ActionListener a) {
         ubah.addActionListener(a);
+    }
+   
+    public void berandaListener(ActionListener a) {
+        beranda.addActionListener(a);
     }
 
     public void cariBarangListener(ActionListener a) {
@@ -73,6 +82,10 @@ public class ownerBarang extends javax.swing.JFrame {
         return barang;
     }
 
+    public JButton beranda(){
+        return beranda;
+    }
+
     public void kembaliListener(ActionListener a) {
         ubah.addActionListener(a);
     }
@@ -85,6 +98,10 @@ public class ownerBarang extends javax.swing.JFrame {
     public void merkListener(ActionListener a) {
         barang.addActionListener(a);
     }
+   
+    public void hapusListener(ActionListener a) {
+        hapus.addActionListener(a);
+    }
 
     public JTable getTabelBarang() {
         return tabelBarang;
@@ -94,8 +111,12 @@ public class ownerBarang extends javax.swing.JFrame {
         return tabelBarang.getRowCount();
     }
 
-    public JButton getUbahBarang() {
+    public JButton ubah() {
         return ubah;
+    }
+  
+    public JButton hapus() {
+        return hapus;
     }
 
     /**
@@ -107,27 +128,54 @@ public class ownerBarang extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cari = new javax.swing.JTextField();
+        hapus = new javax.swing.JButton();
+        reset = new javax.swing.JButton();
         ubah = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelBarang = new javax.swing.JTable();
         logout = new javax.swing.JButton();
         cariButton = new javax.swing.JButton();
         tambahBarang = new javax.swing.JButton();
-        karyawan = new javax.swing.JButton();
+        jenis = new javax.swing.JButton();
+        cari = new javax.swing.JTextField();
+        merk = new javax.swing.JButton();
         transaksi = new javax.swing.JButton();
         barang = new javax.swing.JButton();
-        jenis = new javax.swing.JButton();
-        merk = new javax.swing.JButton();
+        karyawan = new javax.swing.JButton();
+        beranda = new javax.swing.JButton();
         id = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 240, -1));
 
+        hapus.setBackground(new java.awt.Color(204, 0, 0));
+        hapus.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        hapus.setForeground(new java.awt.Color(255, 255, 255));
+        hapus.setText("hapus barang");
+        getContentPane().add(hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 270, 130, 30));
+
+        reset.setBackground(new java.awt.Color(27, 179, 133));
+        reset.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        reset.setForeground(new java.awt.Color(255, 255, 255));
+        reset.setText("reset tabel");
+        reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetActionPerformed(evt);
+            }
+        });
+        getContentPane().add(reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 390, 130, 30));
+
+        ubah.setBackground(new java.awt.Color(27, 179, 133));
+        ubah.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        ubah.setForeground(new java.awt.Color(255, 255, 255));
         ubah.setText("ubah barang");
-        getContentPane().add(ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 190, 110, -1));
+        ubah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ubahActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ubah, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 190, 130, 30));
 
         tabelBarang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,38 +192,84 @@ public class ownerBarang extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 510, 350));
 
-        logout.setText("logout");
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 30, 80, -1));
+        logout.setBorder(null);
+        logout.setContentAreaFilled(false);
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 23, 140, 40));
 
+        cariButton.setBackground(new java.awt.Color(27, 179, 133));
+        cariButton.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        cariButton.setForeground(new java.awt.Color(255, 255, 255));
         cariButton.setText("cari");
-        getContentPane().add(cariButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, -1, -1));
+        getContentPane().add(cariButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, -1));
 
+        tambahBarang.setBackground(new java.awt.Color(27, 179, 133));
+        tambahBarang.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        tambahBarang.setForeground(new java.awt.Color(255, 255, 255));
         tambahBarang.setText("tambah barang");
-        getContentPane().add(tambahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 230, -1, -1));
+        getContentPane().add(tambahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 230, 130, 30));
 
-        karyawan.setText("karyawan");
-        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 120, -1));
-
-        transaksi.setText("transaksi");
-        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 120, -1));
-
-        barang.setText("barang");
-        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 120, -1));
-
+        jenis.setBackground(new java.awt.Color(248, 215, 85));
+        jenis.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        jenis.setForeground(new java.awt.Color(102, 0, 0));
         jenis.setText("daftar jenis");
-        getContentPane().add(jenis, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 280, 130, -1));
+        getContentPane().add(jenis, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 310, 130, 30));
 
+        cari.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 250, 30));
+
+        merk.setBackground(new java.awt.Color(248, 215, 85));
+        merk.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        merk.setForeground(new java.awt.Color(102, 0, 0));
         merk.setText("daftar merk");
-        getContentPane().add(merk, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 330, 130, -1));
+        getContentPane().add(merk, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 350, 130, 30));
+
+        transaksi.setBackground(new java.awt.Color(255, 75, 109));
+        transaksi.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        transaksi.setForeground(new java.awt.Color(255, 255, 255));
+        transaksi.setText("transaksi");
+        transaksi.setBorder(null);
+        transaksi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 90, 30));
+
+        barang.setBackground(new java.awt.Color(255, 75, 109));
+        barang.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        barang.setForeground(new java.awt.Color(255, 255, 255));
+        barang.setText("barang");
+        barang.setBorder(null);
+        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 90, 30));
+
+        karyawan.setBackground(new java.awt.Color(255, 75, 109));
+        karyawan.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        karyawan.setForeground(new java.awt.Color(255, 255, 255));
+        karyawan.setText("karyawan");
+        karyawan.setBorder(null);
+        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 90, 30));
+
+        beranda.setBackground(new java.awt.Color(255, 75, 109));
+        beranda.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        beranda.setForeground(new java.awt.Color(255, 255, 255));
+        beranda.setText("beranda");
+        beranda.setBorder(null);
+        beranda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(beranda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 90, 30));
 
         id.setText(" ");
         getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 60, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\src\\view\\png\\02. owner barang.png")); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 580));
+        jLabel1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/02. owner barang 2.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 580));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ubahActionPerformed
+
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,8 +308,10 @@ public class ownerBarang extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton barang;
+    private javax.swing.JButton beranda;
     private javax.swing.JTextField cari;
     private javax.swing.JButton cariButton;
+    private javax.swing.JButton hapus;
     private javax.swing.JLabel id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -223,6 +319,7 @@ public class ownerBarang extends javax.swing.JFrame {
     private javax.swing.JButton karyawan;
     private javax.swing.JButton logout;
     private javax.swing.JButton merk;
+    private javax.swing.JButton reset;
     private javax.swing.JTable tabelBarang;
     private javax.swing.JButton tambahBarang;
     private javax.swing.JButton transaksi;

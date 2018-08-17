@@ -8,6 +8,7 @@ package view;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -41,6 +42,14 @@ public String getmerk(){
     public void tambahMerkListener(ActionListener a) {
         tambah.addActionListener(a);
     }
+
+    public void berandaListener(ActionListener a) {
+        beranda.addActionListener(a);
+    }
+    
+    public void hapusListener(ActionListener a) {
+        hapus.addActionListener(a);
+    }
     
     public void logoutListener(ActionListener a) {
         logout.addActionListener(a);
@@ -70,8 +79,19 @@ public String getmerk(){
         return barang;
     }
     
+  
+    
+
+    public JButton hapus(){
+        return hapus;
+    }
+    
     public void setID(String h){
         id.setText(h);
+    }
+    
+     public JTable getTabel() {
+        return tabelMerk;
     }
 
     /**
@@ -83,57 +103,39 @@ public String getmerk(){
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        karyawan = new javax.swing.JButton();
-        transaksi = new javax.swing.JButton();
         tambah = new javax.swing.JButton();
         logout = new javax.swing.JButton();
-        barang = new javax.swing.JButton();
         kembali = new javax.swing.JButton();
-        hapus1 = new javax.swing.JButton();
+        hapus = new javax.swing.JButton();
         merk = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelMerk = new javax.swing.JTable();
         id = new javax.swing.JLabel();
+        beranda = new javax.swing.JButton();
+        karyawan = new javax.swing.JButton();
+        barang = new javax.swing.JButton();
+        transaksi = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        karyawan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\karyawan.png")); // NOI18N
-        karyawan.setBorder(null);
-        karyawan.setBorderPainted(false);
-        karyawan.setContentAreaFilled(false);
-        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 140, -1));
-
-        transaksi.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\transaksi.png")); // NOI18N
-        transaksi.setBorder(null);
-        transaksi.setBorderPainted(false);
-        transaksi.setContentAreaFilled(false);
-        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 120, -1));
-
         tambah.setBorder(null);
         tambah.setContentAreaFilled(false);
         getContentPane().add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 480, 150, 30));
 
-        logout.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\logout.png")); // NOI18N
         logout.setBorder(null);
         logout.setBorderPainted(false);
         logout.setContentAreaFilled(false);
         getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 150, -1));
-
-        barang.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\ui\\button\\barang.png")); // NOI18N
-        barang.setBorder(null);
-        barang.setBorderPainted(false);
-        barang.setContentAreaFilled(false);
-        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 150, 40));
 
         kembali.setBorder(null);
         kembali.setBorderPainted(false);
         kembali.setContentAreaFilled(false);
         getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 480, 150, 30));
 
-        hapus1.setText("hapus merk");
-        getContentPane().add(hapus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 480, -1, -1));
+        hapus.setText("hapus merk");
+        getContentPane().add(hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 480, -1, -1));
 
         merk.setBorder(null);
         merk.setOpaque(false);
@@ -158,6 +160,36 @@ public String getmerk(){
         id.setForeground(new java.awt.Color(102, 0, 0));
         id.setText(" ");
         getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 80, 20));
+
+        beranda.setBackground(new java.awt.Color(255, 75, 109));
+        beranda.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        beranda.setForeground(new java.awt.Color(255, 255, 255));
+        beranda.setText("beranda");
+        beranda.setBorder(null);
+        beranda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(beranda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 90, 30));
+
+        karyawan.setBackground(new java.awt.Color(255, 75, 109));
+        karyawan.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        karyawan.setForeground(new java.awt.Color(255, 255, 255));
+        karyawan.setText("karyawan");
+        karyawan.setBorder(null);
+        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 90, 30));
+
+        barang.setBackground(new java.awt.Color(255, 75, 109));
+        barang.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        barang.setForeground(new java.awt.Color(255, 255, 255));
+        barang.setText("barang");
+        barang.setBorder(null);
+        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 90, 30));
+
+        transaksi.setBackground(new java.awt.Color(255, 75, 109));
+        transaksi.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        transaksi.setForeground(new java.awt.Color(255, 255, 255));
+        transaksi.setText("transaksi");
+        transaksi.setBorder(null);
+        transaksi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 90, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/05. owner tambah merk barang.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 580));
@@ -202,7 +234,8 @@ public String getmerk(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton barang;
-    private javax.swing.JButton hapus1;
+    private javax.swing.JButton beranda;
+    private javax.swing.JButton hapus;
     private javax.swing.JLabel id;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

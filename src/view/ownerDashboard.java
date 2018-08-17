@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.Cursor;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -35,7 +36,7 @@ import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
-import org.jdesktop.swingx.JXTable;
+
 
 /**
  *
@@ -128,10 +129,8 @@ public class ownerDashboard extends javax.swing.JFrame {
         cariButton.addActionListener(a);
     }
 
-    public void cari2Listener(ActionListener a) {
-        cariinvoice.addActionListener(a);
-    }
-
+   
+    
     public void transaksiListener(ActionListener a) {
         transaksi.addActionListener(a);
     }
@@ -142,6 +141,10 @@ public class ownerDashboard extends javax.swing.JFrame {
 
     public void barangListener(ActionListener a) {
         barang.addActionListener(a);
+    }
+    
+    public void berandaListener(ActionListener a) {
+        beranda.addActionListener(a);
     }
 
     public void cetakListener(ActionListener a) {
@@ -171,10 +174,12 @@ public class ownerDashboard extends javax.swing.JFrame {
     public JButton cariButton() {
         return cariButton;
     }
-
-    public JButton cariButton2() {
-        return cariinvoice;
+    
+    public JButton beranda() {
+        return beranda;
     }
+
+    
 
     public JButton range() {
         return range;
@@ -221,19 +226,23 @@ public class ownerDashboard extends javax.swing.JFrame {
         logout = new javax.swing.JButton();
         sortDate = new javax.swing.JButton();
         reset = new javax.swing.JButton();
-        transaksi = new javax.swing.JButton();
         cetak = new javax.swing.JButton();
-        calender = new org.jdesktop.swingx.JXDatePicker();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelTransaksi = new javax.swing.JTable();
-        karyawan = new javax.swing.JButton();
-        barang = new javax.swing.JButton();
         pegawai = new javax.swing.JLabel();
         cari = new javax.swing.JTextField();
         cariButton = new javax.swing.JButton();
-        cariinvoice = new javax.swing.JButton();
         hapus = new javax.swing.JButton();
         range = new javax.swing.JButton();
+        calender2 = new org.jdesktop.swingx.JXDatePicker();
+        calender1 = new org.jdesktop.swingx.JXDatePicker();
+        calender = new org.jdesktop.swingx.JXDatePicker();
+        beranda = new javax.swing.JButton();
+        karyawan = new javax.swing.JButton();
+        barang = new javax.swing.JButton();
+        transaksi = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
@@ -241,17 +250,16 @@ public class ownerDashboard extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        sortMonth.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/button/bulan.png"))); // NOI18N
+        sortMonth.setBackground(new java.awt.Color(27, 179, 133));
+        sortMonth.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        sortMonth.setForeground(new java.awt.Color(255, 255, 255));
+        sortMonth.setText("bulan");
         sortMonth.setBorder(null);
-        sortMonth.setBorderPainted(false);
-        sortMonth.setContentAreaFilled(false);
-        sortMonth.setOpaque(false);
-        getContentPane().add(sortMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(739, 288, 130, 30));
+        getContentPane().add(sortMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 270, 120, 30));
 
         logout.setBorder(null);
         logout.setBorderPainted(false);
         logout.setContentAreaFilled(false);
-        logout.setOpaque(false);
         logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 logoutActionPerformed(evt);
@@ -259,41 +267,31 @@ public class ownerDashboard extends javax.swing.JFrame {
         });
         getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 130, 40));
 
-        sortDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/button/tanggal.png"))); // NOI18N
+        sortDate.setBackground(new java.awt.Color(27, 179, 133));
+        sortDate.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        sortDate.setForeground(new java.awt.Color(255, 255, 255));
+        sortDate.setText("tanggal");
         sortDate.setBorder(null);
-        sortDate.setBorderPainted(false);
-        sortDate.setContentAreaFilled(false);
-        sortDate.setOpaque(false);
-        getContentPane().add(sortDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 240, 140, 40));
+        getContentPane().add(sortDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 230, 120, 30));
 
+        reset.setBackground(new java.awt.Color(27, 179, 133));
+        reset.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        reset.setForeground(new java.awt.Color(255, 255, 255));
+        reset.setText("reset tabel");
         reset.setBorder(null);
-        reset.setContentAreaFilled(false);
-        getContentPane().add(reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 460, 130, 30));
+        getContentPane().add(reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 410, 120, 30));
 
-        transaksi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/button/transaksi.png"))); // NOI18N
-        transaksi.setBorder(null);
-        transaksi.setBorderPainted(false);
-        transaksi.setContentAreaFilled(false);
-        transaksi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        transaksi.setOpaque(false);
-        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 120, 30));
-
+        cetak.setBackground(new java.awt.Color(248, 215, 85));
+        cetak.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        cetak.setForeground(new java.awt.Color(102, 0, 0));
+        cetak.setText("cetak laporan");
         cetak.setBorder(null);
-        cetak.setContentAreaFilled(false);
         cetak.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cetakActionPerformed(evt);
             }
         });
-        getContentPane().add(cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 370, 130, 40));
-
-        calender.setBackground(new java.awt.Color(153, 153, 153));
-        calender.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                calenderActionPerformed(evt);
-            }
-        });
-        getContentPane().add(calender, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 160, 170, -1));
+        getContentPane().add(cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 500, 120, 30));
 
         tabelTransaksi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -308,50 +306,97 @@ public class ownerDashboard extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tabelTransaksi);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, -1, 390));
-
-        karyawan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/button/karyawan.png"))); // NOI18N
-        karyawan.setBorder(null);
-        karyawan.setContentAreaFilled(false);
-        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 140, 60));
-
-        barang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/button/barang.png"))); // NOI18N
-        barang.setBorder(null);
-        barang.setBorderPainted(false);
-        barang.setContentAreaFilled(false);
-        barang.setOpaque(false);
-        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, -1, 60));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 510, 390));
 
         pegawai.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
         pegawai.setForeground(new java.awt.Color(102, 0, 0));
         getContentPane().add(pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 70, 20));
 
-        cari.setBorder(null);
-        cari.setOpaque(false);
-        getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 250, 20));
+        cari.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 250, 30));
 
-        cariButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/button/cari pembeli.png"))); // NOI18N
+        cariButton.setBackground(new java.awt.Color(27, 179, 133));
+        cariButton.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        cariButton.setForeground(new java.awt.Color(255, 255, 255));
+        cariButton.setText("cari");
         cariButton.setBorder(null);
-        cariButton.setBorderPainted(false);
-        cariButton.setContentAreaFilled(false);
-        getContentPane().add(cariButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 120, 30));
+        getContentPane().add(cariButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 50, 30));
 
-        cariinvoice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/button/cari invoice.png"))); // NOI18N
-        cariinvoice.setBorder(null);
-        cariinvoice.setBorderPainted(false);
-        cariinvoice.setContentAreaFilled(false);
-        cariinvoice.setOpaque(false);
-        getContentPane().add(cariinvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 120, 60));
-
+        hapus.setBackground(new java.awt.Color(204, 0, 0));
+        hapus.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        hapus.setForeground(new java.awt.Color(255, 255, 255));
+        hapus.setText("hapus transaksi");
         hapus.setBorder(null);
-        hapus.setContentAreaFilled(false);
-        getContentPane().add(hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(733, 420, 140, 30));
+        getContentPane().add(hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 540, 120, 30));
 
+        range.setBackground(new java.awt.Color(27, 179, 133));
+        range.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        range.setForeground(new java.awt.Color(255, 255, 255));
+        range.setText("rentang waktu");
         range.setBorder(null);
-        range.setContentAreaFilled(false);
-        getContentPane().add(range, new org.netbeans.lib.awtextra.AbsoluteConstraints(733, 331, 140, 30));
+        getContentPane().add(range, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 370, 120, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\src\\view\\png\\01. owner dashboard.png")); // NOI18N
+        calender2.setBackground(new java.awt.Color(153, 153, 153));
+        calender2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calender2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(calender2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 340, 130, -1));
+
+        calender1.setBackground(new java.awt.Color(153, 153, 153));
+        calender1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calender1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(calender1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 310, 130, -1));
+
+        calender.setBackground(new java.awt.Color(153, 153, 153));
+        calender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calenderActionPerformed(evt);
+            }
+        });
+        getContentPane().add(calender, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, 180, -1));
+
+        beranda.setBackground(new java.awt.Color(255, 75, 109));
+        beranda.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        beranda.setForeground(new java.awt.Color(255, 255, 255));
+        beranda.setText("beranda");
+        beranda.setBorder(null);
+        beranda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(beranda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 90, 30));
+
+        karyawan.setBackground(new java.awt.Color(255, 75, 109));
+        karyawan.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        karyawan.setForeground(new java.awt.Color(255, 255, 255));
+        karyawan.setText("karyawan");
+        karyawan.setBorder(null);
+        getContentPane().add(karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 90, 30));
+
+        barang.setBackground(new java.awt.Color(255, 75, 109));
+        barang.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        barang.setForeground(new java.awt.Color(255, 255, 255));
+        barang.setText("barang");
+        barang.setBorder(null);
+        getContentPane().add(barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 90, 30));
+
+        transaksi.setBackground(new java.awt.Color(255, 75, 109));
+        transaksi.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        transaksi.setForeground(new java.awt.Color(255, 255, 255));
+        transaksi.setText("transaksi");
+        transaksi.setBorder(null);
+        transaksi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 90, 30));
+
+        jLabel2.setText("akhir:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 340, -1, -1));
+
+        jLabel3.setText("awal:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 310, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/01. owner dashboard 2.png"))); // NOI18N
         jLabel1.setText(" ");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, -1));
 
@@ -392,6 +437,21 @@ public class ownerDashboard extends javax.swing.JFrame {
 "     `transaksi` transaksi join\n" +
 "     `member` member on member.`idMember`= transaksi.`idMember`  join\n" +
 "     `kurir` kurir on kurir.`idKurir`=transaksi.`kurir`";
+            
+             String query2 = "SELECT\n" +
+"     transaksi.`idTransaksi` AS ID_Transaksi,\n" +
+"     member.`nama` AS nama,\n" +
+"     transaksi.`tanggalBeli` AS tanggalBeli,\n" +
+"     transaksi.`pegawai` AS pegawai,\n" +
+"     kurir.`nama` AS transaksi_kurir,\n" +
+"     transaksi.`invoice` AS transaksi_invoice\n" +
+"     \n" +
+"FROM\n" +
+"     `transaksi` transaksi join\n" +
+"     `member` member on member.`idMember`= transaksi.`idMember`  join\n" +
+"     `kurir` kurir on kurir.`idKurir`=transaksi.`kurir` where `tanggalBeli`='"+calender+"'";
+             
+             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             JRDesignQuery runquery = new JRDesignQuery();
             runquery.setText(query);
             jd.setQuery(runquery);
@@ -411,6 +471,14 @@ public class ownerDashboard extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_cetakActionPerformed
+
+    private void calender1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calender1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_calender1ActionPerformed
+
+    private void calender2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calender2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_calender2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -449,13 +517,17 @@ public class ownerDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton barang;
+    private javax.swing.JButton beranda;
     private org.jdesktop.swingx.JXDatePicker calender;
+    private org.jdesktop.swingx.JXDatePicker calender1;
+    private org.jdesktop.swingx.JXDatePicker calender2;
     private javax.swing.JTextField cari;
     private javax.swing.JButton cariButton;
-    private javax.swing.JButton cariinvoice;
     private javax.swing.JButton cetak;
     private javax.swing.JButton hapus;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton karyawan;

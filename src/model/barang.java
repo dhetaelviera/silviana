@@ -52,15 +52,15 @@ public class barang {
 
     public boolean updateBarang(String idBarang, String namaBarang, int stokBarang, int hargaBarang, int jenis, int merk) {
 
-        String query = "UPDATE barang SET namaBarang=?, stokBarang=?,hargaBarang=?,jenis=?, merk=? WHERE idBarang=?";
+        String query = "UPDATE barang SET namaBarang=?, stokBarang=?,harga=?,idJenis=?, idMerk=? WHERE idBarang=?";
         System.out.println(query);
         try {
             PreparedStatement st = konek.prepareStatement(query);
-            st.setInt(1, jenis);
-            st.setString(2, namaBarang);
-            st.setInt(3, stok);
-            st.setInt(4, merk);
-            st.setInt(5, harga);
+            st.setString(1, namaBarang);
+            st.setInt(2, stokBarang);
+            st.setInt(3, hargaBarang);
+            st.setInt(4, jenis);
+            st.setInt(5, merk);
             st.setInt(6, Integer.valueOf(idBarang));
             int status = st.executeUpdate();
             if (status > 0) {
@@ -125,6 +125,24 @@ public class barang {
         }
         return false;
     }
+    
+    public boolean tambahKurir(String kurir) {
+        String query = "INSERT INTO `kurir` (`nama`)VALUES(?)";
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            st.setString(1, kurir);
+            int status = st.executeUpdate();
+            if (status > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            ex.getMessage();
+        }
+        return false;
+    }
 
     public String[][] getJenis() {
         String query = "select idJenis, namajenis from jenis";
@@ -140,6 +158,29 @@ public class barang {
             while (rs.next()) {
                 jenis[0][i] = rs.getString("namaJenis");
                 jenis[1][i] = rs.getString("idJenis");
+                i++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            ex.getMessage();
+        }
+        return jenis;
+    }
+    
+    public String[][] getKurir() {
+        String query = "select idkurir, nama from kurir";
+        String jenis[][] = null;
+
+        try {
+            PreparedStatement st = konek.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = st.executeQuery();
+            rs.last();
+            jenis = new String[2][rs.getRow()];
+            rs.beforeFirst();
+            int i = 0;
+            while (rs.next()) {
+                jenis[0][i] = rs.getString("nama");
+                jenis[1][i] = rs.getString("idKurir");
                 i++;
             }
         } catch (SQLException ex) {
@@ -223,7 +264,7 @@ public class barang {
         String query = "SELECT b.idbarang, b.namabarang, b.stokbarang, j.namajenis, m.namamerk, b.harga "
                 + "from barang b join jenis j on j.idjenis=b.idjenis join merk m on m.idmerk=b.idmerk "
                 + "order by b.stokbarang";
-        String namaKolom[] = {"ID Barang", "Nama Barang", "Stok", "Jenis Barang", "Harga", "Merk"};
+        String namaKolom[] = {"ID Barang", "Nama Barang", "Stok", "Jenis Barang", "Merk", "Harga"};
         DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
         try {
             PreparedStatement st = konek.prepareStatement(query);
@@ -369,11 +410,11 @@ public class barang {
     }
 
     public DefaultTableModel bacaTabelBarangCari(String cari) {
-        String query = "select b.idbarang, b.namabarang, b.stokbarang, jb.namajenis, m.namamerk, b.harga "
+        String query = "select b.idbarang, b.namabarang, b.stokbarang, j.namajenis, m.namamerk, b.harga "
                 + "from barang b join jenis j on j.idjenis=b.idjenis join merk m on m.idmerk=b.idmerk "
-                + "where b.namabarang LIKE '" + cari + "%' or b.namaBarang LIKE '%" + cari + "%' or b.namaBarang LIKE '%" + cari + "') "
-                + "or j.namajenis LIKE '" + cari + "%' or j.namajenis LIKE '%" + cari + "%' or j.namajenis LIKE '%" + cari + "') "
-                + "or  m.namamerk LIKE '" + cari + "%' or m.namamerk LIKE '%" + cari + "%' or m.namamerk LIKE '%" + cari + "');";
+                + "where b.namabarang LIKE '" + cari + "%' or b.namaBarang LIKE '%" + cari + "%' or b.namaBarang LIKE '%" + cari + "' "
+                + "or j.namajenis LIKE '" + cari + "%' or j.namajenis LIKE '%" + cari + "%' or j.namajenis LIKE '%" + cari + "' "
+                + "or  m.namamerk LIKE '" + cari + "%' or m.namamerk LIKE '%" + cari + "%' or m.namamerk LIKE '%" + cari + "';";
         String namaKolom[] = {"ID Barang", "Nama Barang", "Stok", "Jenis Barang", "Harga", "Merk"};
         DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
         try {
@@ -397,7 +438,7 @@ public class barang {
     }
 
     public String getNamaBarang(int idBarang) {
-        String query = "SELECT namabarang from barang when idbarang='" + idBarang + "'";
+        String query = "SELECT namabarang from barang where idbarang=?";
         String barang = null;
         try {
             PreparedStatement st = konek.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -431,7 +472,7 @@ public class barang {
     }
     
             public String getHargaBarang(int idBarang) {
-        String query = "SELECT harga from barang where idbarang='" + idBarang + "'";
+        String query = "SELECT harga from barang where idbarang=?";
         String barang = null;
         try {
             PreparedStatement st = konek.prepareStatement(query);
@@ -449,7 +490,7 @@ public class barang {
             
             
     public String getJenisBarang(int idBarang) {
-        String query = "select j.namajenis from barang b join jenis j on j.idjenis=b.idjenis where b.idbarang='" + idBarang + "'";
+        String query = "select j.namajenis from barang b join jenis j on j.idjenis=b.idjenis where b.idbarang=?";
         String jenis = null;
         try {
             PreparedStatement st = konek.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -483,4 +524,59 @@ public class barang {
         return jtuTerpilih;
     }
 
+            public boolean hapusMerk(int idMerk) {
+        String query = "DELETE FROM merk where idmerk=?";
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            st.setInt(1, idMerk);
+            int status = st.executeUpdate();
+            if (status > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            e.getMessage();
+        }
+        return false;
+    }
+
+            public boolean hapusJenis(int idJenis) {
+        String query = "DELETE FROM jenis where idjenis=?";
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            st.setInt(1, idJenis);
+            int status = st.executeUpdate();
+            if (status > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            e.getMessage();
+        }
+        return false;
+    }
+
+            public boolean hapusBarang(int idBarang) {
+        String query = "DELETE FROM barang where idbarang=?";
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            st.setInt(1, idBarang);
+            int status = st.executeUpdate();
+            if (status > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            e.getMessage();
+        }
+        return false;
+    }
+
+        
 }
