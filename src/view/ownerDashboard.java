@@ -508,14 +508,14 @@ public class ownerDashboard extends javax.swing.JFrame {
                         + "     transaksi.`idTransaksi` AS ID_Transaksi,\n"
                         + "     member.`nama` AS nama,\n"
                         + "     transaksi.`tanggalBeli` AS tanggalBeli,\n"
-                        + "     transaksi.`pegawai` AS pegawai,\n"
+                        + "     user.`nama` AS pegawai,\n"
                         + "     kurir.`nama` AS transaksi_kurir,\n"
                         + "     transaksi.`invoice` AS transaksi_invoice\n"
                         + "     \n"
                         + "FROM\n"
                         + "     `transaksi` transaksi join\n"
                         + "     `member` member on member.`idMember`= transaksi.`idMember`  join\n"
-                        + "     `kurir` kurir on kurir.`idKurir`=transaksi.`kurir`";
+                        + "     `kurir` kurir on kurir.`idKurir`=transaksi.`kurir` join `user` user on user.`username`= transaksi.`pegawai`";
 
                 JRDesignQuery runquery = new JRDesignQuery();
                 runquery.setText(query);
@@ -692,14 +692,14 @@ public class ownerDashboard extends javax.swing.JFrame {
                     + "     transaksi.`idTransaksi` AS ID_Transaksi,\n"
                     + "     member.`nama` AS nama,\n"
                     + "     transaksi.`tanggalBeli` AS tanggalBeli,\n"
-                    + "     transaksi.`pegawai` AS pegawai,\n"
+                    + "     user.`nama` AS pegawai,\n"
                     + "     kurir.`nama` AS transaksi_kurir,\n"
                     + "     transaksi.`invoice` AS transaksi_invoice\n"
                     + "     \n"
                     + "FROM\n"
                     + "     `transaksi` transaksi join\n"
                     + "     `member` member on member.`idMember`= transaksi.`idMember`  join\n"
-                    + "     `kurir` kurir on kurir.`idKurir`=transaksi.`kurir` where `tanggalBeli`='" + sqlDatee + "'";
+                    + "     `kurir` kurir on kurir.`idKurir`=transaksi.`kurir` join `user` user on user.`username`= transaksi.`pegawai`where `tanggalBeli`='" + sqlDatee + "'";
             System.out.println("cobababa");
             System.out.println(sqlDatee);
 
@@ -750,14 +750,14 @@ public class ownerDashboard extends javax.swing.JFrame {
                     + "     transaksi.`idTransaksi` AS ID_Transaksi,\n"
                     + "     member.`nama` AS nama,\n"
                     + "     transaksi.`tanggalBeli` AS tanggalBeli,\n"
-                    + "     transaksi.`pegawai` AS pegawai,\n"
+                    + "     user.`nama` AS pegawai,\n"
                     + "     kurir.`nama` AS transaksi_kurir,\n"
                     + "     transaksi.`invoice` AS transaksi_invoice\n"
                     + "     \n"
                     + "FROM\n"
                     + "     `transaksi` transaksi join\n"
                     + "     `member` member on member.`idMember`= transaksi.`idMember`  join\n"
-                    + "     `kurir` kurir on kurir.`idKurir`=transaksi.`kurir` WHERE tanggalBeli BETWEEN '" + sqlDater + "' and '" + sqlDater2 + "' ORDER BY tanggalBeli desc";
+                    + "     `kurir` kurir on kurir.`idKurir`=transaksi.`kurir` join `user` user on user.`username`= transaksi.`pegawai` WHERE tanggalBeli BETWEEN '" + sqlDater + "' and '" + sqlDater2 + "' ORDER BY tanggalBeli desc";
             System.out.println(query4);
 
             JRDesignQuery runquery4 = new JRDesignQuery();
@@ -799,14 +799,14 @@ public class ownerDashboard extends javax.swing.JFrame {
                     + "     transaksi.`idTransaksi` AS ID_Transaksi,\n"
                     + "     member.`nama` AS nama,\n"
                     + "     transaksi.`tanggalBeli` AS tanggalBeli,\n"
-                    + "     transaksi.`pegawai` AS pegawai,\n"
+                    + "     user.`nama` AS pegawai,\n"
                     + "     kurir.`nama` AS transaksi_kurir,\n"
                     + "     transaksi.`invoice` AS transaksi_invoice\n"
                     + "     \n"
                     + "FROM\n"
                     + "     `transaksi` transaksi join\n"
                     + "     `member` member on member.`idMember`= transaksi.`idMember`  join\n"
-                    + "     `kurir` kurir on kurir.`idKurir`=transaksi.`kurir`WHERE SUBSTRING(tanggalBeli,6,2)='" + tanggal2 + "' ORDER BY tanggalBeli";
+                    + "     `kurir` kurir on kurir.`idKurir`=transaksi.`kurir` join `user` user on user.`username`= transaksi.`pegawai` WHERE SUBSTRING(tanggalBeli,6,2)='" + tanggal2 + "' ORDER BY tanggalBeli";
 
             System.out.println("ini bulan ya berapa hayo =" + tanggal2);
 

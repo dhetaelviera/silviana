@@ -331,13 +331,13 @@ public class ownerTransaksi extends javax.swing.JFrame {
 
         tabelPembayaran.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID ", "Nama Barang", "Merk", "Quantity", "Diskon", "Harga"
             }
         ));
         jScrollPane2.setViewportView(tabelPembayaran);

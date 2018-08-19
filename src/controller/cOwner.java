@@ -279,16 +279,7 @@ public class cOwner {
         }
 //</editor-fold>
     }
-//     private class sortByNama implements ActionListener {
-//        
-//        public sortByNama() {
-//        }
-//        
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            bacaTabelTransaksibyNama();
-//        }
-//    }
+    
 
     private class aktif implements ActionListener {
 

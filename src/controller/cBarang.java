@@ -76,7 +76,7 @@ public class cBarang {
         viewbarang.cariBarangListener(new cariBarang());
         viewbarang.transaksiListener(new barangketransaksi());
         viewbarang.karyawanListener(new barangkekaryawan());
- viewbarang.ubahBarangListener(new barangkeubah());
+        viewbarang.ubahBarangListener(new barangkeubah());
         viewbarang.logoutListener(new logoutbarang());
         viewbarang.tambahBarangListener(new viewTambah());
         viewbarang.hapusListener(new hapusBarang());
@@ -281,8 +281,8 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-       viewbarang.dispose();
-       new controller.cBarang(idBarang, 1, username, ubahbarang);
+            viewbarang.dispose();
+            new controller.cBarang(idBarang, 1, username, ubahbarang);
         }
     }
 
@@ -1024,8 +1024,6 @@ public class cBarang {
         }
     }
 
-    
-
     private class viewTambah implements ActionListener {
 
         public viewTambah() {
@@ -1261,28 +1259,36 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String idTransaksi = String.valueOf(mTransaksi.getIDTransaksi(idMember));
-            System.out.println(idTransaksi + "kembalinya ya");
             int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "mau balik ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
-            if (pilihan == JOptionPane.NO_OPTION) {
-                bacaTabelTransaksi2();
-                bacaTotalTransaksi2();
-            } else if (pilihan == JOptionPane.YES_OPTION) {
-                boolean hapus = mTransaksi.hapusTransaksi(Integer.valueOf(idTransaksi));
-                boolean hapusjuga = mTransaksi.hapusTransaksi2(Integer.valueOf(idTransaksi));
-                JOptionPane.showMessageDialog(ownerTransaksi, "Transaksi batal masuk coy");
-                new controller.cOwner(username, owner);
-                ownerTransaksi.dispose();
-            } else {
-                System.out.println(idTransaksi);
-                JOptionPane.showMessageDialog(ownerTransaksi, "Kesalahan jaringan");
-                bacaTabelTransaksi2();
-                bacaTotalTransaksi2();
+            if (idTransaksi != null) {
+                if (pilihan == JOptionPane.NO_OPTION) {
+                    bacaTabelTransaksi2();
+                    bacaTotalTransaksi2();
+                } else if (pilihan == JOptionPane.YES_OPTION) {
+                    String idTransaksi = String.valueOf(mTransaksi.getIDTransaksi(idMember));
+                    System.out.println(idTransaksi + "kembalinya ya");
+                    boolean hapus = mTransaksi.hapusTransaksi(Integer.valueOf(idTransaksi));
+                    boolean hapusjuga = mTransaksi.hapusTransaksi2(Integer.valueOf(idTransaksi));
+                    JOptionPane.showMessageDialog(ownerTransaksi, "Transaksi batal masuk coy");
+                    new controller.cOwner(username, owner);
+                    ownerTransaksi.dispose();
+                } else {
+                    System.out.println(idTransaksi);
+                    JOptionPane.showMessageDialog(ownerTransaksi, "Kesalahan jaringan");
+                    bacaTabelTransaksi2();
+                    bacaTotalTransaksi2();
+                }
+            } else if (idTransaksi == null) {
+                if (pilihan == JOptionPane.YES_OPTION) {
+                 
+                    JOptionPane.showMessageDialog(ownerTransaksi, "Transaksi batal masuk coy");
+                    new controller.cOwner(username, owner);
+                    ownerTransaksi.dispose();
+                }
 
             }
 
         }
-
     }
 
     private class hapusListener implements ActionListener {

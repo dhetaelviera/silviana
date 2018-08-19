@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.transaksi;
 import model.user;
@@ -65,7 +69,101 @@ public class cAdmin {
         this.vtabelTrans.tabelListener(new selectedTabel());
         this.vtabelTrans.hapusListener(new hapustransaksi());
         this.vtabelTrans.logoutListener(new logout());
+        this.vtabelTrans.caldate(new sortByDate());
+        this.vtabelTrans.calmonth(new sortByMonth());
+        this.vtabelTrans.calrange(new sortByRange());
+        this.vtabelTrans.date().setEnabled(false);
+        this.vtabelTrans.month().setEnabled(false);
+        this.vtabelTrans.range().setEnabled(false);
+        this.vtabelTrans.hapus().setEnabled(false);
+        this.vtabelTrans.printtgl().setEnabled(false);
+        this.vtabelTrans.printbulan().setEnabled(false);
+        this.vtabelTrans.printrange().setEnabled(false);
+        this.vtabelTrans.tanggalbulan(new aktif());
+        this.vtabelTrans.akhir(new aktif2());
+        this.vtabelTrans.reset(new resetTabel());
+//     
         this.vtabelTrans.setTabel(mTransaksi.bacaTabelAdmin(username));
+    }
+
+    private class resetTabel implements ActionListener {
+
+        public resetTabel() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            vtabelTrans.setTabel(mTransaksi.bacaTabelAdmin(username));
+            vtabelTrans.printbulan().setEnabled(false);
+            vtabelTrans.printtgl().setEnabled(false);
+            vtabelTrans.printrange().setEnabled(false);
+        }
+    }
+
+    private class aktif implements ActionListener {
+
+        public aktif() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            vtabelTrans.date().setEnabled(true);
+            vtabelTrans.month().setEnabled(true);
+        }
+    }
+
+    private class aktif2 implements ActionListener {
+
+        public aktif2() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            vtabelTrans.range().setEnabled(true);
+
+        }
+    }
+
+    private class sortByDate implements ActionListener {
+
+        public sortByDate() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            vtabelTrans.printtgl().setEnabled(true);
+            vtabelTrans.printbulan().setEnabled(false);
+            vtabelTrans.printrange().setEnabled(false);
+            bacaTabelTransaksiByDate();
+        }
+    }
+
+    private class sortByMonth implements ActionListener {
+
+        public sortByMonth() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            vtabelTrans.printbulan().setEnabled(true);
+            vtabelTrans.printtgl().setEnabled(false);
+            vtabelTrans.printrange().setEnabled(false);
+            bacaTabelTransaksiByMonth();
+        }
+    }
+
+    private class sortByRange implements ActionListener {
+
+        public sortByRange() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            vtabelTrans.printrange().setEnabled(true);
+            vtabelTrans.printbulan().setEnabled(false);
+            vtabelTrans.printtgl().setEnabled(false);
+            bacaTabelTransaksiByRange();
+        }
     }
 
     private class logout implements ActionListener {
@@ -82,6 +180,30 @@ public class cAdmin {
                 new controller.cUser();
                 vtabelTrans.dispose();
             }
+        }
+    }
+
+    private void bacaTabelTransaksiByDate() {
+        try {
+            vtabelTrans.setTabel(mTransaksi.bacaTabelTransaksiAdminbyDate(username, vtabelTrans.gettglBeli()));
+        } catch (ParseException ex) {
+            Logger.getLogger(cUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void bacaTabelTransaksiByMonth() {
+        try {
+            vtabelTrans.setTabel(mTransaksi.bacaTabelTransaksiAdminbyMonth(username, vtabelTrans.gettglBeli()));
+        } catch (ParseException ex) {
+            Logger.getLogger(cUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void bacaTabelTransaksiByRange() {
+        try {
+            vtabelTrans.setTabel(mTransaksi.bacaTabelTransaksiAdminbyDateRange(username, vtabelTrans.getTglAwal(), vtabelTrans.getTglAkhir()));
+        } catch (ParseException ex) {
+            Logger.getLogger(cUser.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

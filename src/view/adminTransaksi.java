@@ -213,116 +213,136 @@ public class adminTransaksi extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        diskon = new javax.swing.JTextField();
-        logout = new javax.swing.JButton();
-        jumlahBarang = new javax.swing.JSpinner();
-        namaPembeli = new javax.swing.JTextField();
         total = new javax.swing.JLabel();
-        kembali = new javax.swing.JButton();
-        tambahBarang = new javax.swing.JButton();
-        tambahPembeli = new javax.swing.JButton();
-        buatTransaksi = new javax.swing.JButton();
-        hapusBarang = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabelPembayaran = new javax.swing.JTable();
         id = new javax.swing.JLabel();
-        invoice = new javax.swing.JTextField();
+        tambahKurir = new javax.swing.JButton();
+        namaPembeli = new javax.swing.JTextField();
         pilihkurir = new javax.swing.JComboBox<>(kurir[1]);
+        invoice = new javax.swing.JTextField();
+        jumlahBarang = new javax.swing.JSpinner();
         jenisBarang = new javax.swing.JComboBox(jenis_Barang[0]);
         merkBarang = new javax.swing.JComboBox(merk_Barang[1]);
         namaBarang = new javax.swing.JComboBox<String>();
-        tambahKurir = new javax.swing.JButton();
+        diskon = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelPembayaran = new javax.swing.JTable();
+        tambahPembeli = new javax.swing.JButton();
+        buatTransaksi = new javax.swing.JButton();
+        tambahBarang = new javax.swing.JButton();
+        hapusBarang = new javax.swing.JButton();
         selesai = new javax.swing.JButton();
+        kembali = new javax.swing.JButton();
+        logout = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(diskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 270, 120, -1));
-
-        logout.setText("log out");
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, 110, -1));
-
-        jumlahBarang.setFont(new java.awt.Font("Tempus Sans ITC", 0, 12)); // NOI18N
-        getContentPane().add(jumlahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, 110, -1));
-        getContentPane().add(namaPembeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 130, -1));
 
         total.setFont(new java.awt.Font("Tempus Sans ITC", 0, 18)); // NOI18N
         total.setForeground(new java.awt.Color(255, 255, 255));
         total.setText("0");
-        getContentPane().add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 120, 30));
-
-        kembali.setText("kembali");
-        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 290, 110, -1));
-
-        tambahBarang.setText("tambah barang");
-        getContentPane().add(tambahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 170, -1, -1));
-
-        tambahPembeli.setText("tambah pembeli");
-        getContentPane().add(tambahPembeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, 110, -1));
-
-        buatTransaksi.setText("buat transaksi");
-        getContentPane().add(buatTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 130, 110, -1));
-
-        hapusBarang.setText("hapus barang");
-        getContentPane().add(hapusBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 210, 110, -1));
-
-        tabelPembayaran.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(tabelPembayaran);
-
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 650, 260));
+        getContentPane().add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 120, 30));
 
         id.setText(" ");
         getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 50, 110, 20));
-        getContentPane().add(invoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 120, -1));
+
+        tambahKurir.setBackground(new java.awt.Color(27, 179, 133));
+        tambahKurir.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        tambahKurir.setForeground(new java.awt.Color(255, 255, 255));
+        tambahKurir.setText("+");
+        getContentPane().add(tambahKurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 30, 20));
+        getContentPane().add(namaPembeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 120, 20));
 
         pilihkurir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pilihkurirActionPerformed(evt);
             }
         });
-        getContentPane().add(pilihkurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 100, 20));
+        getContentPane().add(pilihkurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, 90, 20));
+        getContentPane().add(invoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 120, 20));
+
+        jumlahBarang.setFont(new java.awt.Font("Tempus Sans ITC", 0, 12)); // NOI18N
+        getContentPane().add(jumlahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 150, 110, -1));
 
         jenisBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jenisBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(jenisBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, 130, -1));
+        getContentPane().add(jenisBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 120, -1));
 
         merkBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 merkBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(merkBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, 120, -1));
+        getContentPane().add(merkBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 120, -1));
 
         namaBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 namaBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(namaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 230, 130, -1));
+        getContentPane().add(namaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 120, -1));
+        getContentPane().add(diskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, 120, -1));
 
-        tambahKurir.setBackground(new java.awt.Color(27, 179, 133));
-        tambahKurir.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
-        tambahKurir.setForeground(new java.awt.Color(255, 255, 255));
-        tambahKurir.setText("+");
-        getContentPane().add(tambahKurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 30, 20));
+        tabelPembayaran.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID ", "Nama Barang", "Merk", "Quantity", "Diskon", "Harga"
+            }
+        ));
+        jScrollPane2.setViewportView(tabelPembayaran);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 630, 220));
+
+        tambahPembeli.setBackground(new java.awt.Color(27, 179, 133));
+        tambahPembeli.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        tambahPembeli.setForeground(new java.awt.Color(255, 255, 255));
+        tambahPembeli.setText("tambah pembeli");
+        getContentPane().add(tambahPembeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 110, 140, -1));
+
+        buatTransaksi.setBackground(new java.awt.Color(27, 179, 133));
+        buatTransaksi.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        buatTransaksi.setForeground(new java.awt.Color(255, 255, 255));
+        buatTransaksi.setText("buat transaksi");
+        getContentPane().add(buatTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 150, 140, -1));
+
+        tambahBarang.setBackground(new java.awt.Color(27, 179, 133));
+        tambahBarang.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        tambahBarang.setForeground(new java.awt.Color(255, 255, 255));
+        tambahBarang.setText("tambah barang");
+        getContentPane().add(tambahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 190, 140, -1));
+
+        hapusBarang.setBackground(new java.awt.Color(153, 0, 0));
+        hapusBarang.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        hapusBarang.setForeground(new java.awt.Color(255, 255, 204));
+        hapusBarang.setText("hapus barang");
+        getContentPane().add(hapusBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 230, 140, -1));
+
+        selesai.setBackground(new java.awt.Color(27, 179, 133));
+        selesai.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        selesai.setForeground(new java.awt.Color(255, 255, 255));
         selesai.setText("selesai transaksi");
-        getContentPane().add(selesai, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 250, 110, -1));
+        getContentPane().add(selesai, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 270, 140, -1));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/10. admin tambah transaksi.png"))); // NOI18N
+        kembali.setBackground(new java.awt.Color(248, 215, 85));
+        kembali.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        kembali.setForeground(new java.awt.Color(51, 0, 0));
+        kembali.setText("kembali");
+        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 310, 140, -1));
+
+        logout.setText(" ");
+        logout.setBorderPainted(false);
+        logout.setContentAreaFilled(false);
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 130, 40));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/07. owner tambah transaksi 2.png"))); // NOI18N
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
         pack();

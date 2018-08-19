@@ -283,21 +283,22 @@ public class transaksi implements NewInterface{
     }
 
     public DefaultTableModel bacaTabelTransaksiOwner() {
-        String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli, t.invoice"
-                + "  FROM transaksi t JOIN member m ON m.idmember=t.idMember ORDER BY tanggalBeli desc";
-        String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "invoice", "Total Harga"};
+        String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli, t.invoice, u.nama"
+                + "  FROM transaksi t JOIN member m ON m.idmember=t.idMember JOIN user u on u.username=t.pegawai ORDER BY tanggalBeli desc";
+        String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "invoice","Pegawai", "Total Harga"};
         DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
         try {
             PreparedStatement st = konek.prepareStatement(query);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Object data[] = new Object[5];
+                Object data[] = new Object[6];
 
                 data[0] = rs.getString(1);
                 data[1] = rs.getString(2);
                 data[2] = rs.getString(3);
                 data[3] = rs.getString(4);
-                data[4] = getTotalTransaksi((String) data[0]);
+                data[4] = rs.getString(5);
+                data[5] = getTotalTransaksi((String) data[0]);
                 tabel.addRow(data);
             }
 
@@ -424,26 +425,20 @@ public class transaksi implements NewInterface{
         return tabel;
     }
     
-        public DefaultTableModel bacaTabelTransaksiRentangWaktu(Date tanggal1, Date tanggal2) throws ParseException {
+    public DefaultTableModel bacaTabelTransaksiAdminbyDate(String username, Date tanggal) throws ParseException {
         String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli"
-                + "  FROM transaksi t JOIN member m ON m.idMember=t.idMember WHERE t.tanggalBeli=? ORDER BY t.tanggalBeli desc;";
+                + "  FROM transaksi t JOIN member m ON m.idMember=t.idMember WHERE t.tanggalBeli=? and t.pegawai=? ORDER BY t.tanggalBeli desc;";
         String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "Total Harga"};
         DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
         try {
             PreparedStatement st = konek.prepareStatement(query);
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date date1 = tanggal1;
-            System.out.println(date1);
-            java.sql.Date sqlDate1 = new java.sql.Date(date1.getTime());
-            System.out.println(sqlDate1);
-            
-            java.util.Date date2 = tanggal2;
-            System.out.println(date2);
-            java.sql.Date sqlDate2 = new java.sql.Date(date2.getTime());
-            System.out.println(sqlDate2);
-            
-            st.setDate(1, sqlDate1);
-            st.setDate(2, sqlDate2);
+            java.util.Date date = tanggal;
+            System.out.println(date);
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            System.out.println(sqlDate);
+            st.setDate(1, sqlDate);
+            st.setString(2, username);
             System.out.println(query);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
@@ -462,7 +457,8 @@ public class transaksi implements NewInterface{
         }
         return tabel;
     }
-
+    
+    
 
     public DefaultTableModel bacaTabelTransaksiManajerbyDateRange(Date tanggal1, Date tanggal2) throws ParseException {
         String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli  FROM transaksi t JOIN member m ON m.idMember=t.idMember"
@@ -505,6 +501,49 @@ public class transaksi implements NewInterface{
         }
         return tabel;
     }
+
+    public DefaultTableModel bacaTabelTransaksiAdminbyDateRange(String username, Date tanggal1, Date tanggal2) throws ParseException {
+        String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli  FROM transaksi t JOIN member m ON m.idMember=t.idMember"
+                + " WHERE t.pegawai=? and t.tanggalBeli BETWEEN ? and ?  ORDER BY t.tanggalBeli desc;";
+        String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "Total Harga"};
+        DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date1 = tanggal1;
+            System.out.println(date1);
+            java.sql.Date sqlDate1 = new java.sql.Date(date1.getTime());
+            System.out.println(sqlDate1);
+
+            DateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date2 = tanggal2;
+            System.out.println(date2);
+            java.sql.Date sqlDate2 = new java.sql.Date(date2.getTime());
+            System.out.println(sqlDate2);
+            System.out.println(tanggal1);
+            System.out.println(tanggal2);
+            
+            st.setString(1, username);
+            st.setDate(2, sqlDate1);
+            st.setDate(3, sqlDate2);
+            System.out.println(query);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Object data[] = new Object[4];
+
+                data[0] = rs.getString(1);
+                data[1] = rs.getString(2);
+                data[2] = rs.getString(3);
+                data[3] = getTotalTransaksi((String) data[0]);
+                tabel.addRow(data);
+            }
+
+        } catch (SQLException e) {
+            e.getMessage();
+            e.printStackTrace();
+        }
+        return tabel;
+    }
     
     public DefaultTableModel bacaTabelTransaksiManajerbyMonth(Date tanggal) throws ParseException {
         String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli"
@@ -522,6 +561,42 @@ public class transaksi implements NewInterface{
             String tanggal2 = tanggal1.substring(5, 7);
             System.out.println(tanggal2 + " ayam22 ");
             st.setString(1, tanggal2);
+            System.out.println(query);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Object data[] = new Object[4];
+
+                data[0] = rs.getString(1);
+                data[1] = rs.getString(2);
+                data[2] = rs.getString(3);
+                data[3] = getTotalTransaksi((String) data[0]);
+                tabel.addRow(data);
+            }
+
+        } catch (SQLException e) {
+            e.getMessage();
+            e.printStackTrace();
+        }
+        return tabel;
+    }
+    
+    public DefaultTableModel bacaTabelTransaksiAdminbyMonth(String username, Date tanggal) throws ParseException {
+        String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli"
+                + "  FROM transaksi t JOIN member m ON m.idMember=t.idMember WHERE SUBSTRING(tanggalBeli,6,2)=? and t.pegawai=? ORDER BY tanggalBeli  desc;";
+        String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "Total Harga"};
+        DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date = tanggal;
+            System.out.println(date);
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            System.out.println(sqlDate + " ayam ");
+            String tanggal1 = format.format(sqlDate);
+            String tanggal2 = tanggal1.substring(5, 7);
+            System.out.println(tanggal2 + " ayam22 ");
+            st.setString(1, tanggal2);
+            st.setString(2, username);
             System.out.println(query);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
