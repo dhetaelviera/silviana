@@ -76,8 +76,13 @@ public class cOwner {
         this.owner.beranda().setEnabled(false);
         this.owner.kal().setEnabled(false);
         this.owner.month().setEnabled(false);
+        this.owner.range().setEnabled(false);
         this.owner.hapus().setEnabled(false);
+        this.owner.printtgl().setEnabled(false);
+        this.owner.printbulan().setEnabled(false);
+        this.owner.printrange().setEnabled(false);
         this.owner.kalender3(new aktif());
+        this.owner.kalender4(new aktif2());
         this.owner.reset(new resetTabel());
 //        this.owner.sortByNama(new sortByNama());
 //        
@@ -186,6 +191,7 @@ public class cOwner {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
+                owner.printrange().setEnabled(true);
                 owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiManajerbyDateRange(owner.getTglAwal(),owner.getTglAkhir()));
             } catch (ParseException ex) {
                 Logger.getLogger(cOwner.class.getName()).log(Level.SEVERE, null, ex);
@@ -296,6 +302,18 @@ public class cOwner {
         }
     }
 
+    private class aktif2 implements ActionListener {
+
+        public aktif2() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            owner.range().setEnabled(true);
+      
+        }
+    }
+
     private class resetTabel implements ActionListener {
 
         public resetTabel() {
@@ -314,6 +332,7 @@ public class cOwner {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            owner.printbulan().setEnabled(true);
             bacaTabelTransaksiByMonth();
         }
     }
@@ -325,6 +344,7 @@ public class cOwner {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            owner.printtgl().setEnabled(true);
             bacaTabelTransaksiByKal();
         }
     }

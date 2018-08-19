@@ -86,9 +86,7 @@ public class ownerBarang extends javax.swing.JFrame {
         return beranda;
     }
 
-    public void kembaliListener(ActionListener a) {
-        ubah.addActionListener(a);
-    }
+    
     
     
     public void jenisListener(ActionListener a) {

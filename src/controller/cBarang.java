@@ -76,12 +76,10 @@ public class cBarang {
         viewbarang.cariBarangListener(new cariBarang());
         viewbarang.transaksiListener(new barangketransaksi());
         viewbarang.karyawanListener(new barangkekaryawan());
-//        viewbarang.berandaListener(new barangkeberanda());
+ viewbarang.ubahBarangListener(new barangkeubah());
         viewbarang.logoutListener(new logoutbarang());
         viewbarang.tambahBarangListener(new viewTambah());
         viewbarang.hapusListener(new hapusBarang());
-        viewbarang.ubahBarangListener(new barangkeubah());
-        viewbarang.kembaliListener(new kembali2());
         viewbarang.jenisListener(new jenis());
         viewbarang.tabelListener(new setSelectedTabelBarang());
         viewbarang.resetTabelListener(new resetTabelBarang());
@@ -276,6 +274,18 @@ public class cBarang {
         }
     }
 
+    private class barangkeubah implements ActionListener {
+
+        public barangkeubah() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+       viewbarang.dispose();
+       new controller.cBarang(idBarang, 1, username, ubahbarang);
+        }
+    }
+
     private class cariBarang implements ActionListener {
 
         public cariBarang() {
@@ -305,18 +315,6 @@ public class cBarang {
             bacaTabelBarang();
         }
 
-    }
-
-    private class barangkeubah implements ActionListener {
-
-        public barangkeubah() {
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            viewbarang.dispose();
-            System.out.println("berhasil");
-        }
     }
 
     private class ubahkeberanda implements ActionListener {
@@ -1026,17 +1024,7 @@ public class cBarang {
         }
     }
 
-    private class kembali2 implements ActionListener {
-
-        public kembali2() {
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            new controller.cOwner(username, owner);
-            viewbarang.dispose();
-        }
-    }
+    
 
     private class viewTambah implements ActionListener {
 

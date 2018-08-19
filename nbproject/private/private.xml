@@ -5,9 +5,10 @@
         <group>
             <file>file:/C:/Users/Dheta/Documents/NetBeansProjects/silviana/src/controller/cBarang.java</file>
             <file>file:/C:/Users/Dheta/Documents/NetBeansProjects/silviana/src/controller/cOwner.java</file>
+            <file>file:/C:/Users/Dheta/Documents/NetBeansProjects/silviana/src/view/ownerUbahBarang.java</file>
+            <file>file:/C:/Users/Dheta/Documents/NetBeansProjects/silviana/src/view/ownerTransaksi.java</file>
             <file>file:/C:/Users/Dheta/Documents/NetBeansProjects/silviana/src/view/ownerBarang.java</file>
             <file>file:/C:/Users/Dheta/Documents/NetBeansProjects/silviana/src/model/transaksi.java</file>
-            <file>file:/C:/Users/Dheta/Documents/NetBeansProjects/silviana/src/model/barang.java</file>
             <file>file:/C:/Users/Dheta/Documents/NetBeansProjects/silviana/src/view/ownerDashboard.java</file>
         </group>
     </open-files>
