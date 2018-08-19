@@ -37,7 +37,6 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
-
 /**
  *
  * @author Dheta
@@ -71,6 +70,16 @@ public class ownerDashboard extends javax.swing.JFrame {
 
     public Date gettglBeli() {
         Date tgllahir1 = (calender.getDate());
+        return tgllahir1;
+    }
+
+    public Date getTglAwal() {
+        Date tgllahir1 = (calender1.getDate());
+        return tgllahir1;
+    }
+
+    public Date getTglAkhir() {
+        Date tgllahir1 = (calender2.getDate());
         return tgllahir1;
     }
 
@@ -129,8 +138,6 @@ public class ownerDashboard extends javax.swing.JFrame {
         cariButton.addActionListener(a);
     }
 
-   
-    
     public void transaksiListener(ActionListener a) {
         transaksi.addActionListener(a);
     }
@@ -142,7 +149,7 @@ public class ownerDashboard extends javax.swing.JFrame {
     public void barangListener(ActionListener a) {
         barang.addActionListener(a);
     }
-    
+
     public void berandaListener(ActionListener a) {
         beranda.addActionListener(a);
     }
@@ -159,7 +166,10 @@ public class ownerDashboard extends javax.swing.JFrame {
         return sortDate;
     }
 
+    int abc;
+
     public JButton month() {
+        abc = 2;
         return sortMonth;
     }
 
@@ -174,12 +184,10 @@ public class ownerDashboard extends javax.swing.JFrame {
     public JButton cariButton() {
         return cariButton;
     }
-    
+
     public JButton beranda() {
         return beranda;
     }
-
-    
 
     public JButton range() {
         return range;
@@ -425,46 +433,164 @@ public class ownerDashboard extends javax.swing.JFrame {
         JasperPrint jasperPrint = null;
         try {
             JasperDesign jd = JRXmlLoader.load("src/report/report1.jrxml");
-            String query = "SELECT\n" +
-"     transaksi.`idTransaksi` AS ID_Transaksi,\n" +
-"     member.`nama` AS nama,\n" +
-"     transaksi.`tanggalBeli` AS tanggalBeli,\n" +
-"     transaksi.`pegawai` AS pegawai,\n" +
-"     kurir.`nama` AS transaksi_kurir,\n" +
-"     transaksi.`invoice` AS transaksi_invoice\n" +
-"     \n" +
-"FROM\n" +
-"     `transaksi` transaksi join\n" +
-"     `member` member on member.`idMember`= transaksi.`idMember`  join\n" +
-"     `kurir` kurir on kurir.`idKurir`=transaksi.`kurir`";
+            // laporan keseluruhan
+            String query = "SELECT\n"
+                    + "     transaksi.`idTransaksi` AS ID_Transaksi,\n"
+                    + "     member.`nama` AS nama,\n"
+                    + "     transaksi.`tanggalBeli` AS tanggalBeli,\n"
+                    + "     transaksi.`pegawai` AS pegawai,\n"
+                    + "     kurir.`nama` AS transaksi_kurir,\n"
+                    + "     transaksi.`invoice` AS transaksi_invoice\n"
+                    + "     \n"
+                    + "FROM\n"
+                    + "     `transaksi` transaksi join\n"
+                    + "     `member` member on member.`idMember`= transaksi.`idMember`  join\n"
+                    + "     `kurir` kurir on kurir.`idKurir`=transaksi.`kurir`";
+
+            // laporan berdasarkan rentang waktu
+            System.out.println("awalnya" + getTglAwal());
+            System.out.println("lalu kahirnya " + getTglAkhir());
+
+//            DateFormat formatr = new SimpleDateFormat("yyyy-MM-dd");
+//            java.util.Date dater = getTglAwal();
+//            System.out.println(dater);
+//            java.sql.Date sqlDater = new java.sql.Date(dater.getTime());
+//            System.out.println(sqlDater);
+//
+//            DateFormat formatr2 = new SimpleDateFormat("yyyy-MM-dd");
+//            java.util.Date dater2= getTglAkhir();
+//            System.out.println(dater2);
+//            java.sql.Date sqlDater2 = new java.sql.Date(dater2.getTime());
+//            System.out.println(sqlDater2);
+//            
+//
+//            System.out.println("ini" + sqlDater);
+//            System.out.println("sama ini" + sqlDater2);
+//            String query4 = "SELECT\n"
+//                    + "     transaksi.`idTransaksi` AS ID_Transaksi,\n"
+//                    + "     member.`nama` AS nama,\n"
+//                    + "     transaksi.`tanggalBeli` AS tanggalBeli,\n"
+//                    + "     transaksi.`pegawai` AS pegawai,\n"
+//                    + "     kurir.`nama` AS transaksi_kurir,\n"
+//                    + "     transaksi.`invoice` AS transaksi_invoice\n"
+//                    + "     \n"
+//                    + "FROM\n"
+//                    + "     `transaksi` transaksi join\n"
+//                    + "     `member` member on member.`idMember`= transaksi.`idMember`  join\n"
+//                    + "     `kurir` kurir on kurir.`idKurir`=transaksi.`kurir` where transaksi.`tanggalBeli` beetween '" + sqlDater + "'and '" + sqlDater2 + "' ";
+//            System.out.println(query4);
             
-             String query2 = "SELECT\n" +
-"     transaksi.`idTransaksi` AS ID_Transaksi,\n" +
-"     member.`nama` AS nama,\n" +
-"     transaksi.`tanggalBeli` AS tanggalBeli,\n" +
-"     transaksi.`pegawai` AS pegawai,\n" +
-"     kurir.`nama` AS transaksi_kurir,\n" +
-"     transaksi.`invoice` AS transaksi_invoice\n" +
-"     \n" +
-"FROM\n" +
-"     `transaksi` transaksi join\n" +
-"     `member` member on member.`idMember`= transaksi.`idMember`  join\n" +
-"     `kurir` kurir on kurir.`idKurir`=transaksi.`kurir` where `tanggalBeli`='"+calender+"'";
-             
-             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            JRDesignQuery runquery = new JRDesignQuery();
-            runquery.setText(query);
-            jd.setQuery(runquery);
-            jasperReport = JasperCompileManager.compileReport(jd);
-            try {
-                jasperPrint = JasperFillManager.fillReport(
-                        jasperReport, new HashMap(), DriverManager.getConnection("jdbc:mysql://localhost:3306/silviana", "root", ""));
-            } catch (SQLException ex) {
-                Logger.getLogger(ownerDashboard.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            JasperViewer.viewReport(jasperPrint, false);
+            // laporan tanggal aja
+            JasperDesign jd2 = JRXmlLoader.load("src/report/report1.jrxml");
+            DateFormat formatt = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date datee = gettglBeli();
+            System.out.println(datee);
+            java.sql.Date sqlDatee = new java.sql.Date(datee.getTime());
+            System.out.println(sqlDatee);
+
+            String query2 = "SELECT\n"
+                    + "     transaksi.`idTransaksi` AS ID_Transaksi,\n"
+                    + "     member.`nama` AS nama,\n"
+                    + "     transaksi.`tanggalBeli` AS tanggalBeli,\n"
+                    + "     transaksi.`pegawai` AS pegawai,\n"
+                    + "     kurir.`nama` AS transaksi_kurir,\n"
+                    + "     transaksi.`invoice` AS transaksi_invoice\n"
+                    + "     \n"
+                    + "FROM\n"
+                    + "     `transaksi` transaksi join\n"
+                    + "     `member` member on member.`idMember`= transaksi.`idMember`  join\n"
+                    + "     `kurir` kurir on kurir.`idKurir`=transaksi.`kurir` where `tanggalBeli`='" + sqlDatee + "'";
+            System.out.println("cobababa");
+            System.out.println(sqlDatee);
+
+            // laporan berdasarkkan bulan
+            DateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date2 = gettglBeli();
+            System.out.println(date2);
+            java.sql.Date sqlDate2 = new java.sql.Date(date2.getTime());
+            System.out.println(sqlDate2 + " bulan ");
+            String tanggal1 = format2.format(sqlDate2);
+            String tanggal2 = tanggal1.substring(5, 7);
+            System.out.println(tanggal2 + " bulanbulan ");
+
+            String query3 = "SELECT\n"
+                    + "     transaksi.`idTransaksi` AS ID_Transaksi,\n"
+                    + "     member.`nama` AS nama,\n"
+                    + "     transaksi.`tanggalBeli` AS tanggalBeli,\n"
+                    + "     transaksi.`pegawai` AS pegawai,\n"
+                    + "     kurir.`nama` AS transaksi_kurir,\n"
+                    + "     transaksi.`invoice` AS transaksi_invoice\n"
+                    + "     \n"
+                    + "FROM\n"
+                    + "     `transaksi` transaksi join\n"
+                    + "     `member` member on member.`idMember`= transaksi.`idMember`  join\n"
+                    + "     `kurir` kurir on kurir.`idKurir`=transaksi.`kurir` where substring (`tanggalBeli`,6,2)='" + tanggal2 + "'";
+
+            System.out.println("ini bulan ya berapa hayo =" + tanggal2);
+
+        // masuk ke if-else buat cetak laporan
+            if (gettglBeli() == null) {
+                JRDesignQuery runquery = new JRDesignQuery();
+
+                runquery.setText(query);
+                jd.setQuery(runquery);
+                jasperReport = JasperCompileManager.compileReport(jd);
+                try {
+                    jasperPrint = JasperFillManager.fillReport(
+                            jasperReport, new HashMap(), DriverManager.getConnection("jdbc:mysql://localhost:3306/silviana", "root", ""));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ownerDashboard.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                JasperViewer.viewReport(jasperPrint, false);
 //            JasperExportManager.exportReportToPdfFile(jasperPrint, "src/main/java/com/blegoh/kasir/views/laporan/simple_report.pdf");
-            System.out.println("lalalala");
+                System.out.println("lalalala111");
+            }
+            else if (gettglBeli() != null) {
+                JRDesignQuery runquery2 = new JRDesignQuery();
+                runquery2.setText(query2);
+                jd2.setQuery(runquery2);
+                jasperReport = JasperCompileManager.compileReport(jd2);
+                try {
+                    jasperPrint = JasperFillManager.fillReport(
+                            jasperReport, new HashMap(), DriverManager.getConnection("jdbc:mysql://localhost:3306/silviana", "root", ""));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ownerDashboard.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                JasperViewer.viewReport(jasperPrint, false);
+//            JasperExportManager.exportReportToPdfFile(jasperPrint, "src/main/java/com/blegoh/kasir/views/laporan/simple_report.pdf");
+                System.out.println("lalalala2222");
+            
+           } else if (gettglBeli() != null && abc == 2) {
+                JRDesignQuery runquery3 = new JRDesignQuery();
+                runquery3.setText(query3);
+                jd2.setQuery(runquery3);
+                jasperReport = JasperCompileManager.compileReport(jd2);
+                try {
+                    jasperPrint = JasperFillManager.fillReport(
+                            jasperReport, new HashMap(), DriverManager.getConnection("jdbc:mysql://localhost:3306/silviana", "root", ""));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ownerDashboard.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                JasperViewer.viewReport(jasperPrint, false);
+//            JasperExportManager.exportReportToPdfFile(jasperPrint, "src/main/java/com/blegoh/kasir/views/laporan/simple_report.pdf");
+                System.out.println("lalalala2222");
+            }
+            
+//            if (getTglAwal() != null && getTglAkhir() != null) {
+//                JRDesignQuery runquery4 = new JRDesignQuery();
+//                runquery4.setText(query4);
+//                jd2.setQuery(runquery4);
+//                jasperReport = JasperCompileManager.compileReport(jd2);
+//                try {
+//                    jasperPrint = JasperFillManager.fillReport(
+//                            jasperReport, new HashMap(), DriverManager.getConnection("jdbc:mysql://localhost:3306/silviana", "root", ""));
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(ownerDashboard.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                JasperViewer.viewReport(jasperPrint, false);
+////            JasperExportManager.exportReportToPdfFile(jasperPrint, "src/main/java/com/blegoh/kasir/views/laporan/simple_report.pdf");
+//                System.out.println("yeyeyellalalala");
+//            }
         } catch (JRException e) {
             System.err.println("asuasuasu" + e);
         }

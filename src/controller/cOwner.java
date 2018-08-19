@@ -186,9 +186,7 @@ public class cOwner {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                String tanggal1 = JOptionPane.showInputDialog("Masukkan tanggal awal dengn format yyyy-mm-dd");
-                String tanggal2 = JOptionPane.showInputDialog("Masukkan tanggal akhir dengn format yyyy-mm-dd");
-                owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiManajerbyDateRange(tanggal1, tanggal2));
+                owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiManajerbyDateRange(owner.getTglAwal(),owner.getTglAkhir()));
             } catch (ParseException ex) {
                 Logger.getLogger(cOwner.class.getName()).log(Level.SEVERE, null, ex);
             }
