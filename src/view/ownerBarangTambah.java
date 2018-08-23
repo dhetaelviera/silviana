@@ -36,9 +36,13 @@ public class ownerBarangTambah extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void setID(String n) {
+        id.setText(n);
+    }
+
     public String getJenis() {
         int indeks = jenisBarang.getSelectedIndex();
-        return jenis_Barang[1][indeks];
+        return jenis_Barang[0][indeks];
     }
 
     public String getMerk() {
@@ -62,6 +66,7 @@ public class ownerBarangTambah extends javax.swing.JFrame {
     public void inputListener(ActionListener a) {
         simpan.addActionListener(a);
     }
+
     public void logoutListener(ActionListener a) {
         logout.addActionListener(a);
     }
@@ -81,7 +86,7 @@ public class ownerBarangTambah extends javax.swing.JFrame {
     public void kembaliListener(ActionListener a) {
         kembali.addActionListener(a);
     }
-   
+
     public void berandaListener(ActionListener a) {
         beranda.addActionListener(a);
     }
@@ -97,12 +102,12 @@ public class ownerBarangTambah extends javax.swing.JFrame {
     public JComboBox jenis() {
         return jenisBarang;
     }
-    
+
     public JComboBox merk() {
         return merkBarang;
     }
-    
-    public JButton barang(){
+
+    public JButton barang() {
         return barang;
     }
 
@@ -122,13 +127,15 @@ public class ownerBarangTambah extends javax.swing.JFrame {
         tambahJenis = new javax.swing.JButton();
         tambahMerk = new javax.swing.JButton();
         simpan = new javax.swing.JButton();
-        jenisBarang = new javax.swing.JComboBox(jenis_Barang[0]);
+        jenisBarang = new javax.swing.JComboBox(jenis_Barang[1]);
         merkBarang = new javax.swing.JComboBox(merk_Barang[1]);
         transaksi = new javax.swing.JButton();
         barang = new javax.swing.JButton();
         karyawan = new javax.swing.JButton();
         beranda = new javax.swing.JButton();
         logout = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        id = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -204,6 +211,16 @@ public class ownerBarangTambah extends javax.swing.JFrame {
         logout.setContentAreaFilled(false);
         getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 130, 40));
 
+        jLabel4.setFont(new java.awt.Font("Candara", 0, 22)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel4.setText("Hai,");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, -1, -1));
+
+        id.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        id.setForeground(new java.awt.Color(102, 0, 0));
+        id.setText(" ");
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 60, 30));
+
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/03. owner tambah barang 2.png"))); // NOI18N
         jLabel6.setText(" ");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, -1));
@@ -254,6 +271,8 @@ public class ownerBarangTambah extends javax.swing.JFrame {
     private javax.swing.JButton barang;
     private javax.swing.JButton beranda;
     private javax.swing.JTextField hargaBarang;
+    private javax.swing.JLabel id;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JComboBox<String> jenisBarang;
     private javax.swing.JButton karyawan;

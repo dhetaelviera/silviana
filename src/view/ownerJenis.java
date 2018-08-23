@@ -28,6 +28,10 @@ public class ownerJenis extends javax.swing.JFrame {
     public String getjenis() {
         return jenis.getText();
     }
+    
+    public String getcari() {
+        return cari.getText();
+    }
 
     public void setJenis(String a) {
         jenis.setText(a);
@@ -41,12 +45,20 @@ public class ownerJenis extends javax.swing.JFrame {
         return logout;
     }
 
+    public JButton cari() {
+        return cariButton;
+    }
+
     public JButton barang() {
         return barang;
     }
     
     public JButton beranda() {
         return beranda;
+    }
+    
+    public int getJumlahBaris() {
+        return tabelJenis.getRowCount();
     }
 
     public void setTabelJenis(DefaultTableModel t) {
@@ -59,6 +71,10 @@ public class ownerJenis extends javax.swing.JFrame {
 
     public void tambahJenisListener(ActionListener a) {
         tambah.addActionListener(a);
+    }
+
+    public void cariListener(ActionListener a) {
+        cariButton.addActionListener(a);
     }
 
     public void berandaListener(ActionListener a) {
@@ -123,6 +139,8 @@ public class ownerJenis extends javax.swing.JFrame {
         karyawan = new javax.swing.JButton();
         barang = new javax.swing.JButton();
         transaksi = new javax.swing.JButton();
+        cari = new javax.swing.JTextField();
+        cariButton = new javax.swing.JButton();
         id = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -201,6 +219,18 @@ public class ownerJenis extends javax.swing.JFrame {
         transaksi.setBorder(null);
         transaksi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 90, 30));
+
+        cari.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 250, 30));
+
+        cariButton.setBackground(new java.awt.Color(27, 179, 133));
+        cariButton.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        cariButton.setForeground(new java.awt.Color(255, 255, 255));
+        cariButton.setText("cari");
+        getContentPane().add(cariButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, -1, -1));
+
+        id.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        id.setForeground(new java.awt.Color(102, 0, 0));
         getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, 80, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/04. owner tambah jenis barang 2.png"))); // NOI18N
@@ -252,6 +282,8 @@ public class ownerJenis extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton barang;
     private javax.swing.JButton beranda;
+    private javax.swing.JTextField cari;
+    private javax.swing.JButton cariButton;
     private javax.swing.JButton hapus;
     private javax.swing.JLabel id;
     private javax.swing.JLabel jLabel2;

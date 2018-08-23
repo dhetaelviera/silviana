@@ -28,7 +28,6 @@ import view.ownerKaryawan;
 import view.ownerTransaksi;
 import view.rentangwaktu;
 
-
 /**
  *
  * @author Dheta
@@ -49,7 +48,7 @@ public class cOwner {
     public static String username;
     public static String abc;
     private static int idTransaksi;
-    private static String namaPembeli, total;
+    private static String namaPembeli, total, usernameKaryawan, nama, password;
 
     public cOwner(String username, ownerDashboard owner) {
         mUser = new user();
@@ -102,13 +101,14 @@ public class cOwner {
         karyawan.setID(k);
         karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
         karyawan.tambahKaryawanListener(new karyawanListener());
+        karyawan.tabelListener(new selectedKaryawan());
+        karyawan.hapusKaryawanListener(new hapusKaryawan());
         karyawan.backListener(new kembali3());
         karyawan.logoutListener(new logoutkaryawan());
         karyawan.kary().setEnabled(false);
         karyawan.barangListener(new karyawankebarang());
         karyawan.transaksiListener(new karyawanketransaksi());
         karyawan.berandaListener(new karyawankeberanda());
-        
 
     }
 
@@ -122,7 +122,27 @@ public class cOwner {
 
         }
     }
-    
+
+    private class hapusKaryawan implements ActionListener {
+
+        public hapusKaryawan() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int pilihan = JOptionPane.showConfirmDialog(karyawan, "Apakah anda yakin ingin menghapus karyawan ini ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+                karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+                System.out.println(usernameKaryawan);
+                boolean status = mUser.hapusKaryawan(usernameKaryawan);
+                if (status == true) {
+                    JOptionPane.showMessageDialog(karyawan, "Berhasil Dihapus");
+                    karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
+                }
+            }
+        }
+    }
 
     private class logoutkaryawan implements ActionListener {
 
@@ -131,7 +151,7 @@ public class cOwner {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-      int pilihan = JOptionPane.showConfirmDialog(karyawan, "Apakah anda ingin yakin meninggalkan halaman ini ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(karyawan, "Apakah anda ingin yakin meninggalkan halaman ini ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
                 karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
             } else if (pilihan == JOptionPane.YES_OPTION) {
@@ -141,6 +161,7 @@ public class cOwner {
             }
         }
     }
+
     private class karyawankeberanda implements ActionListener {
 
         public karyawankeberanda() {
@@ -152,6 +173,7 @@ public class cOwner {
             new cOwner(abc, owner);
         }
     }
+
     private class karyawanketransaksi implements ActionListener {
 
         public karyawanketransaksi() {
@@ -159,11 +181,10 @@ public class cOwner {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-       
-                karyawan.dispose();
-                new controller.cBarang(1,1,abc);
 
-                
+            karyawan.dispose();
+            new controller.cBarang(1, 1, abc);
+
         }
     }
 
@@ -174,13 +195,12 @@ public class cOwner {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-      
-            karyawan.dispose();
-                new controller.cBarang(abc);
 
-            }
-        
-        
+            karyawan.dispose();
+            new controller.cBarang(abc);
+
+        }
+
     }
 
     private class sortbyrange implements ActionListener {
@@ -192,7 +212,7 @@ public class cOwner {
         public void actionPerformed(ActionEvent e) {
             try {
                 owner.printrange().setEnabled(true);
-                owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiManajerbyDateRange(owner.getTglAwal(),owner.getTglAkhir()));
+                owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiManajerbyDateRange(owner.getTglAwal(), owner.getTglAkhir()));
             } catch (ParseException ex) {
                 Logger.getLogger(cOwner.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -240,7 +260,6 @@ public class cOwner {
 
         }
     }
-    
 
     private class selectedTabelManajer implements MouseListener {
 
@@ -279,7 +298,44 @@ public class cOwner {
         }
 //</editor-fold>
     }
-    
+
+    private class selectedKaryawan implements MouseListener {
+
+        public selectedKaryawan() {
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+//            viewManajer.detail().setEnabled(true);
+            int baris = karyawan.tabel().getSelectedRow();
+            usernameKaryawan = karyawan.tabel().getValueAt(baris, 1).toString();
+            nama = karyawan.tabel().getValueAt(baris, 0).toString();
+            password = karyawan.tabel().getValueAt(baris, 2).toString();
+            karyawan.hapus().setEnabled(true);
+        }
+//<editor-fold defaultstate="collapsed" desc="comment">
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+//</editor-fold>
+    }
 
     private class aktif implements ActionListener {
 
@@ -301,7 +357,7 @@ public class cOwner {
         @Override
         public void actionPerformed(ActionEvent e) {
             owner.range().setEnabled(true);
-      
+
         }
     }
 
@@ -340,10 +396,6 @@ public class cOwner {
         }
     }
 
-//    private void bacaTabelTransaksibyNama() {
-//        String idBarang = owner.getBarang();
-//        owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiOwnerbyNama(idBarang));
-//    }
     private void bacaTabelTransaksiByKal() {
         try {
             owner.setTabelPembayaran(mTransaksi.bacaTabelTransaksiManajerbyDate(owner.gettglBeli()));
@@ -351,14 +403,6 @@ public class cOwner {
             Logger.getLogger(cUser.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-//    private void bacaTabelTransaksiByRentangWaktu() {
-//        try {
-//        date date1    
-//        } catch (ParseException ex) {
-//            Logger.getLogger(cUser.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
 
     private void bacaTabelTransaksiByMonth() {
         try {
@@ -383,10 +427,9 @@ public class cOwner {
             if (pilihan == JOptionPane.NO_OPTION) {
                 karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
             } else if (pilihan == JOptionPane.YES_OPTION) {
-            karyawan.dispose();
-            new controller.cOwner(username, owner);
+                karyawan.dispose();
+                new controller.cOwner(username, owner);
 
-            
             }
         }
     }
@@ -439,14 +482,13 @@ public class cOwner {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-             int pilihan = JOptionPane.showConfirmDialog(karyawan, "Apakah anda ingin yakin ingin keluar ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(karyawan, "Apakah anda ingin yakin ingin keluar ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
                 karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
             } else if (pilihan == JOptionPane.YES_OPTION) {
-            new controller.cUser();
-            owner.dispose();
+                new controller.cUser();
+                owner.dispose();
 
-            
             }
         }
     }

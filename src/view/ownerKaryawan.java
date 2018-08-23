@@ -8,6 +8,7 @@ package view;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -63,6 +64,10 @@ public class ownerKaryawan extends javax.swing.JFrame {
     public void tambahKaryawanListener(ActionListener a) {
         tambah.addActionListener(a);
     }
+   
+    public void hapusKaryawanListener(ActionListener a) {
+        hapus1.addActionListener(a);
+    }
 
     public void backListener(ActionListener a) {
         kembali.addActionListener(a);
@@ -107,6 +112,14 @@ public class ownerKaryawan extends javax.swing.JFrame {
     public JButton beranda() {
         return beranda;
     }
+   
+    public JButton hapus() {
+        return hapus1;
+    }
+
+    public JTable tabel() {
+        return tabelKaryawan;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,6 +132,7 @@ public class ownerKaryawan extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelKaryawan = new javax.swing.JTable();
+        id1 = new javax.swing.JLabel();
         logout = new javax.swing.JButton();
         kembali = new javax.swing.JButton();
         tambah = new javax.swing.JButton();
@@ -151,6 +165,11 @@ public class ownerKaryawan extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 510, 200));
 
+        id1.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        id1.setForeground(new java.awt.Color(102, 0, 0));
+        id1.setText("* username tidak boleh sama");
+        getContentPane().add(id1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, 240, 20));
+
         logout.setBorder(null);
         logout.setBorderPainted(false);
         logout.setContentAreaFilled(false);
@@ -175,7 +194,8 @@ public class ownerKaryawan extends javax.swing.JFrame {
         getContentPane().add(hapus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 530, -1, -1));
         getContentPane().add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 250, 30));
 
-        id.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        id.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        id.setForeground(new java.awt.Color(102, 0, 0));
         id.setText(" ");
         getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 50, 50, 20));
         getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 250, 30));
@@ -258,6 +278,7 @@ public class ownerKaryawan extends javax.swing.JFrame {
     private javax.swing.JButton beranda;
     private javax.swing.JButton hapus1;
     private javax.swing.JLabel id;
+    private javax.swing.JLabel id1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton karyawan;

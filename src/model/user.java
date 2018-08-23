@@ -44,7 +44,24 @@ public class user {
         }
         return id;
     }
-     
+     public String username() {
+        String query = "SELECT username FROM user";
+        String id = "kosong";
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+//            st.setString(2, password);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                id = rs.getString(1);
+                System.out.println(id);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            e.getMessage();
+        }
+        return id;
+    }
     public int login(String username, String password) {
         String query ="select * from user where username = ? and password =?";
             System.out.println(query);
@@ -107,5 +124,24 @@ public class user {
             e.printStackTrace();
         }
         return tabel;
+    }
+    
+    public boolean hapusKaryawan(String username) {
+        String query = "DELETE FROM user where username=?";
+        System.out.println(query);
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            st.setString(1, username);
+            int status = st.executeUpdate();
+            if (status > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            e.getMessage();
+        }
+        return false;
     }
 }

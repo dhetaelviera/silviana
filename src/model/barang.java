@@ -144,29 +144,7 @@ public class barang {
         return false;
     }
 
-    public String[][] getJenis() {
-        String query = "select idJenis, namajenis from jenis";
-        String jenis[][] = null;
 
-        try {
-            PreparedStatement st = konek.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            ResultSet rs = st.executeQuery();
-            rs.last();
-            jenis = new String[2][rs.getRow()];
-            rs.beforeFirst();
-            int i = 0;
-            while (rs.next()) {
-                jenis[0][i] = rs.getString("namaJenis");
-                jenis[1][i] = rs.getString("idJenis");
-                i++;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            ex.getMessage();
-        }
-        return jenis;
-    }
-    
     public String[][] getKurir() {
         String query = "select idkurir, nama from kurir";
         String jenis[][] = null;
@@ -209,6 +187,30 @@ public class barang {
         return false;
     }
 
+        public String[][] getJenis() {
+        String query = "select idJenis, namajenis from jenis";
+        String jenis[][] = null;
+
+        try {
+            PreparedStatement st = konek.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = st.executeQuery();
+            rs.last();
+            jenis = new String[2][rs.getRow()];
+            rs.beforeFirst();
+            int i = 0;
+            while (rs.next()) {
+                jenis[0][i] = rs.getString("idJenis");
+                jenis[1][i] = rs.getString("namaJenis");
+                i++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            ex.getMessage();
+        }
+        return jenis;
+    }
+    
+    
     public String[][] getMerk() {
         String query = "SELECT idMerk, namamerk from merk";
         String merk[][] = null;
@@ -437,6 +439,50 @@ public class barang {
         return tabel;
     }
 
+    public DefaultTableModel cariJenis(String cari) {
+        String query = "select idJenis, namajenis "
+                + "from jenis "
+                +"where namajenis LIKE '" + cari + "%' or namajenis LIKE '%" + cari + "%' or namajenis LIKE '%" + cari + "' ;";
+        String namaKolom[] = {"ID Jenis","Jenis Barang"};
+        DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Object data[] = new Object[2];
+                data[0] = rs.getString(1);
+                data[1] = rs.getString(2);
+                tabel.addRow(data);
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+            e.printStackTrace();
+        }
+        return tabel;
+    }
+    
+    public DefaultTableModel cariMerk(String cari) {
+        String query = "select idMerk, namamerk "
+                + "from merk "
+                +"where namamerk LIKE '" + cari + "%' or namamerk LIKE '%" + cari + "%' or namamerk LIKE '%" + cari + "' ;";
+        String namaKolom[] = {"ID Merk","Merk Barang"};
+        DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
+        try {
+            PreparedStatement st = konek.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Object data[] = new Object[2];
+                data[0] = rs.getString(1);
+                data[1] = rs.getString(2);
+                tabel.addRow(data);
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+            e.printStackTrace();
+        }
+        return tabel;
+    }
+    
     public String getNamaBarang(int idBarang) {
         String query = "SELECT namabarang from barang where idbarang=?";
         String barang = null;

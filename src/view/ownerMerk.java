@@ -24,9 +24,19 @@ public class ownerMerk extends javax.swing.JFrame {
     public ownerMerk() {
         initComponents();
     }
-public String getmerk(){
+
+    public String getmerk() {
         return merk.getText();
     }
+
+    public String getcari() {
+        return cari.getText();
+    }
+
+    public int getJumlahBaris() {
+        return tabelMerk.getRowCount();
+    }
+
     public void setMerk(String a) {
         merk.setText(a);
     }
@@ -39,6 +49,10 @@ public String getmerk(){
         tabelMerk.addMouseListener(m);
     }
 
+    public void cariMerkListener(ActionListener a) {
+        cariButton.addActionListener(a);
+    }
+
     public void tambahMerkListener(ActionListener a) {
         tambah.addActionListener(a);
     }
@@ -46,11 +60,11 @@ public String getmerk(){
     public void berandaListener(ActionListener a) {
         beranda.addActionListener(a);
     }
-    
+
     public void hapusListener(ActionListener a) {
         hapus.addActionListener(a);
     }
-    
+
     public void logoutListener(ActionListener a) {
         logout.addActionListener(a);
     }
@@ -74,23 +88,24 @@ public String getmerk(){
     public JTextField jenis() {
         return merk;
     }
-    
-    public JButton barang(){
+
+    public JButton barang() {
         return barang;
     }
-    
-  
-    
 
-    public JButton hapus(){
+    public JButton cari() {
+        return cariButton;
+    }
+
+    public JButton hapus() {
         return hapus;
     }
-    
-    public void setID(String h){
+
+    public void setID(String h) {
         id.setText(h);
     }
-    
-     public JTable getTabel() {
+
+    public JTable getTabel() {
         return tabelMerk;
     }
 
@@ -103,43 +118,29 @@ public String getmerk(){
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tambah = new javax.swing.JButton();
         logout = new javax.swing.JButton();
-        kembali = new javax.swing.JButton();
-        hapus = new javax.swing.JButton();
-        merk = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelMerk = new javax.swing.JTable();
+        merk = new javax.swing.JTextField();
         id = new javax.swing.JLabel();
         beranda = new javax.swing.JButton();
         karyawan = new javax.swing.JButton();
         barang = new javax.swing.JButton();
         transaksi = new javax.swing.JButton();
+        kembali = new javax.swing.JButton();
+        tambah = new javax.swing.JButton();
+        hapus = new javax.swing.JButton();
+        cari = new javax.swing.JTextField();
+        cariButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tambah.setBorder(null);
-        tambah.setContentAreaFilled(false);
-        getContentPane().add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 480, 150, 30));
-
         logout.setBorder(null);
         logout.setBorderPainted(false);
         logout.setContentAreaFilled(false);
         getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 150, -1));
-
-        kembali.setBorder(null);
-        kembali.setBorderPainted(false);
-        kembali.setContentAreaFilled(false);
-        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 480, 150, 30));
-
-        hapus.setText("hapus merk");
-        getContentPane().add(hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 480, -1, -1));
-
-        merk.setBorder(null);
-        merk.setOpaque(false);
-        getContentPane().add(merk, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 230, 30));
 
         tabelMerk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -154,7 +155,8 @@ public String getmerk(){
         ));
         jScrollPane1.setViewportView(tabelMerk);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 430, 200));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 600, 260));
+        getContentPane().add(merk, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 250, 30));
 
         id.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
         id.setForeground(new java.awt.Color(102, 0, 0));
@@ -191,8 +193,35 @@ public String getmerk(){
         transaksi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 90, 30));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/05. owner tambah merk barang.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 580));
+        kembali.setBackground(new java.awt.Color(248, 215, 85));
+        kembali.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        kembali.setForeground(new java.awt.Color(102, 0, 0));
+        kembali.setText("kembali");
+        getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 500, 120, -1));
+
+        tambah.setBackground(new java.awt.Color(27, 179, 133));
+        tambah.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        tambah.setForeground(new java.awt.Color(255, 255, 204));
+        tambah.setText("tambah merk");
+        getContentPane().add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 500, 140, -1));
+
+        hapus.setBackground(new java.awt.Color(204, 0, 0));
+        hapus.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        hapus.setForeground(new java.awt.Color(255, 255, 255));
+        hapus.setText("hapus merk");
+        getContentPane().add(hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 500, 130, -1));
+
+        cari.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 250, 30));
+
+        cariButton.setBackground(new java.awt.Color(27, 179, 133));
+        cariButton.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        cariButton.setForeground(new java.awt.Color(255, 255, 255));
+        cariButton.setText("cari");
+        getContentPane().add(cariButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/05. owner tambah merk barang 2.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -235,6 +264,8 @@ public String getmerk(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton barang;
     private javax.swing.JButton beranda;
+    private javax.swing.JTextField cari;
+    private javax.swing.JButton cariButton;
     private javax.swing.JButton hapus;
     private javax.swing.JLabel id;
     private javax.swing.JLabel jLabel2;

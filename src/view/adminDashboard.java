@@ -52,19 +52,19 @@ public class adminDashboard extends javax.swing.JFrame {
         logout.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
         logout.setForeground(new java.awt.Color(255, 255, 204));
         logout.setText("log out");
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 170, 50));
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 180, 60));
 
         transaksi.setBackground(new java.awt.Color(27, 179, 133));
         transaksi.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
         transaksi.setForeground(new java.awt.Color(255, 255, 204));
         transaksi.setText("transksi");
-        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 170, 50));
+        getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 180, 60));
 
         admin.setText(" ");
         getContentPane().add(admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, 120, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/08. admin dashboard.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 610));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

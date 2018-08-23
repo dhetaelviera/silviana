@@ -81,6 +81,7 @@ public class cBarang {
         viewbarang.tambahBarangListener(new viewTambah());
         viewbarang.hapusListener(new hapusBarang());
         viewbarang.jenisListener(new jenis());
+        viewbarang.merkListener(new merk());
         viewbarang.tabelListener(new setSelectedTabelBarang());
         viewbarang.resetTabelListener(new resetTabelBarang());
         bacaTabelBarang();
@@ -99,9 +100,10 @@ public class cBarang {
         jenisbarang.setLocationRelativeTo(null);
         jenisbarang.barang().setEnabled(false);
         jenisbarang.hapus().setEnabled(false);
+        jenisbarang.cariListener(new cariJenis());
         jenisbarang.tabelListener(new setSelectedTabelJenis());
         jenisbarang.tambahJenisListener(new tambahjenislistener());
-        jenisbarang.hapusListener(new hapusJenis());
+        jenisbarang.hapusListener(new hapus());
         jenisbarang.berandaListener(new jeniskeberanda());
         jenisbarang.backListener(new kembalikebarang());
         jenisbarang.transaksiListener(new jenisketransaksi());
@@ -122,6 +124,7 @@ public class cBarang {
         merkbarang.setID(username);
         merkbarang.barang().setEnabled(false);
         merkbarang.hapus().setEnabled(false);
+//        merkbarang.cariMerkListener(new cariMerk());
         merkbarang.tambahMerkListener(new tambahmerklistener());
         merkbarang.tabelListener(new setSelectedTabelMerk());
         merkbarang.hapusListener(new hapusmerk());
@@ -133,12 +136,13 @@ public class cBarang {
         merkbarang.setTabelMerk(mBarang.bacaTabelMerk());
     }
 
-    public cBarang(int c) {
+    public cBarang(int c, String w) {
         mUser = new user();
         mBarang = new barang();
+        username=w;
         tambahbarang = new ownerBarangTambah();
         tambahbarang.setVisible(true);
-        tambahbarang.setVisible(true);
+        tambahbarang.setID(w);
         tambahbarang.setResizable(false);
         tambahbarang.setLocationRelativeTo(null);
         tambahbarang.barang().setEnabled(false);
@@ -273,6 +277,31 @@ public class cBarang {
 
         }
     }
+    
+   
+    private void bacaTabelCariJenis() {
+        String cari = jenisbarang.getcari();
+        System.out.println(cari);
+        if (cari.equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(owner, "Masukkan jenis barang yang ingin dicari");
+        } else {
+            jenisbarang.setTabelJenis(mBarang.cariJenis(cari));
+
+        }
+    }
+
+    private void bacaTabelCariMerk() {
+        String cari = merkbarang.getcari();
+        System.out.println(cari);
+        if (cari.equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(owner, "Masukkan merk barang yang ingin dicari");
+        } else {
+            merkbarang.setTabelMerk(mBarang.cariMerk(cari));
+
+        }
+    }
+    
+    
 
     private class barangkeubah implements ActionListener {
 
@@ -304,7 +333,39 @@ public class cBarang {
         }
 
     }
+    private class cariJenis implements ActionListener {
 
+        public cariJenis() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            bacaTabelCariJenis();
+            int data = jenisbarang.getJumlahBaris();
+            if (data == 0) {
+                JOptionPane.showMessageDialog(owner, "Data Yang Dicari Kosong");
+                 jenisbarang.setTabelJenis(mBarang.bacaTabelJenis());
+            }
+        }
+    }
+
+    private class cariMerk implements ActionListener {
+
+        public cariMerk() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            bacaTabelCariMerk();
+            int data = merkbarang.getJumlahBaris();
+            if (data == 0) {
+                JOptionPane.showMessageDialog(owner, "Data Yang Dicari Kosong");
+                merkbarang.setTabelMerk(mBarang.bacaTabelMerk());
+            }
+        }
+    }
     private class resetTabelBarang implements ActionListener {
 
         public resetTabelBarang() {
@@ -416,9 +477,9 @@ public class cBarang {
         }
     }
 
-    private class hapusJenis implements ActionListener {
+    private class hapus implements ActionListener {
 
-        public hapusJenis() {
+        public hapus() {
         }
 
         @Override
@@ -893,6 +954,18 @@ public class cBarang {
             new cBarang(2, 2, username, 9);
         }
     }
+    
+    private class merk implements ActionListener {
+
+        public merk() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            viewbarang.dispose();
+            new cBarang(3, 3, 1, username);
+        }
+    }
 
     private class setSelectedTabelBarang implements MouseListener {
 
@@ -1031,7 +1104,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            new controller.cBarang(1);
+            new controller.cBarang(1,username);
             viewbarang.dispose();
         }
     }
@@ -1060,7 +1133,7 @@ public class cBarang {
             boolean tambah = mBarang.tambahJenis(jenis);
             String jenis_Barang[][];
             jenis_Barang = mBarang.getJenis();
-            tambahbarang.jenis().setModel(new DefaultComboBoxModel<>(jenis_Barang[0]));
+            tambahbarang.jenis().setModel(new DefaultComboBoxModel<>(jenis_Barang[1]));
         }
     }
 
@@ -1076,7 +1149,7 @@ public class cBarang {
             boolean tambah = mBarang.tambahMerk(merk);
             String merk_Barang[][];
             merk_Barang = mBarang.getMerk();
-            tambahbarang.merk().setModel(new DefaultComboBoxModel<>(merk_Barang[0]));
+            tambahbarang.merk().setModel(new DefaultComboBoxModel<>(merk_Barang[1]));
         }
     }
 
@@ -1100,7 +1173,9 @@ public class cBarang {
                 boolean status = mBarang.tambahBarang(namaBarang, Integer.valueOf(stok), Integer.valueOf(harga), idJenis, idMerk);
                 if (status) {
                     JOptionPane.showMessageDialog(tambahbarang, "Data berhasil dimasukkan");
+                    tambahbarang.dispose();
                     new cBarang(username);
+                    
 
                 } else {
                     JOptionPane.showMessageDialog(tambahbarang, "Terjadi kesalahan");
