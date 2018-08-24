@@ -284,6 +284,8 @@ public class ownerDashboard extends javax.swing.JFrame {
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(903, 600));
+        setPreferredSize(new java.awt.Dimension(903, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sortMonth.setBackground(new java.awt.Color(27, 179, 133));
@@ -475,6 +477,9 @@ public class ownerDashboard extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/01. owner dashboard 2.png"))); // NOI18N
         jLabel1.setText(" ");
+        jLabel1.setMaximumSize(new java.awt.Dimension(903, 600));
+        jLabel1.setMinimumSize(new java.awt.Dimension(903, 600));
+        jLabel1.setPreferredSize(new java.awt.Dimension(903, 600));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, -1));
 
         pack();

@@ -26,7 +26,6 @@ import view.ownerBarangTambah;
 import view.ownerDashboard;
 import view.ownerKaryawan;
 import view.ownerTransaksi;
-import view.rentangwaktu;
 
 /**
  *
@@ -36,7 +35,6 @@ public class cOwner {
 
     private ownerDashboard owner;
     private ownerBarang barang;
-    private rentangwaktu tanggal;
     private ownerBarangTambah tambahbarang;
     private ownerKaryawan karyawan;
     private ownerTransaksi transaksi;

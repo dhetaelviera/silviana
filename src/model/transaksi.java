@@ -202,6 +202,53 @@ public class transaksi implements NewInterface{
         }
         return jenis;
     }
+    
+    public String[][] getJenis() {
+        String query = "select idJenis, namajenis from jenis";
+        String jenis[][] = null;
+
+        try {
+            PreparedStatement st = konek.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = st.executeQuery();
+            rs.last();
+            jenis = new String[2][rs.getRow()];
+            rs.beforeFirst();
+            int i = 0;
+            while (rs.next()) {
+                jenis[0][i] = rs.getString("idJenis");
+                jenis[1][i] = rs.getString("namaJenis");
+                i++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            ex.getMessage();
+        }
+        return jenis;
+    }
+    
+    
+    public String[][] getMerk() {
+        String query = "SELECT idMerk, namamerk from merk";
+        String merk[][] = null;
+        try {
+            PreparedStatement st = konek.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = st.executeQuery();
+            rs.last();
+            merk = new String[2][rs.getRow()];
+            rs.beforeFirst();
+            int i = 0;
+            while (rs.next()) {
+                merk[0][i] = rs.getString("idMerk");
+                merk[1][i] = rs.getString("namaMerk");
+                i++;
+            }
+        } catch (SQLException ex) {
+            ex.getMessage();
+            ex.printStackTrace();
+        }
+        return merk;
+
+    }
 
     public int getIDTransaksi(String idMember) {
         String query = "select idTransaksi from transaksi where idMember=? LIMIT 1";

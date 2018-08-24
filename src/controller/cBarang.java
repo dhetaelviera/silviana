@@ -59,6 +59,14 @@ public class cBarang {
     private ownerJenis jenisbarang;
     private ownerMerk merkbarang;
     String idBarang, idMerk, idJenis;
+    String jenis_Barang[][];
+    String merk_Barang[][];
+    JComboBox jenisBarang;
+    public int indeks;
+
+    public cBarang() {
+
+    }
 
     public cBarang(String username) {
         mUser = new user();
@@ -139,7 +147,7 @@ public class cBarang {
     public cBarang(int c, String w) {
         mUser = new user();
         mBarang = new barang();
-        username=w;
+        username = w;
         tambahbarang = new ownerBarangTambah();
         tambahbarang.setVisible(true);
         tambahbarang.setID(w);
@@ -154,6 +162,8 @@ public class cBarang {
         tambahbarang.jenisListener(new tambahJenis());
         tambahbarang.merkListener(new tambahMerk());
         tambahbarang.kembaliListener(new kembali());
+        jenisBarang = new JComboBox();
+
     }
 
 //    tambahtransaksigAdmin
@@ -277,8 +287,7 @@ public class cBarang {
 
         }
     }
-    
-   
+
     private void bacaTabelCariJenis() {
         String cari = jenisbarang.getcari();
         System.out.println(cari);
@@ -300,8 +309,6 @@ public class cBarang {
 
         }
     }
-    
-    
 
     private class barangkeubah implements ActionListener {
 
@@ -333,6 +340,7 @@ public class cBarang {
         }
 
     }
+
     private class cariJenis implements ActionListener {
 
         public cariJenis() {
@@ -345,7 +353,7 @@ public class cBarang {
             int data = jenisbarang.getJumlahBaris();
             if (data == 0) {
                 JOptionPane.showMessageDialog(owner, "Data Yang Dicari Kosong");
-                 jenisbarang.setTabelJenis(mBarang.bacaTabelJenis());
+                jenisbarang.setTabelJenis(mBarang.bacaTabelJenis());
             }
         }
     }
@@ -366,6 +374,7 @@ public class cBarang {
             }
         }
     }
+
     private class resetTabelBarang implements ActionListener {
 
         public resetTabelBarang() {
@@ -537,38 +546,6 @@ public class cBarang {
 
                 }
             }
-        }
-    }
-
-    private class tambahkurirOwner implements ActionListener {
-
-        public tambahkurirOwner() {
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String kurir = JOptionPane.showInputDialog("Masukkan kurir tambahan");
-            System.out.println(kurir);
-            boolean tambah = mBarang.tambahKurir(kurir);
-            String pilihkurir[][];
-            pilihkurir = mBarang.getKurir();
-            ownerTransaksi.kurir().setModel(new DefaultComboBoxModel<>(pilihkurir[0]));
-        }
-    }
-
-    private class tambahkurirAdmin implements ActionListener {
-
-        public tambahkurirAdmin() {
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String kurir = JOptionPane.showInputDialog("Masukkan kurir tambahan");
-            System.out.println(kurir);
-            boolean tambah = mBarang.tambahKurir(kurir);
-            String pilihkurir[][];
-            pilihkurir = mBarang.getKurir();
-            adminTransaksi.kurir().setModel(new DefaultComboBoxModel<>(pilihkurir[0]));
         }
     }
 
@@ -954,7 +931,7 @@ public class cBarang {
             new cBarang(2, 2, username, 9);
         }
     }
-    
+
     private class merk implements ActionListener {
 
         public merk() {
@@ -1104,7 +1081,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            new controller.cBarang(1,username);
+            new controller.cBarang(1, username);
             viewbarang.dispose();
         }
     }
@@ -1121,7 +1098,41 @@ public class cBarang {
         }
     }
 
-    private class tambahJenis implements ActionListener {
+    private class tambahkurirOwner implements ActionListener {
+
+        public tambahkurirOwner() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String kurir = JOptionPane.showInputDialog("Masukkan kurir tambahan");
+            System.out.println(kurir);
+            boolean tambah = mBarang.tambahKurir(kurir);
+            String pilihkurir[][];
+            pilihkurir = mBarang.getKurir();
+            ownerTransaksi.setKurir(pilihkurir);
+            ownerTransaksi.kurirbaru(kurir);
+        }
+    }
+
+    private class tambahkurirAdmin implements ActionListener {
+
+        public tambahkurirAdmin() {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String kurir = JOptionPane.showInputDialog("Masukkan kurir tambahan");
+            System.out.println(kurir);
+            boolean tambah = mBarang.tambahKurir(kurir);
+            String pilihkurir[][];
+            pilihkurir = mBarang.getKurir();
+            adminTransaksi.setKurir(pilihkurir);
+            adminTransaksi.kurirbaru(kurir);
+        }
+    }
+
+    public class tambahJenis implements ActionListener {
 
         public tambahJenis() {
         }
@@ -1133,7 +1144,8 @@ public class cBarang {
             boolean tambah = mBarang.tambahJenis(jenis);
             String jenis_Barang[][];
             jenis_Barang = mBarang.getJenis();
-            tambahbarang.jenis().setModel(new DefaultComboBoxModel<>(jenis_Barang[1]));
+            tambahbarang.setJenis(jenis_Barang);
+            tambahbarang.jenisbaru(jenis);
         }
     }
 
@@ -1149,7 +1161,9 @@ public class cBarang {
             boolean tambah = mBarang.tambahMerk(merk);
             String merk_Barang[][];
             merk_Barang = mBarang.getMerk();
-            tambahbarang.merk().setModel(new DefaultComboBoxModel<>(merk_Barang[1]));
+            tambahbarang.setMerk(merk_Barang);
+            tambahbarang.merkbaru(merk);
+//            tambahbarang.merk().setModel(new DefaultComboBoxModel<>(merk_Barang[1]));
         }
     }
 
@@ -1175,7 +1189,6 @@ public class cBarang {
                     JOptionPane.showMessageDialog(tambahbarang, "Data berhasil dimasukkan");
                     tambahbarang.dispose();
                     new cBarang(username);
-                    
 
                 } else {
                     JOptionPane.showMessageDialog(tambahbarang, "Terjadi kesalahan");
@@ -1355,7 +1368,7 @@ public class cBarang {
                 }
             } else if (idTransaksi == null) {
                 if (pilihan == JOptionPane.YES_OPTION) {
-                 
+
                     JOptionPane.showMessageDialog(ownerTransaksi, "Transaksi batal masuk coy");
                     new controller.cOwner(username, owner);
                     ownerTransaksi.dispose();

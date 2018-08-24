@@ -11,6 +11,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import model.barang;
+import controller.cBarang;
 
 /**
  *
@@ -20,14 +21,17 @@ public class ownerBarangTambah extends javax.swing.JFrame {
 
     Connection konek;
     barang modelBarang;
+    cBarang cBarang;
     String jenis_Barang[][];
     String merk_Barang[][];
+    String username;
 
     /**
      * Creates new form ownerBarangTambah
      */
     public ownerBarangTambah() {
         modelBarang = new barang();
+        cBarang = new cBarang();
         jenisBarang = new JComboBox();
         merkBarang = new JComboBox();
 
@@ -39,9 +43,26 @@ public class ownerBarangTambah extends javax.swing.JFrame {
     public void setID(String n) {
         id.setText(n);
     }
+    
+    public void setJenis(String jenis_Barang[][]){
+        this.jenis_Barang=jenis_Barang;
+        jenisBarang.setModel(new DefaultComboBoxModel<>(jenis_Barang[1]));
+            
+    }
+   
+    public void setMerk(String merk_Barang[][]){
+        this.merk_Barang=merk_Barang;
+        merkBarang.setModel(new DefaultComboBoxModel<>(merk_Barang[1]));
+            
+    }
 
-    public String getJenis() {
+    public  String getJenis() {
         int indeks = jenisBarang.getSelectedIndex();
+        System.out.println("lllll"+indeks);
+        System.out.println("panjangnya"+jenis_Barang[0].length);
+        int cek=modelBarang.idjenisterakhir();
+        System.out.println("cek sini= "+cek);
+        System.out.println("indeksnya + "+ indeks);
         return jenis_Barang[0][indeks];
     }
 
@@ -65,6 +86,14 @@ public class ownerBarangTambah extends javax.swing.JFrame {
 
     public void inputListener(ActionListener a) {
         simpan.addActionListener(a);
+    }
+    
+    public void jenisbaru(String a){
+        jenisBarang.setSelectedItem(a);
+    }
+
+    public void merkbaru(String a){
+        merkBarang.setSelectedItem(a);
     }
 
     public void logoutListener(ActionListener a) {
@@ -223,6 +252,8 @@ public class ownerBarangTambah extends javax.swing.JFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/03. owner tambah barang 2.png"))); // NOI18N
         jLabel6.setText(" ");
+        jLabel6.setMaximumSize(new java.awt.Dimension(901, 599));
+        jLabel6.setMinimumSize(new java.awt.Dimension(901, 599));
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, -1));
 
         pack();

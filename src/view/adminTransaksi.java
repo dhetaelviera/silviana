@@ -53,10 +53,19 @@ public class adminTransaksi extends javax.swing.JFrame {
     public void setID(String id) {
         this.id.setText(id);
     }
+    
+    public void kurirbaru(String a){
+        pilihkurir.setSelectedItem(a);
+    }
+    
+    public void setKurir(String kurir[][]){
+       this.kurir=kurir;
+       pilihkurir.setModel(new DefaultComboBoxModel<>(kurir[1]));
+    }
 
     public String getJenis() {
         int indeks = jenisBarang.getSelectedIndex();
-        return jenis_Barang[1][indeks];
+        return jenis_Barang[0][indeks];
     }
 
     public String getMerk() {
@@ -220,7 +229,7 @@ public class adminTransaksi extends javax.swing.JFrame {
         pilihkurir = new javax.swing.JComboBox<>(kurir[1]);
         invoice = new javax.swing.JTextField();
         jumlahBarang = new javax.swing.JSpinner();
-        jenisBarang = new javax.swing.JComboBox(jenis_Barang[0]);
+        jenisBarang = new javax.swing.JComboBox(jenis_Barang[1]);
         merkBarang = new javax.swing.JComboBox(merk_Barang[1]);
         namaBarang = new javax.swing.JComboBox<String>();
         diskon = new javax.swing.JTextField();
@@ -236,6 +245,7 @@ public class adminTransaksi extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(903, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         total.setFont(new java.awt.Font("Tempus Sans ITC", 0, 18)); // NOI18N
@@ -343,6 +353,7 @@ public class adminTransaksi extends javax.swing.JFrame {
         getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 130, 40));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/07. owner tambah transaksi 2.png"))); // NOI18N
+        jLabel10.setPreferredSize(new java.awt.Dimension(903, 600));
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
         pack();
@@ -357,7 +368,7 @@ public class adminTransaksi extends javax.swing.JFrame {
         int merkBarang1 = merkBarang.getSelectedIndex();
         System.out.println(jenisBarang1);
         System.out.println(merkBarang1);
-        nama_Barang = modelBarang.getNamaBarangPilihan(jenis_Barang[1][jenisBarang1], merk_Barang[0][merkBarang1]);
+        nama_Barang = modelBarang.getNamaBarangPilihan(jenis_Barang[0][jenisBarang1], merk_Barang[0][merkBarang1]);
         namaBarang.setModel(new DefaultComboBoxModel<>(nama_Barang[1]));        // TODO add your handling code here:
     }//GEN-LAST:event_jenisBarangActionPerformed
 
@@ -366,7 +377,7 @@ public class adminTransaksi extends javax.swing.JFrame {
         int merkBarang1 = merkBarang.getSelectedIndex();
         System.out.println(jenisBarang1);
         System.out.println(merkBarang1);
-        nama_Barang = modelBarang.getNamaBarangPilihan(jenis_Barang[1][jenisBarang1], merk_Barang[0][merkBarang1]);
+        nama_Barang = modelBarang.getNamaBarangPilihan(jenis_Barang[0][jenisBarang1], merk_Barang[0][merkBarang1]);
         namaBarang.setModel(new DefaultComboBoxModel<>(nama_Barang[1]));         // TODO add your handling code here:
     }//GEN-LAST:event_merkBarangActionPerformed
 

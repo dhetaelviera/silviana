@@ -47,7 +47,7 @@ public class ownerTransaksi extends javax.swing.JFrame {
 
         jenis_Barang = modelBarang.getJenis();
         merk_Barang = modelBarang.getMerk();
-        kurir=modelTransaksi.getKurir();
+        kurir = modelTransaksi.getKurir();
 
         initComponents();
     }
@@ -57,9 +57,18 @@ public class ownerTransaksi extends javax.swing.JFrame {
         return kurir[0][indeks];
     }
 
+    public void kurirbaru(String a) {
+        pilihkurir.setSelectedItem(a);
+    }
+
+    public void setKurir(String kurir[][]) {
+        this.kurir = kurir;
+        pilihkurir.setModel(new DefaultComboBoxModel<>(kurir[1]));
+    }
+
     public String getJenis() {
         int indeks = jenisBarang.getSelectedIndex();
-        return jenis_Barang[1][indeks];
+        return jenis_Barang[0][indeks];
     }
 
     public String getMerk() {
@@ -100,9 +109,11 @@ public class ownerTransaksi extends javax.swing.JFrame {
     public JTextField disableNama() {
         return namaPembeli;
     }
+
     public JTextField disableInvoice() {
         return invoice;
     }
+
     public JComboBox disableKurir() {
         return pilihkurir;
     }
@@ -126,16 +137,15 @@ public class ownerTransaksi extends javax.swing.JFrame {
     public void setTotal(String a) {
         total.setText(a);
     }
-    
-    
+
     public void transaksiListener(ActionListener a) {
         transaksi.addActionListener(a);
     }
-   
+
     public void berandaListener(ActionListener a) {
         beranda.addActionListener(a);
     }
-    
+
     public void selesaiListener(ActionListener a) {
         selesai.addActionListener(a);
     }
@@ -148,10 +158,10 @@ public class ownerTransaksi extends javax.swing.JFrame {
         barang.addActionListener(a);
     }
 
-
     public void tambahListener(ActionListener a) {
         tambahBarang.addActionListener(a);
-    } 
+    }
+
     public void hapusListener(ActionListener a) {
         hapusBarang.addActionListener(a);
     }
@@ -171,24 +181,23 @@ public class ownerTransaksi extends javax.swing.JFrame {
     public void buatTransaksiListener(ActionListener a) {
         buatTransaksi.addActionListener(a);
     }
-    
+
     public void logoutListener(ActionListener a) {
         logout.addActionListener(a);
     }
-   
+
     public void kurirListener(ActionListener a) {
         tambahKurir.addActionListener(a);
     }
 
-    
     public void setTabelPembayaran(DefaultTableModel t) {
         tabelPembayaran.setModel(t);
-    } 
-    
+    }
+
     public JButton getHapus() {
         return hapusBarang;
     }
-    
+
     public JButton getSelesai() {
         return selesai;
     }
@@ -208,7 +217,7 @@ public class ownerTransaksi extends javax.swing.JFrame {
     public JButton transaksi() {
         return transaksi;
     }
-    
+
     public JButton tambahkurir() {
         return tambahKurir;
     }
@@ -241,10 +250,10 @@ public class ownerTransaksi extends javax.swing.JFrame {
         return tabelPembayaran;
     }
 
-      public JComboBox kurir() {
+    public JComboBox kurir() {
         return pilihkurir;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -266,7 +275,7 @@ public class ownerTransaksi extends javax.swing.JFrame {
         hapusBarang = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelPembayaran = new javax.swing.JTable();
-        jenisBarang = new javax.swing.JComboBox(jenis_Barang[0]);
+        jenisBarang = new javax.swing.JComboBox(jenis_Barang[1]);
         merkBarang = new javax.swing.JComboBox(merk_Barang[1]);
         namaBarang = new javax.swing.JComboBox<String>();
         pegawai = new javax.swing.JLabel();
@@ -281,6 +290,8 @@ public class ownerTransaksi extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(903, 600));
+        setPreferredSize(new java.awt.Dimension(903, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(diskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, 120, -1));
 
@@ -426,7 +437,7 @@ public class ownerTransaksi extends javax.swing.JFrame {
         int merkBarang1 = merkBarang.getSelectedIndex();
         System.out.println(jenisBarang1);
         System.out.println(merkBarang1);
-        nama_Barang = modelBarang.getNamaBarangPilihan(jenis_Barang[1][jenisBarang1], merk_Barang[0][merkBarang1]);
+        nama_Barang = modelBarang.getNamaBarangPilihan(jenis_Barang[0][jenisBarang1], merk_Barang[0][merkBarang1]);
         namaBarang.setModel(new DefaultComboBoxModel<>(nama_Barang[1]));        // TODO add your handling code here:
     }//GEN-LAST:event_jenisBarangActionPerformed
 
@@ -435,7 +446,7 @@ public class ownerTransaksi extends javax.swing.JFrame {
         int merkBarang1 = merkBarang.getSelectedIndex();
         System.out.println(jenisBarang1);
         System.out.println(merkBarang1);
-        nama_Barang = modelBarang.getNamaBarangPilihan(jenis_Barang[1][jenisBarang1], merk_Barang[0][merkBarang1]);
+        nama_Barang = modelBarang.getNamaBarangPilihan(jenis_Barang[0][jenisBarang1], merk_Barang[0][merkBarang1]);
         namaBarang.setModel(new DefaultComboBoxModel<>(nama_Barang[1]));         // TODO add your handling code here:
     }//GEN-LAST:event_merkBarangActionPerformed
 
