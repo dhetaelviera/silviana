@@ -168,8 +168,8 @@ public class ownerBarangTambah extends javax.swing.JFrame {
         karyawan = new javax.swing.JButton();
         beranda = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        id = new javax.swing.JLabel();
         logout = new javax.swing.JButton();
+        id = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -248,11 +248,6 @@ public class ownerBarangTambah extends javax.swing.JFrame {
         jLabel4.setText("Hai,");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
 
-        id.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        id.setForeground(new java.awt.Color(102, 0, 0));
-        id.setText(" ");
-        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 30, 60, 30));
-
         logout.setBackground(new java.awt.Color(27, 179, 133));
         logout.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         logout.setForeground(new java.awt.Color(255, 255, 255));
@@ -267,6 +262,9 @@ public class ownerBarangTambah extends javax.swing.JFrame {
             }
         });
         getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, 110, 40));
+
+        id.setText(" ");
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 40, 60, 20));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/03. owner tambah barang new.png"))); // NOI18N
         jLabel6.setText(" ");

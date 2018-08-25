@@ -417,7 +417,7 @@ public class ownerDashboard extends javax.swing.JFrame {
                 calenderActionPerformed(evt);
             }
         });
-        getContentPane().add(calender, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, 180, -1));
+        getContentPane().add(calender, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, 160, -1));
 
         printbulan.setBackground(new java.awt.Color(248, 215, 85));
         printbulan.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N

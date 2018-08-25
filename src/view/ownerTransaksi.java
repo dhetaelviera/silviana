@@ -64,7 +64,7 @@ public class ownerTransaksi extends javax.swing.JFrame {
 
     public String getKurir() {
         int indeks = pilihkurir.getSelectedIndex();
-        return kurir[1][indeks];
+        return kurir[0][indeks];
     }
 
     public String getJenis() {
@@ -283,7 +283,6 @@ public class ownerTransaksi extends javax.swing.JFrame {
         jenisBarang = new javax.swing.JComboBox(jenis_Barang[1]);
         merkBarang = new javax.swing.JComboBox(merk_Barang[1]);
         namaBarang = new javax.swing.JComboBox<String>();
-        pegawai = new javax.swing.JLabel();
         invoice = new javax.swing.JTextField();
         pilihkurir = new javax.swing.JComboBox<>(kurir[1]);
         transaksi = new javax.swing.JButton();
@@ -293,6 +292,7 @@ public class ownerTransaksi extends javax.swing.JFrame {
         logout = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         beranda = new javax.swing.JButton();
+        pegawai = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -381,7 +381,6 @@ public class ownerTransaksi extends javax.swing.JFrame {
             }
         });
         getContentPane().add(namaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 120, -1));
-        getContentPane().add(pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 40, 50, 20));
         getContentPane().add(invoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 120, -1));
 
         pilihkurir.addActionListener(new java.awt.event.ActionListener() {
@@ -446,6 +445,9 @@ public class ownerTransaksi extends javax.swing.JFrame {
         beranda.setBorder(null);
         beranda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(beranda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 90, 30));
+
+        pegawai.setText(" ");
+        getContentPane().add(pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 40, 60, 20));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/07. owner tambah transaksi new.png"))); // NOI18N
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, -1));

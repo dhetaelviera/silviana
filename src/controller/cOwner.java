@@ -148,14 +148,29 @@ public class cOwner {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(karyawan, "Apabila Anda belum menyimpan data baru, data tidak akan tersimpan. Tetap keluar?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
-            if (pilihan == JOptionPane.NO_OPTION) {
-                karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
-            } else if (pilihan == JOptionPane.YES_OPTION) {
-                karyawan.dispose();
-                new controller.cUser();
+            String nama = karyawan.getNama();
+            String password = karyawan.getPassword();
+            String username = karyawan.getUsername();
+
+            if (nama.equalsIgnoreCase("") && username.equalsIgnoreCase("") && password.equalsIgnoreCase("")) {
+                int pilihan2 = JOptionPane.showConfirmDialog(karyawan, "Anda yakin ingin keluar?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+                if (pilihan2 == JOptionPane.NO_OPTION) {
+                    karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
+                } else if (pilihan2 == JOptionPane.YES_OPTION) {
+                    karyawan.dispose();
+                    new controller.cUser();
+                }
+            } else if (!nama.equalsIgnoreCase("") || !username.equalsIgnoreCase("") || !password.equalsIgnoreCase("")) {
+                int pilihan = JOptionPane.showConfirmDialog(karyawan, "Data belum tersimpan. Anda yakin ingin keluar?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+                if (pilihan == JOptionPane.NO_OPTION) {
+                    karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
+                } else if (pilihan == JOptionPane.YES_OPTION) {
+                    karyawan.dispose();
+                    new controller.cUser();
+                }
 
             }
+
         }
     }
 
@@ -166,8 +181,29 @@ public class cOwner {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            karyawan.dispose();
-            new cOwner(abc, owner);
+            String nama = karyawan.getNama();
+            String password = karyawan.getPassword();
+            String username = karyawan.getUsername();
+
+            if (nama.equalsIgnoreCase("") && username.equalsIgnoreCase("") && password.equalsIgnoreCase("")) {
+                int pilihan2 = JOptionPane.showConfirmDialog(karyawan, "Pindah ke beranda?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+                if (pilihan2 == JOptionPane.NO_OPTION) {
+                    karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
+                } else if (pilihan2 == JOptionPane.YES_OPTION) {
+                    karyawan.dispose();
+                    new cOwner(abc, owner);
+                }
+            } else if (!nama.equalsIgnoreCase("") || !username.equalsIgnoreCase("") || !password.equalsIgnoreCase("")) {
+                int pilihan = JOptionPane.showConfirmDialog(karyawan, "Data belum tersimpan. Tetap pindah ke beranda?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+                if (pilihan == JOptionPane.NO_OPTION) {
+                    karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
+                } else if (pilihan == JOptionPane.YES_OPTION) {
+                    karyawan.dispose();
+                    new cOwner(abc, owner);
+                }
+
+            }
+
         }
     }
 
@@ -178,9 +214,28 @@ public class cOwner {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            String nama = karyawan.getNama();
+            String password = karyawan.getPassword();
+            String username = karyawan.getUsername();
 
-            karyawan.dispose();
-            new controller.cBarang(1, 1, abc);
+            if (nama.equalsIgnoreCase("") && username.equalsIgnoreCase("") && password.equalsIgnoreCase("")) {
+                int pilihan2 = JOptionPane.showConfirmDialog(karyawan, "Pindah ke menu transaksi?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+                if (pilihan2 == JOptionPane.NO_OPTION) {
+                    karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
+                } else if (pilihan2 == JOptionPane.YES_OPTION) {
+                    karyawan.dispose();
+                    new controller.cBarang(1, 1, abc);
+                }
+            } else if (!nama.equalsIgnoreCase("") || !username.equalsIgnoreCase("") || !password.equalsIgnoreCase("")) {
+                int pilihan = JOptionPane.showConfirmDialog(karyawan, "Data belum tersimpan. Tetap pindah ke menu transaksi?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+                if (pilihan == JOptionPane.NO_OPTION) {
+                    karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
+                } else if (pilihan == JOptionPane.YES_OPTION) {
+                    karyawan.dispose();
+                    new controller.cBarang(1, 1, abc);
+                }
+
+            }
 
         }
     }
@@ -195,8 +250,8 @@ public class cOwner {
             String nama = karyawan.getNama();
             String password = karyawan.getPassword();
             String username = karyawan.getUsername();
-            
-            if (nama.equalsIgnoreCase("") || username.equalsIgnoreCase("") || password.equalsIgnoreCase("")) {
+
+            if (nama.equalsIgnoreCase("") && username.equalsIgnoreCase("") && password.equalsIgnoreCase("")) {
                 int pilihan2 = JOptionPane.showConfirmDialog(karyawan, "Pindah ke menu barang?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
                 if (pilihan2 == JOptionPane.NO_OPTION) {
                     karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());
@@ -204,7 +259,7 @@ public class cOwner {
                     karyawan.dispose();
                     new controller.cBarang(abc);
                 }
-            } else {
+            } else if (!nama.equalsIgnoreCase("") || !username.equalsIgnoreCase("") || !password.equalsIgnoreCase("")) {
                 int pilihan = JOptionPane.showConfirmDialog(karyawan, "Data belum tersimpan. Tetap pindah ke menu barang?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
                 if (pilihan == JOptionPane.NO_OPTION) {
                     karyawan.setTabelKaryawan(mUser.bacaTabelKaryawan());

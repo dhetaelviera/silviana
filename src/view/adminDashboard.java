@@ -63,6 +63,8 @@ public class adminDashboard extends javax.swing.JFrame {
         transaksi.setText("transaksi");
         getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 180, 60));
 
+        admin.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        admin.setForeground(new java.awt.Color(102, 0, 0));
         admin.setText(" ");
         getContentPane().add(admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, 120, 30));
 

@@ -200,6 +200,7 @@ public class cBarang {
         this.adminTransaksi.getDiskonVisible().setEnabled(false);
         this.adminTransaksi.getJumlahBarang().setEnabled(false);
         this.adminTransaksi.getHapus().setEnabled(false);
+        this.adminTransaksi.logout().setEnabled(false);
 
     }
 
@@ -432,13 +433,20 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Kembali ke beranda? ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            String pembeli = ownerTransaksi.getNamaPembeli();
+            String invoice = ownerTransaksi.getInvoice();
+
+            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Pindah ke beranda? ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
 
-            } else if (pilihan == JOptionPane.YES_OPTION) {
+            } else if (!pembeli.equalsIgnoreCase("") && pilihan == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(ownerTransaksi, "Tidak ada transaksi yang dimasukkan ");
                 ownerTransaksi.dispose();
                 new controller.cOwner(username, owner);
-
+            } else if (pembeli != null && pilihan == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(ownerTransaksi, "Tidak ada transaksi yang dimasukkan.");
+                ownerTransaksi.dispose();
+                new controller.cOwner(username, owner);
             }
 
         }
@@ -606,14 +614,23 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Pindah ke menu karyawan?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            String pembeli = ownerTransaksi.getNamaPembeli();
+            String invoice = ownerTransaksi.getInvoice();
+
+            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Pindah ke karyawan? ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
-                bacaTabelTransaksi2();
-                bacaTotalTransaksi2();
-            } else if (pilihan == JOptionPane.YES_OPTION) {
+
+            } else if (!pembeli.equalsIgnoreCase("") && pilihan == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(ownerTransaksi, "Tidak ada transaksi yang dimasukkan ");
                 ownerTransaksi.dispose();
                 new controller.cOwner(5, username);
+            } else if (pembeli != null && pilihan == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(ownerTransaksi, "Tidak ada transaksi yang dimasukkan.");
+                ownerTransaksi.dispose();
+                new controller.cOwner(5, username);
+
             }
+
         }
     }
 
@@ -624,11 +641,18 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            String pembeli = ownerTransaksi.getNamaPembeli();
+            String invoice = ownerTransaksi.getInvoice();
+
             int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Pindah ke menu barang? ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
-                bacaTabelTransaksi2();
-                bacaTotalTransaksi2();
-            } else if (pilihan == JOptionPane.YES_OPTION) {
+
+            } else if (!pembeli.equalsIgnoreCase("") && pilihan == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(ownerTransaksi, "Tidak ada transaksi yang dimasukkan ");
+                ownerTransaksi.dispose();
+                new controller.cBarang(username);
+            } else if (pembeli != null && pilihan == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(ownerTransaksi, "Tidak ada transaksi yang dimasukkan.");
                 ownerTransaksi.dispose();
                 new controller.cBarang(username);
             }
@@ -1146,7 +1170,9 @@ public class cBarang {
             int idBar = Integer.valueOf(ubahbarang.getIDBarang());
             String idBarang = String.valueOf(idBar);
             boolean status1 = mBarang.updateBarang(idBarang, namaBarang, stok, harga, idJenis, idMerk);
-            if (status1) {
+            if (stok < 0) {
+                JOptionPane.showMessageDialog(ubahbarang, "Masukkan jumlah barang dengan benar");
+            } else if (status1) {
                 JOptionPane.showMessageDialog(ubahbarang, "Data berhasil diperbarui");
                 ubahbarang.dispose();
                 new cBarang(username);
@@ -1176,7 +1202,7 @@ public class cBarang {
         public void actionPerformed(ActionEvent e) {
             int pilihan = JOptionPane.showConfirmDialog(tambahbarang, "Apabila Anda belum menyimpan data baru, data tidak akan tersimpan. Tetap kembali ke menu barang?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
-                tambahbarang.nama().setText("");
+
             } else if (pilihan == JOptionPane.YES_OPTION) {
 
                 new controller.cBarang(username);
@@ -1192,13 +1218,18 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String kurir = JOptionPane.showInputDialog("Masukkan kurir tambahan");
+            String kurir = "";
+            kurir = JOptionPane.showInputDialog("Masukkan kurir tambahan");
             System.out.println(kurir);
-            boolean tambah = mBarang.tambahKurir(kurir);
-            String pilihkurir[][];
-            pilihkurir = mBarang.getKurir();
-            ownerTransaksi.setKurir(pilihkurir);
-            ownerTransaksi.kurirbaru(kurir);
+            if (kurir != null || !kurir.equalsIgnoreCase("")) {
+                boolean tambah = mBarang.tambahKurir(kurir);
+                String pilihkurir[][];
+                pilihkurir = mBarang.getKurir();
+                ownerTransaksi.setKurir(pilihkurir);
+                ownerTransaksi.kurirbaru(kurir);
+            } else {
+                JOptionPane.showMessageDialog(ownerTransaksi, "Tidak ada kurir tambahan yg dimasukkan");
+            }
         }
     }
 
@@ -1209,13 +1240,18 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String kurir = JOptionPane.showInputDialog("Masukkan kurir tambahan");
+            String kurir = "";
+            kurir = JOptionPane.showInputDialog("Masukkan kurir tambahan");
             System.out.println(kurir);
-            boolean tambah = mBarang.tambahKurir(kurir);
-            String pilihkurir[][];
-            pilihkurir = mBarang.getKurir();
-            adminTransaksi.setKurir(pilihkurir);
-            adminTransaksi.kurirbaru(kurir);
+            if (kurir != null || !kurir.equalsIgnoreCase("")) {
+                boolean tambah = mBarang.tambahKurir(kurir);
+                String pilihkurir[][];
+                pilihkurir = mBarang.getKurir();
+                adminTransaksi.setKurir(pilihkurir);
+                adminTransaksi.kurirbaru(kurir);
+            } else {
+                JOptionPane.showMessageDialog(adminTransaksi, "Tidak ada kurir yang ditambahkan");
+            }
         }
     }
 
@@ -1226,14 +1262,18 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String jenis = JOptionPane.showInputDialog("Masukkan jenis barang");
+            String jenis = "";
+            jenis = JOptionPane.showInputDialog("Masukkan jenis barang");
             System.out.println(jenis);
-
-            boolean tambah = mBarang.tambahJenis(jenis);
-            String jenis_Barang[][];
-            jenis_Barang = mBarang.getJenis();
-            tambahbarang.setJenis(jenis_Barang);
-            tambahbarang.jenisbaru(jenis);
+            if (jenis != null || !jenis.equalsIgnoreCase("")) {
+                boolean tambah = mBarang.tambahJenis(jenis);
+                String jenis_Barang[][];
+                jenis_Barang = mBarang.getJenis();
+                tambahbarang.setJenis(jenis_Barang);
+                tambahbarang.jenisbaru(jenis);
+            } else {
+                JOptionPane.showMessageDialog(tambahbarang, "Tidak ada jenis baru yg ditambahkan");
+            }
 
         }
     }
@@ -1245,14 +1285,19 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String merk = JOptionPane.showInputDialog("Masukkan merk barang");
+            String merk = "";
+            merk = JOptionPane.showInputDialog("Masukkan merk barang");
             System.out.println(merk);
+            if (merk == null || !merk.equalsIgnoreCase("")) {
+                boolean tambah = mBarang.tambahMerk(merk);
+                String merk_Barang[][];
+                merk_Barang = mBarang.getMerk();
+                tambahbarang.setMerk(merk_Barang);
+                tambahbarang.merkbaru(merk);
+            } else {
+                JOptionPane.showMessageDialog(tambahbarang, "Tidak ada merk baru yg ditambahkan");
 
-            boolean tambah = mBarang.tambahMerk(merk);
-            String merk_Barang[][];
-            merk_Barang = mBarang.getMerk();
-            tambahbarang.setMerk(merk_Barang);
-            tambahbarang.merkbaru(merk);
+            }
 
 //            tambahbarang.merk().setModel(new DefaultComboBoxModel<>(merk_Barang[1]));
         }
@@ -1266,21 +1311,22 @@ public class cBarang {
         @Override
         public void actionPerformed(ActionEvent e) {
             String namaBarang = tambahbarang.getNamaBarang();
-            String stok = tambahbarang.getStokBarang();
+            int stok = Integer.valueOf(tambahbarang.getStokBarang());
             String harga = tambahbarang.getHargaBarang();
             int idJenis = Integer.valueOf(tambahbarang.getJenis());
             int idMerk = Integer.valueOf(tambahbarang.getMerk());
             System.out.println(idJenis);
 
-            if (namaBarang.equalsIgnoreCase("") || stok.equalsIgnoreCase("") || harga.equalsIgnoreCase("")) {
+            if (namaBarang.equalsIgnoreCase("") || harga.equalsIgnoreCase("")) {
                 JOptionPane.showMessageDialog(tambahbarang, "Kolom tidak boleh kosong");
+            } else if (stok <= 0) {
+                JOptionPane.showMessageDialog(tambahbarang, "Jumlah harus lebih dari 0");
             } else {
-                boolean status = mBarang.tambahBarang(namaBarang, Integer.valueOf(stok), Integer.valueOf(harga), idJenis, idMerk);
+                boolean status = mBarang.tambahBarang(namaBarang, stok, Integer.valueOf(harga), idJenis, idMerk);
                 if (status) {
                     JOptionPane.showMessageDialog(tambahbarang, "Data berhasil dimasukkan");
                     tambahbarang.dispose();
                     new cBarang(username);
-
                 } else {
                     JOptionPane.showMessageDialog(tambahbarang, "Terjadi kesalahan");
                 }

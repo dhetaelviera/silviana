@@ -70,7 +70,7 @@ public class ownerUbahBarang extends javax.swing.JFrame {
     
     public String getJenis() {
         int indeks = jenisBarang.getSelectedIndex();
-        return jenis_Barang[1][indeks];
+        return jenis_Barang[0][indeks];
     }
 
     public String getMerk() {
@@ -106,14 +106,7 @@ public class ownerUbahBarang extends javax.swing.JFrame {
     public void kembaliListener(ActionListener a) {
         kembali.addActionListener(a);
     }
-
-    public void jenisListener(ActionListener a) {
-        tambahJenis.addActionListener(a);
-    }
-
-    public void merkListener(ActionListener a) {
-        tambahMerk.addActionListener(a);
-    }
+    
     
     public void transaksiListener(ActionListener a) {
         transaksi.addActionListener(a);
@@ -150,7 +143,7 @@ public class ownerUbahBarang extends javax.swing.JFrame {
         merkBarang = new javax.swing.JComboBox(merk_Barang[1]);
         simpan = new javax.swing.JButton();
         kembali = new javax.swing.JButton();
-        jenisBarang = new javax.swing.JComboBox(jenis_Barang[0]);
+        jenisBarang = new javax.swing.JComboBox(jenis_Barang[1]);
         hargaBarang = new javax.swing.JTextField();
         namaBarang = new javax.swing.JTextField();
         stokBarang = new javax.swing.JSpinner();
@@ -161,10 +154,8 @@ public class ownerUbahBarang extends javax.swing.JFrame {
         id = new javax.swing.JLabel();
         logout = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        idbarang = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        tambahMerk = new javax.swing.JButton();
-        tambahJenis = new javax.swing.JButton();
+        idbarang = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -243,23 +234,11 @@ public class ownerUbahBarang extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(102, 0, 0));
         jLabel4.setText("Hai,");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
-        getContentPane().add(idbarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 70, 20));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/03. owner tambah barang new.png"))); // NOI18N
         jLabel6.setText(" ");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
-
-        tambahMerk.setBackground(new java.awt.Color(102, 0, 0));
-        tambahMerk.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
-        tambahMerk.setForeground(new java.awt.Color(255, 255, 204));
-        tambahMerk.setText("tambah merk");
-        getContentPane().add(tambahMerk, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 290, -1, -1));
-
-        tambahJenis.setBackground(new java.awt.Color(102, 0, 0));
-        tambahJenis.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
-        tambahJenis.setForeground(new java.awt.Color(255, 255, 204));
-        tambahJenis.setText("tambah jenis");
-        getContentPane().add(tambahJenis, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, -1, -1));
+        getContentPane().add(idbarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 70, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -323,8 +302,6 @@ public class ownerUbahBarang extends javax.swing.JFrame {
     private javax.swing.JTextField namaBarang;
     private javax.swing.JButton simpan;
     private javax.swing.JSpinner stokBarang;
-    private javax.swing.JButton tambahJenis;
-    private javax.swing.JButton tambahMerk;
     private javax.swing.JButton transaksi;
     // End of variables declaration//GEN-END:variables
 }

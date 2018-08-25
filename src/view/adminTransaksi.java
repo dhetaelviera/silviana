@@ -53,14 +53,20 @@ public class adminTransaksi extends javax.swing.JFrame {
     public void setID(String id) {
         this.id.setText(id);
     }
-    
-    public void kurirbaru(String a){
+
+    public void setKurir(String kurir[][]) {
+        this.kurir = kurir;
+        pilihkurir.setModel(new DefaultComboBoxModel<>(kurir[0]));
+
+    }
+
+    public void kurirbaru(String a) {
         pilihkurir.setSelectedItem(a);
     }
-    
-    public void setKurir(String kurir[][]){
-       this.kurir=kurir;
-       pilihkurir.setModel(new DefaultComboBoxModel<>(kurir[1]));
+
+    public String getKurir() {
+        int indeks = pilihkurir.getSelectedIndex();
+        return kurir[1][indeks];
     }
 
     public String getJenis() {
@@ -106,12 +112,9 @@ public class adminTransaksi extends javax.swing.JFrame {
     public String getInvoice() {
         return invoice.getText();
     }
- public String getID() {
+
+    public String getID() {
         return id.getText();
-    }
-    public String getKurir() {
-        int indeks = pilihkurir.getSelectedIndex();
-        return kurir[0][indeks];
     }
 
     public void setJumlah(int a) {
@@ -153,7 +156,7 @@ public class adminTransaksi extends javax.swing.JFrame {
     public void buatTransaksiListener(ActionListener a) {
         buatTransaksi.addActionListener(a);
     }
-    
+
     public void logoutListener(ActionListener a) {
         logout.addActionListener(a);
     }
@@ -186,6 +189,10 @@ public class adminTransaksi extends javax.swing.JFrame {
         return selesai;
     }
 
+    public JButton logout() {
+        return logout;
+    }
+
     public JComboBox<String> getNamaBarang() {
         return namaBarang;
     }
@@ -209,7 +216,8 @@ public class adminTransaksi extends javax.swing.JFrame {
     public JTable getTableTransaksi() {
         return tabelPembayaran;
     }
-     public JComboBox kurir() {
+
+    public JComboBox kurir() {
         return pilihkurir;
     }
 
@@ -255,7 +263,7 @@ public class adminTransaksi extends javax.swing.JFrame {
         getContentPane().add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 120, 30));
 
         id.setText(" ");
-        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 110, 20));
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 40, 60, 20));
 
         tambahKurir.setBackground(new java.awt.Color(27, 179, 133));
         tambahKurir.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
@@ -310,7 +318,7 @@ public class adminTransaksi extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tabelPembayaran);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 630, 220));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 630, 220));
 
         tambahPembeli.setBackground(new java.awt.Color(27, 179, 133));
         tambahPembeli.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N

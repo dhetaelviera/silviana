@@ -37,7 +37,7 @@ FROM
 			<frame>
 				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="bf0e0aa4-8052-4030-a4a9-d0fde9299d0a"/>
 				<staticText>
-					<reportElement x="20" y="20" width="345" height="43" forecolor="#FFFFFF" uuid="59c5a932-2516-4289-9483-34633241998a"/>
+					<reportElement x="20" y="43" width="345" height="43" forecolor="#FFFFFF" uuid="59c5a932-2516-4289-9483-34633241998a"/>
 					<textElement>
 						<font size="34" isBold="true"/>
 					</textElement>
@@ -48,8 +48,15 @@ FROM
 					<textElement textAlignment="Right">
 						<font size="14" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Silviana Online-Shop]]></text>
+					<text><![CDATA[]]></text>
 				</staticText>
+				<image>
+					<reportElement x="557" y="86" width="15" height="0" uuid="d575d08b-8dd1-4a8d-9d84-7e5caef9d82f"/>
+				</image>
+				<image>
+					<reportElement x="20" y="10" width="114" height="33" uuid="b8aa2059-ec2e-44db-9ec5-d461da04e40e"/>
+					<imageExpression><![CDATA["C:\\Users\\Dheta\\Documents\\NetBeansProjects\\silviana\\src\\report\\1533186198344.png"]]></imageExpression>
+				</image>
 			</frame>
 		</band>
 	</title>

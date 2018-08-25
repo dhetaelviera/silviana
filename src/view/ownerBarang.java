@@ -127,7 +127,6 @@ public class ownerBarang extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        id = new javax.swing.JLabel();
         hapus = new javax.swing.JButton();
         reset = new javax.swing.JButton();
         ubah = new javax.swing.JButton();
@@ -144,6 +143,7 @@ public class ownerBarang extends javax.swing.JFrame {
         beranda = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         logout = new javax.swing.JButton();
+        id = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         jLabel2.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
@@ -154,11 +154,6 @@ public class ownerBarang extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(900, 600));
         setPreferredSize(new java.awt.Dimension(900, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        id.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        id.setForeground(new java.awt.Color(102, 0, 0));
-        id.setText(" ");
-        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 30, 60, 30));
 
         hapus.setBackground(new java.awt.Color(204, 0, 0));
         hapus.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
@@ -279,6 +274,9 @@ public class ownerBarang extends javax.swing.JFrame {
             }
         });
         getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, 110, 40));
+
+        id.setText(" ");
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 40, 60, 20));
 
         jLabel1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/new 2.png"))); // NOI18N
