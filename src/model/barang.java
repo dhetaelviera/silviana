@@ -303,7 +303,7 @@ public class barang {
     public DefaultTableModel bacaTabelBarang() {
         String query = "SELECT b.idbarang, b.namabarang, b.stokbarang, j.namajenis, m.namamerk, b.harga "
                 + "from barang b join jenis j on j.idjenis=b.idjenis join merk m on m.idmerk=b.idmerk "
-                + "order by b.stokbarang";
+                + "order by b.idbarang";
         String namaKolom[] = {"ID Barang", "Nama Barang", "Stok", "Jenis Barang", "Merk", "Harga"};
         DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
         try {
@@ -455,7 +455,7 @@ public class barang {
                 + "where b.namabarang LIKE '" + cari + "%' or b.namaBarang LIKE '%" + cari + "%' or b.namaBarang LIKE '%" + cari + "' "
                 + "or j.namajenis LIKE '" + cari + "%' or j.namajenis LIKE '%" + cari + "%' or j.namajenis LIKE '%" + cari + "' "
                 + "or  m.namamerk LIKE '" + cari + "%' or m.namamerk LIKE '%" + cari + "%' or m.namamerk LIKE '%" + cari + "';";
-        String namaKolom[] = {"ID Barang", "Nama Barang", "Stok", "Jenis Barang", "Harga", "Merk"};
+        String namaKolom[] = {"ID Barang", "Nama Barang", "Stok", "Jenis Barang", "Merk", "Harga"};
         DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
         try {
             PreparedStatement st = konek.prepareStatement(query);

@@ -43,9 +43,12 @@ public class adminDashboard extends javax.swing.JFrame {
         logout = new javax.swing.JButton();
         transaksi = new javax.swing.JButton();
         admin = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(900, 600));
+        setPreferredSize(new java.awt.Dimension(900, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         logout.setBackground(new java.awt.Color(27, 179, 133));
@@ -57,13 +60,18 @@ public class adminDashboard extends javax.swing.JFrame {
         transaksi.setBackground(new java.awt.Color(27, 179, 133));
         transaksi.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
         transaksi.setForeground(new java.awt.Color(255, 255, 204));
-        transaksi.setText("transksi");
+        transaksi.setText("transaksi");
         getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 180, 60));
 
         admin.setText(" ");
-        getContentPane().add(admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, 120, 30));
+        getContentPane().add(admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, 120, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/08. admin dashboard.png"))); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Candara", 0, 22)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel5.setText("Selamat datang,");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/new 2.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 600));
 
         pack();
@@ -107,6 +115,7 @@ public class adminDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel admin;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JButton logout;
     private javax.swing.JButton transaksi;
     // End of variables declaration//GEN-END:variables

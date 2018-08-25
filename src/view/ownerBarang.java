@@ -9,9 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-
-
 
 /**
  *
@@ -25,12 +24,12 @@ public class ownerBarang extends javax.swing.JFrame {
     public ownerBarang() {
         initComponents();
     }
-    
-    public void setID(String n){
-         id.setText(n);
-    } 
-    
-     public String getPencarianBarang() {
+
+    public void setID(String n) {
+        id.setText(n);
+    }
+
+    public String getPencarianBarang() {
         return cari.getText();
     }
 
@@ -53,7 +52,7 @@ public class ownerBarang extends javax.swing.JFrame {
     public void ubahBarangListener(ActionListener a) {
         ubah.addActionListener(a);
     }
-   
+
     public void berandaListener(ActionListener a) {
         beranda.addActionListener(a);
     }
@@ -61,12 +60,11 @@ public class ownerBarang extends javax.swing.JFrame {
     public void cariBarangListener(ActionListener a) {
         cariButton.addActionListener(a);
     }
-   
+
     public void logoutListener(ActionListener a) {
         logout.addActionListener(a);
     }
-    
-      
+
     public void transaksiListener(ActionListener a) {
         transaksi.addActionListener(a);
     }
@@ -78,17 +76,7 @@ public class ownerBarang extends javax.swing.JFrame {
     public void barangListener(ActionListener a) {
         barang.addActionListener(a);
     }
-    public JButton barang(){
-        return barang;
-    }
 
-    public JButton beranda(){
-        return beranda;
-    }
-
-    
-    
-    
     public void jenisListener(ActionListener a) {
         jenis.addActionListener(a);
     }
@@ -96,9 +84,17 @@ public class ownerBarang extends javax.swing.JFrame {
     public void merkListener(ActionListener a) {
         merk.addActionListener(a);
     }
-   
+
     public void hapusListener(ActionListener a) {
         hapus.addActionListener(a);
+    }
+
+    public JButton barang() {
+        return barang;
+    }
+
+    public JButton beranda() {
+        return beranda;
     }
 
     public JTable getTabelBarang() {
@@ -112,9 +108,13 @@ public class ownerBarang extends javax.swing.JFrame {
     public JButton ubah() {
         return ubah;
     }
-  
+
     public JButton hapus() {
         return hapus;
+    }
+    
+    public JTextField cari(){
+        return cari;
     }
 
     /**
@@ -133,7 +133,6 @@ public class ownerBarang extends javax.swing.JFrame {
         ubah = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelBarang = new javax.swing.JTable();
-        logout = new javax.swing.JButton();
         cariButton = new javax.swing.JButton();
         tambahBarang = new javax.swing.JButton();
         jenis = new javax.swing.JButton();
@@ -144,20 +143,22 @@ public class ownerBarang extends javax.swing.JFrame {
         karyawan = new javax.swing.JButton();
         beranda = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        logout = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
 
         jLabel2.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 0, 0));
         jLabel2.setText("Hai,");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(900, 600));
+        setPreferredSize(new java.awt.Dimension(900, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         id.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         id.setForeground(new java.awt.Color(102, 0, 0));
         id.setText(" ");
-        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 60, 30));
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 30, 60, 30));
 
         hapus.setBackground(new java.awt.Color(204, 0, 0));
         hapus.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
@@ -201,10 +202,6 @@ public class ownerBarang extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabelBarang);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 510, 350));
-
-        logout.setBorder(null);
-        logout.setContentAreaFilled(false);
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 140, 40));
 
         cariButton.setBackground(new java.awt.Color(27, 179, 133));
         cariButton.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
@@ -266,12 +263,26 @@ public class ownerBarang extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Candara", 0, 22)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 0, 0));
         jLabel4.setText("Hai,");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
+
+        logout.setBackground(new java.awt.Color(27, 179, 133));
+        logout.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        logout.setForeground(new java.awt.Color(255, 255, 255));
+        logout.setText("LOGOUT");
+        logout.setBorder(null);
+        logout.setBorderPainted(false);
+        logout.setContentAreaFilled(false);
+        logout.setOpaque(true);
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, 110, 40));
 
         jLabel1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/02. owner barang 2.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/new 2.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 600));
-        getContentPane().add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, -40, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -283,6 +294,10 @@ public class ownerBarang extends javax.swing.JFrame {
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_resetActionPerformed
+
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -329,7 +344,6 @@ public class ownerBarang extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jenis;
     private javax.swing.JButton karyawan;

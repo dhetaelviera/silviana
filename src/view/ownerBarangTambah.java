@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import model.barang;
 import controller.cBarang;
+import javax.swing.JTextField;
 
 /**
  *
@@ -43,27 +44,27 @@ public class ownerBarangTambah extends javax.swing.JFrame {
     public void setID(String n) {
         id.setText(n);
     }
-    
-    public void setJenis(String jenis_Barang[][]){
-        this.jenis_Barang=jenis_Barang;
+
+    public void setJenis(String jenis_Barang[][]) {
+        this.jenis_Barang = jenis_Barang;
         jenisBarang.setModel(new DefaultComboBoxModel<>(jenis_Barang[1]));
-            
-    }
-   
-    public void setMerk(String merk_Barang[][]){
-        this.merk_Barang=merk_Barang;
-        merkBarang.setModel(new DefaultComboBoxModel<>(merk_Barang[1]));
-            
+
     }
 
-    public  String getJenis() {
+    public String getJenis() {
         int indeks = jenisBarang.getSelectedIndex();
-        System.out.println("lllll"+indeks);
-        System.out.println("panjangnya"+jenis_Barang[0].length);
-        int cek=modelBarang.idjenisterakhir();
-        System.out.println("cek sini= "+cek);
-        System.out.println("indeksnya + "+ indeks);
+        System.out.println("lllll" + indeks);
+        System.out.println("panjangnya" + jenis_Barang[0].length);
+        int cek = modelBarang.idjenisterakhir();
+        System.out.println("cek sini= " + cek);
+        System.out.println("indeksnya + " + indeks);
         return jenis_Barang[0][indeks];
+    }
+
+    public void setMerk(String merk_Barang[][]) {
+        this.merk_Barang = merk_Barang;
+        merkBarang.setModel(new DefaultComboBoxModel<>(merk_Barang[1]));
+
     }
 
     public String getMerk() {
@@ -87,12 +88,12 @@ public class ownerBarangTambah extends javax.swing.JFrame {
     public void inputListener(ActionListener a) {
         simpan.addActionListener(a);
     }
-    
-    public void jenisbaru(String a){
+
+    public void jenisbaru(String a) {
         jenisBarang.setSelectedItem(a);
     }
 
-    public void merkbaru(String a){
+    public void merkbaru(String a) {
         merkBarang.setSelectedItem(a);
     }
 
@@ -140,6 +141,10 @@ public class ownerBarangTambah extends javax.swing.JFrame {
         return barang;
     }
 
+    public JTextField nama() {
+        return namaBarang;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -162,12 +167,14 @@ public class ownerBarangTambah extends javax.swing.JFrame {
         barang = new javax.swing.JButton();
         karyawan = new javax.swing.JButton();
         beranda = new javax.swing.JButton();
-        logout = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         id = new javax.swing.JLabel();
+        logout = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(900, 600));
+        setPreferredSize(new java.awt.Dimension(900, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(hargaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, 250, 30));
         getContentPane().add(stokBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 240, 30));
@@ -236,21 +243,32 @@ public class ownerBarangTambah extends javax.swing.JFrame {
         beranda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(beranda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 90, 30));
 
-        logout.setBorderPainted(false);
-        logout.setContentAreaFilled(false);
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 130, 40));
-
         jLabel4.setFont(new java.awt.Font("Candara", 0, 22)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 0, 0));
         jLabel4.setText("Hai,");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
 
         id.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         id.setForeground(new java.awt.Color(102, 0, 0));
         id.setText(" ");
-        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 60, 30));
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 30, 60, 30));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/03. owner tambah barang 2.png"))); // NOI18N
+        logout.setBackground(new java.awt.Color(27, 179, 133));
+        logout.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        logout.setForeground(new java.awt.Color(255, 255, 255));
+        logout.setText("LOGOUT");
+        logout.setBorder(null);
+        logout.setBorderPainted(false);
+        logout.setContentAreaFilled(false);
+        logout.setOpaque(true);
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, 110, 40));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/03. owner tambah barang new.png"))); // NOI18N
         jLabel6.setText(" ");
         jLabel6.setMaximumSize(new java.awt.Dimension(901, 599));
         jLabel6.setMinimumSize(new java.awt.Dimension(901, 599));
@@ -262,6 +280,10 @@ public class ownerBarangTambah extends javax.swing.JFrame {
     private void jenisBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisBarangActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jenisBarangActionPerformed
+
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logoutActionPerformed
 
     /**
      * @param args the command line arguments

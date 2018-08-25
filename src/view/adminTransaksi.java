@@ -242,6 +242,7 @@ public class adminTransaksi extends javax.swing.JFrame {
         selesai = new javax.swing.JButton();
         kembali = new javax.swing.JButton();
         logout = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -251,50 +252,50 @@ public class adminTransaksi extends javax.swing.JFrame {
         total.setFont(new java.awt.Font("Tempus Sans ITC", 0, 18)); // NOI18N
         total.setForeground(new java.awt.Color(255, 255, 255));
         total.setText("0");
-        getContentPane().add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 120, 30));
+        getContentPane().add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 120, 30));
 
         id.setText(" ");
-        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 50, 110, 20));
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 110, 20));
 
         tambahKurir.setBackground(new java.awt.Color(27, 179, 133));
         tambahKurir.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
         tambahKurir.setForeground(new java.awt.Color(255, 255, 255));
         tambahKurir.setText("+");
-        getContentPane().add(tambahKurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 30, 20));
-        getContentPane().add(namaPembeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 120, 20));
+        getContentPane().add(tambahKurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 30, 20));
+        getContentPane().add(namaPembeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 120, 20));
 
         pilihkurir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pilihkurirActionPerformed(evt);
             }
         });
-        getContentPane().add(pilihkurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, 90, 20));
-        getContentPane().add(invoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 120, 20));
+        getContentPane().add(pilihkurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, 90, 20));
+        getContentPane().add(invoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, 120, 20));
 
         jumlahBarang.setFont(new java.awt.Font("Tempus Sans ITC", 0, 12)); // NOI18N
-        getContentPane().add(jumlahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 150, 110, -1));
+        getContentPane().add(jumlahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, 110, -1));
 
         jenisBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jenisBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(jenisBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 120, -1));
+        getContentPane().add(jenisBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 120, -1));
 
         merkBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 merkBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(merkBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 120, -1));
+        getContentPane().add(merkBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 120, -1));
 
         namaBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 namaBarangActionPerformed(evt);
             }
         });
-        getContentPane().add(namaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 120, -1));
-        getContentPane().add(diskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, 120, -1));
+        getContentPane().add(namaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 250, 120, -1));
+        getContentPane().add(diskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 120, -1));
 
         tabelPembayaran.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -347,13 +348,30 @@ public class adminTransaksi extends javax.swing.JFrame {
         kembali.setText("kembali");
         getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 310, 140, -1));
 
-        logout.setText(" ");
+        logout.setBackground(new java.awt.Color(27, 179, 133));
+        logout.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        logout.setForeground(new java.awt.Color(255, 255, 255));
+        logout.setText("LOGOUT");
+        logout.setBorder(null);
         logout.setBorderPainted(false);
         logout.setContentAreaFilled(false);
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 130, 40));
+        logout.setOpaque(true);
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, 110, 40));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/07. owner tambah transaksi 2.png"))); // NOI18N
-        jLabel10.setPreferredSize(new java.awt.Dimension(903, 600));
+        jLabel5.setFont(new java.awt.Font("Candara", 0, 22)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel5.setText("Hai,");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/10. admin tambah transaksi new.png"))); // NOI18N
+        jLabel10.setMaximumSize(new java.awt.Dimension(900, 600));
+        jLabel10.setMinimumSize(new java.awt.Dimension(900, 600));
+        jLabel10.setPreferredSize(new java.awt.Dimension(900, 600));
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
         pack();
@@ -384,6 +402,10 @@ public class adminTransaksi extends javax.swing.JFrame {
     private void namaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaBarangActionPerformed
 
     }//GEN-LAST:event_namaBarangActionPerformed
+
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -427,6 +449,7 @@ public class adminTransaksi extends javax.swing.JFrame {
     private javax.swing.JLabel id;
     private javax.swing.JTextField invoice;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox<String> jenisBarang;
     private javax.swing.JSpinner jumlahBarang;

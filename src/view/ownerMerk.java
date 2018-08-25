@@ -118,7 +118,6 @@ public class ownerMerk extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        logout = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelMerk = new javax.swing.JTable();
         merk = new javax.swing.JTextField();
@@ -132,15 +131,14 @@ public class ownerMerk extends javax.swing.JFrame {
         hapus = new javax.swing.JButton();
         cari = new javax.swing.JTextField();
         cariButton = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        logout = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(900, 600));
+        setPreferredSize(new java.awt.Dimension(900, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        logout.setBorder(null);
-        logout.setBorderPainted(false);
-        logout.setContentAreaFilled(false);
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 150, -1));
 
         tabelMerk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -161,7 +159,7 @@ public class ownerMerk extends javax.swing.JFrame {
         id.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
         id.setForeground(new java.awt.Color(102, 0, 0));
         id.setText(" ");
-        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 80, 20));
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 40, 80, 20));
 
         beranda.setBackground(new java.awt.Color(255, 75, 109));
         beranda.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
@@ -220,11 +218,35 @@ public class ownerMerk extends javax.swing.JFrame {
         cariButton.setText("cari");
         getContentPane().add(cariButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, -1, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/05. owner tambah merk barang 2.png"))); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Candara", 0, 22)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel5.setText("Hai,");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
+
+        logout.setBackground(new java.awt.Color(27, 179, 133));
+        logout.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        logout.setForeground(new java.awt.Color(255, 255, 255));
+        logout.setText("LOGOUT");
+        logout.setBorder(null);
+        logout.setBorderPainted(false);
+        logout.setContentAreaFilled(false);
+        logout.setOpaque(true);
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, 110, 40));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/05. owner tambah merk barang new.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,6 +291,7 @@ public class ownerMerk extends javax.swing.JFrame {
     private javax.swing.JButton hapus;
     private javax.swing.JLabel id;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton karyawan;
     private javax.swing.JButton kembali;

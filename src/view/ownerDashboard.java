@@ -23,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.barang;
 import model.transaksi;
@@ -204,6 +205,10 @@ public class ownerDashboard extends javax.swing.JFrame {
     public JButton printbulan() {
         return printbulan;
     }
+    
+    public JTextField cari(){
+        return cari;
+    }
 
     public JButton printrange() {
         return printrange;
@@ -284,8 +289,7 @@ public class ownerDashboard extends javax.swing.JFrame {
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(903, 600));
-        setPreferredSize(new java.awt.Dimension(903, 600));
+        setMinimumSize(new java.awt.Dimension(900, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sortMonth.setBackground(new java.awt.Color(27, 179, 133));
@@ -295,15 +299,20 @@ public class ownerDashboard extends javax.swing.JFrame {
         sortMonth.setBorder(null);
         getContentPane().add(sortMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 270, 120, 30));
 
+        logout.setBackground(new java.awt.Color(27, 179, 133));
+        logout.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        logout.setForeground(new java.awt.Color(255, 255, 255));
+        logout.setText("LOGOUT");
         logout.setBorder(null);
         logout.setBorderPainted(false);
         logout.setContentAreaFilled(false);
+        logout.setOpaque(true);
         logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 logoutActionPerformed(evt);
             }
         });
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 130, 40));
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, 110, 40));
 
         sortDate.setBackground(new java.awt.Color(27, 179, 133));
         sortDate.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
@@ -348,7 +357,7 @@ public class ownerDashboard extends javax.swing.JFrame {
 
         pegawai.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         pegawai.setForeground(new java.awt.Color(102, 0, 0));
-        getContentPane().add(pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 70, 20));
+        getContentPane().add(pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, 70, 20));
 
         cari.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 250, 30));
@@ -470,12 +479,12 @@ public class ownerDashboard extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Candara", 0, 22)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 0, 0));
         jLabel4.setText("Hai,");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, -1));
 
         jLabel3.setText("awal:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 310, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/01. owner dashboard 2.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/new.png"))); // NOI18N
         jLabel1.setText(" ");
         jLabel1.setMaximumSize(new java.awt.Dimension(903, 600));
         jLabel1.setMinimumSize(new java.awt.Dimension(903, 600));

@@ -180,7 +180,7 @@ public class transaksi implements NewInterface{
 
     }
 
-    public String[][] getKurir() {
+       public String[][] getKurir() {
         String query = "select idkurir, nama from kurir";
         String jenis[][] = null;
 
@@ -202,7 +202,7 @@ public class transaksi implements NewInterface{
         }
         return jenis;
     }
-    
+
     public String[][] getJenis() {
         String query = "select idJenis, namajenis from jenis";
         String jenis[][] = null;

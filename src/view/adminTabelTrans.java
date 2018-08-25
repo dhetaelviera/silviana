@@ -183,7 +183,6 @@ public class adminTabelTrans extends javax.swing.JFrame {
         tabel = new javax.swing.JTable();
         hapus = new javax.swing.JButton();
         transaksi = new javax.swing.JButton();
-        logout = new javax.swing.JButton();
         kembali = new javax.swing.JButton();
         calender = new org.jdesktop.swingx.JXDatePicker();
         sortDate = new javax.swing.JButton();
@@ -199,9 +198,13 @@ public class adminTabelTrans extends javax.swing.JFrame {
         cetak = new javax.swing.JButton();
         reset = new javax.swing.JButton();
         id = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        logout = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(900, 600));
+        setPreferredSize(new java.awt.Dimension(900, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabel.setModel(new javax.swing.table.DefaultTableModel(
@@ -232,11 +235,6 @@ public class adminTabelTrans extends javax.swing.JFrame {
         transaksi.setText("buat transaksi");
         transaksi.setBorder(null);
         getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 120, 30));
-
-        logout.setBorder(null);
-        logout.setBorderPainted(false);
-        logout.setContentAreaFilled(false);
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 130, 40));
 
         kembali.setToolTipText("");
         kembali.setBorder(null);
@@ -352,9 +350,29 @@ public class adminTabelTrans extends javax.swing.JFrame {
 
         id.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
         id.setForeground(new java.awt.Color(102, 0, 0));
-        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 80, 20));
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 40, 80, 20));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/01. owner dashboard 2.png"))); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Candara", 0, 22)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel5.setText("Hai,");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
+
+        logout.setBackground(new java.awt.Color(27, 179, 133));
+        logout.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        logout.setForeground(new java.awt.Color(255, 255, 255));
+        logout.setText("LOGOUT");
+        logout.setBorder(null);
+        logout.setBorderPainted(false);
+        logout.setContentAreaFilled(false);
+        logout.setOpaque(true);
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, 110, 40));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/new 2.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 590));
 
         pack();
@@ -578,6 +596,10 @@ public class adminTabelTrans extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cetakActionPerformed
 
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logoutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -623,6 +645,7 @@ public class adminTabelTrans extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton kembali;
     private javax.swing.JButton logout;

@@ -52,18 +52,19 @@ public class ownerTransaksi extends javax.swing.JFrame {
         initComponents();
     }
 
-    public String getKurir() {
-        int indeks = pilihkurir.getSelectedIndex();
-        return kurir[0][indeks];
-    }
+    public void setKurir(String kurir[][]) {
+        this.kurir = kurir;
+        pilihkurir.setModel(new DefaultComboBoxModel<>(kurir[0]));
 
+    }
     public void kurirbaru(String a) {
         pilihkurir.setSelectedItem(a);
     }
 
-    public void setKurir(String kurir[][]) {
-        this.kurir = kurir;
-        pilihkurir.setModel(new DefaultComboBoxModel<>(kurir[1]));
+
+    public String getKurir() {
+        int indeks = pilihkurir.getSelectedIndex();
+        return kurir[1][indeks];
     }
 
     public String getJenis() {
@@ -226,6 +227,10 @@ public class ownerTransaksi extends javax.swing.JFrame {
         return beranda;
     }
 
+    public JButton logout() {
+        return logout;
+    }
+
     public JComboBox<String> getNamaBarang() {
         return namaBarang;
     }
@@ -286,12 +291,13 @@ public class ownerTransaksi extends javax.swing.JFrame {
         karyawan = new javax.swing.JButton();
         selesai = new javax.swing.JButton();
         logout = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         beranda = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(903, 600));
-        setPreferredSize(new java.awt.Dimension(903, 600));
+        setMinimumSize(new java.awt.Dimension(900, 600));
+        setPreferredSize(new java.awt.Dimension(900, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(diskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, 120, -1));
 
@@ -353,7 +359,7 @@ public class ownerTransaksi extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tabelPembayaran);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 630, 220));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 630, 190));
 
         jenisBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -375,7 +381,7 @@ public class ownerTransaksi extends javax.swing.JFrame {
             }
         });
         getContentPane().add(namaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 120, -1));
-        getContentPane().add(pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 50, 110, 20));
+        getContentPane().add(pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 40, 50, 20));
         getContentPane().add(invoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 120, -1));
 
         pilihkurir.addActionListener(new java.awt.event.ActionListener() {
@@ -413,10 +419,25 @@ public class ownerTransaksi extends javax.swing.JFrame {
         selesai.setText("selesai transaksi");
         getContentPane().add(selesai, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 330, 140, -1));
 
-        logout.setText(" ");
+        logout.setBackground(new java.awt.Color(27, 179, 133));
+        logout.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        logout.setForeground(new java.awt.Color(255, 255, 255));
+        logout.setText("LOGOUT");
+        logout.setBorder(null);
         logout.setBorderPainted(false);
         logout.setContentAreaFilled(false);
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 130, 40));
+        logout.setOpaque(true);
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, 110, 40));
+
+        jLabel4.setFont(new java.awt.Font("Candara", 0, 22)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel4.setText("Hai,");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
 
         beranda.setBackground(new java.awt.Color(255, 75, 109));
         beranda.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
@@ -426,7 +447,7 @@ public class ownerTransaksi extends javax.swing.JFrame {
         beranda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(beranda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 90, 30));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/07. owner tambah transaksi 2.png"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/07. owner tambah transaksi new.png"))); // NOI18N
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, -1));
 
         pack();
@@ -457,6 +478,10 @@ public class ownerTransaksi extends javax.swing.JFrame {
     private void pilihkurirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihkurirActionPerformed
 
     }//GEN-LAST:event_pilihkurirActionPerformed
+
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -501,6 +526,7 @@ public class ownerTransaksi extends javax.swing.JFrame {
     private javax.swing.JButton hapusBarang;
     private javax.swing.JTextField invoice;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox<String> jenisBarang;
     private javax.swing.JSpinner jumlahBarang;

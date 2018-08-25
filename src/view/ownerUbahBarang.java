@@ -154,14 +154,15 @@ public class ownerUbahBarang extends javax.swing.JFrame {
         hargaBarang = new javax.swing.JTextField();
         namaBarang = new javax.swing.JTextField();
         stokBarang = new javax.swing.JSpinner();
-        logout = new javax.swing.JButton();
         beranda = new javax.swing.JButton();
         karyawan = new javax.swing.JButton();
         barang = new javax.swing.JButton();
         transaksi = new javax.swing.JButton();
         id = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        logout = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         idbarang = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         tambahMerk = new javax.swing.JButton();
         tambahJenis = new javax.swing.JButton();
 
@@ -192,11 +193,6 @@ public class ownerUbahBarang extends javax.swing.JFrame {
         getContentPane().add(namaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 250, 30));
         getContentPane().add(stokBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 240, 30));
 
-        logout.setText(" ");
-        logout.setBorderPainted(false);
-        logout.setContentAreaFilled(false);
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 33, 140, 30));
-
         beranda.setBackground(new java.awt.Color(255, 75, 109));
         beranda.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         beranda.setForeground(new java.awt.Color(255, 255, 255));
@@ -226,12 +222,32 @@ public class ownerUbahBarang extends javax.swing.JFrame {
         transaksi.setBorder(null);
         transaksi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(transaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 90, 30));
-        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 50, 70, 20));
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, 70, 20));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/03. owner tambah barang 2.png"))); // NOI18N
+        logout.setBackground(new java.awt.Color(27, 179, 133));
+        logout.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        logout.setForeground(new java.awt.Color(255, 255, 255));
+        logout.setText("LOGOUT");
+        logout.setBorder(null);
+        logout.setBorderPainted(false);
+        logout.setContentAreaFilled(false);
+        logout.setOpaque(true);
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, 110, 40));
+
+        jLabel4.setFont(new java.awt.Font("Candara", 0, 22)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel4.setText("Hai,");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
+        getContentPane().add(idbarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 70, 20));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/03. owner tambah barang new.png"))); // NOI18N
         jLabel6.setText(" ");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
-        getContentPane().add(idbarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 70, 20));
 
         tambahMerk.setBackground(new java.awt.Color(102, 0, 0));
         tambahMerk.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
@@ -251,6 +267,10 @@ public class ownerUbahBarang extends javax.swing.JFrame {
     private void jenisBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisBarangActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jenisBarangActionPerformed
+
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,6 +313,7 @@ public class ownerUbahBarang extends javax.swing.JFrame {
     private javax.swing.JTextField hargaBarang;
     private javax.swing.JLabel id;
     private javax.swing.JLabel idbarang;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JComboBox<String> jenisBarang;
     private javax.swing.JButton karyawan;

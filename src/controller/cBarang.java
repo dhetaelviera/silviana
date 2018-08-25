@@ -85,6 +85,7 @@ public class cBarang {
         viewbarang.transaksiListener(new barangketransaksi());
         viewbarang.karyawanListener(new barangkekaryawan());
         viewbarang.ubahBarangListener(new barangkeubah());
+        viewbarang.berandaListener(new barangkeberanda());
         viewbarang.logoutListener(new logoutbarang());
         viewbarang.tambahBarangListener(new viewTambah());
         viewbarang.hapusListener(new hapusBarang());
@@ -226,6 +227,7 @@ public class cBarang {
         ownerTransaksi.tabelListener(new tabel2Listener());
         ownerTransaksi.backListener(new kembaliOwner());
         ownerTransaksi.selesaiListener(new selesaiOwner());
+//        ownerTransaksi.logoutListener(new ownerTransaksiLogout());
         ownerTransaksi.getSelesai().setEnabled(false);
         ownerTransaksi.transaksi().setEnabled(false);
         ownerTransaksi.getTambahBarang().setEnabled(false);
@@ -236,7 +238,7 @@ public class cBarang {
         ownerTransaksi.getDiskonVisible().setEnabled(false);
         ownerTransaksi.getJumlahBarang().setEnabled(false);
         ownerTransaksi.getHapus().setEnabled(false);
-
+        ownerTransaksi.logout().setEnabled(false);
         System.out.println(idMember);
 
     }
@@ -259,7 +261,6 @@ public class cBarang {
         this.ubahbarang.setStokBarang(stok);
         this.ubahbarang.setHargaBarang(harga);
         this.ubahbarang.barang().setEnabled(false);
-
         this.ubahbarang.transaksiListener(new ubahketransaksi());
         this.ubahbarang.berandaListener(new ubahkeberanda());
         this.ubahbarang.karyawanListener(new ubahkekaryawan());
@@ -281,7 +282,7 @@ public class cBarang {
         String cari = viewbarang.getPencarianBarang();
         System.out.println(cari);
         if (cari.equalsIgnoreCase("")) {
-            JOptionPane.showMessageDialog(owner, "Masukkan nama pembeli atau invoice yang ingin dicari");
+            JOptionPane.showMessageDialog(owner, "Masukkan nama pembeli atau invoice yang ingin dicari.");
         } else {
             viewbarang.setTabelBarang(mBarang.bacaTabelBarangCari(cari));
 
@@ -292,7 +293,7 @@ public class cBarang {
         String cari = jenisbarang.getcari();
         System.out.println(cari);
         if (cari.equalsIgnoreCase("")) {
-            JOptionPane.showMessageDialog(owner, "Masukkan jenis barang yang ingin dicari");
+            JOptionPane.showMessageDialog(owner, "Masukkan jenis barang yang ingin dicari.");
         } else {
             jenisbarang.setTabelJenis(mBarang.cariJenis(cari));
 
@@ -310,6 +311,24 @@ public class cBarang {
         }
     }
 
+//    private class ownerTransaksiLogout implements ActionListener {
+//
+//        public ownerTransaksiLogout() {
+//        }
+//
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Apakah anda yakin ingin keluar?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+//            if (pilihan == JOptionPane.NO_OPTION) {
+//                bacaTabelTransaksi2();
+//                bacaTotalTransaksi2();
+//            } else if (pilihan == JOptionPane.YES_OPTION) {
+//                new controller.cUser();
+//                ownerTransaksi.dispose();
+//
+//            }
+//        }
+//    }
     private class barangkeubah implements ActionListener {
 
         public barangkeubah() {
@@ -333,7 +352,7 @@ public class cBarang {
             bacaTabelCariNama();
             int data = viewbarang.getJumlahBaris();
             if (data == 0) {
-                JOptionPane.showMessageDialog(owner, "Data Yang Dicari Kosong");
+                JOptionPane.showMessageDialog(owner, "Data yang dicari kosong.");
                 bacaTabelBarang();
             }
 
@@ -352,7 +371,7 @@ public class cBarang {
             bacaTabelCariJenis();
             int data = jenisbarang.getJumlahBaris();
             if (data == 0) {
-                JOptionPane.showMessageDialog(owner, "Data Yang Dicari Kosong");
+                JOptionPane.showMessageDialog(owner, "Data yang dicari kosong.");
                 jenisbarang.setTabelJenis(mBarang.bacaTabelJenis());
             }
         }
@@ -369,7 +388,7 @@ public class cBarang {
             bacaTabelCariMerk();
             int data = merkbarang.getJumlahBaris();
             if (data == 0) {
-                JOptionPane.showMessageDialog(owner, "Data Yang Dicari Kosong");
+                JOptionPane.showMessageDialog(owner, "Data yang dicari kosong.");
                 merkbarang.setTabelMerk(mBarang.bacaTabelMerk());
             }
         }
@@ -383,6 +402,7 @@ public class cBarang {
         @Override
         public void actionPerformed(ActionEvent e) {
             bacaTabelBarang();
+            viewbarang.cari().setText("");
         }
 
     }
@@ -394,7 +414,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Apakah anda ingin pindah halaman ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(ubahbarang, "Kembali ke beranda? ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
 
             } else if (pilihan == JOptionPane.YES_OPTION) {
@@ -412,8 +432,14 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            ownerTransaksi.dispose();
-            new controller.cOwner(username, owner);
+            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Kembali ke beranda? ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+                ownerTransaksi.dispose();
+                new controller.cOwner(username, owner);
+
+            }
 
         }
     }
@@ -425,8 +451,14 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            jenisbarang.dispose();
-            new controller.cOwner(username, owner);
+            int pilihan = JOptionPane.showConfirmDialog(jenisbarang, "Kembali ke beranda? ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+                jenisbarang.dispose();
+                new controller.cOwner(username, owner);
+
+            }
+
         }
     }
 
@@ -437,8 +469,16 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            tambahbarang.dispose();
-            new controller.cOwner(username, owner);
+            int pilihan = JOptionPane.showConfirmDialog(tambahbarang, "Kembali ke beranda? ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+
+                tambahbarang.dispose();
+                new controller.cOwner(username, owner);
+
+            }
+
         }
     }
 
@@ -449,8 +489,13 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            merkbarang.dispose();
-            new controller.cOwner(username, owner);
+            int pilihan = JOptionPane.showConfirmDialog(merkbarang, "Kembali ke beranda? ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+                merkbarang.dispose();
+                new controller.cOwner(username, owner);
+
+            }
         }
     }
 
@@ -461,8 +506,16 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            viewbarang.dispose();
-            new controller.cOwner(username, owner);
+            int pilihan = JOptionPane.showConfirmDialog(viewbarang, "Kembali ke beranda? ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+
+                viewbarang.dispose();
+                new controller.cOwner(username, owner);
+
+            }
+
         }
     }
 
@@ -473,7 +526,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Apakah anda ingin yakin menghapus barang ini ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Apakah anda yakin ingin menghapus barang ini?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
                 bacaTabelBarang();
             } else if (pilihan == JOptionPane.YES_OPTION) {
@@ -493,7 +546,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Apakah anda ingin yakin menghapus jenis ini ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Apakah anda yakin ingin menghapus jenis ini?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
                 jenisbarang.setTabelJenis(mBarang.bacaTabelJenis());
             } else if (pilihan == JOptionPane.YES_OPTION) {
@@ -514,28 +567,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Apakah anda ingin yakin menghapus merk ini ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
-            if (pilihan == JOptionPane.NO_OPTION) {
-                merkbarang.setTabelMerk(mBarang.bacaTabelMerk());
-            } else if (pilihan == JOptionPane.YES_OPTION) {
-                boolean status = mBarang.hapusMerk(Integer.valueOf(idMerk));
-                if (status) {
-                    JOptionPane.showMessageDialog(ownerTransaksi, "Berhasil Dihapus");
-                    merkbarang.setTabelMerk(mBarang.bacaTabelMerk());
-
-                }
-            }
-        }
-    }
-
-    private class hapusjenis implements ActionListener {
-
-        public hapusjenis() {
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Apakah anda ingin yakin menghapus merk ini ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Apakah anda yakin ingin menghapus merk ini?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
                 merkbarang.setTabelMerk(mBarang.bacaTabelMerk());
             } else if (pilihan == JOptionPane.YES_OPTION) {
@@ -556,7 +588,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(adminTransaksi, "Apakah anda yakin keluar ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(adminTransaksi, "Apakah anda yakin ingin keluar?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
                 bacaTotalTransaksi();
                 bacaTabelTransaksi();
@@ -574,11 +606,10 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Pindah menu ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Pindah ke menu karyawan?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
                 bacaTabelTransaksi2();
                 bacaTotalTransaksi2();
-                ;
             } else if (pilihan == JOptionPane.YES_OPTION) {
                 ownerTransaksi.dispose();
                 new controller.cOwner(5, username);
@@ -593,7 +624,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Pindah menu ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Pindah ke menu barang? ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
                 bacaTabelTransaksi2();
                 bacaTotalTransaksi2();
@@ -612,7 +643,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(merkbarang, "Pindah menu ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(merkbarang, "Pindah ke menu karyawan? ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
 
             } else if (pilihan == JOptionPane.YES_OPTION) {
@@ -629,13 +660,27 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(merkbarang, "Pindah menu ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
-            if (pilihan == JOptionPane.NO_OPTION) {
+            String merk = merkbarang.getmerk();
 
-            } else if (pilihan == JOptionPane.YES_OPTION) {
-                merkbarang.dispose();
-                new controller.cBarang(3, 4, username);
+            if (merk.equalsIgnoreCase("")) {
+                int pilihan2 = JOptionPane.showConfirmDialog(merkbarang, "Pindah ke menu transaksi?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+                if (pilihan2 == JOptionPane.NO_OPTION) {
+                    merkbarang.setTabelMerk(mBarang.bacaTabelMerk());
+                } else if (pilihan2 == JOptionPane.YES_OPTION) {
+                    merkbarang.dispose();
+                    new controller.cBarang(3, 4, username);
+                }
+            } else {
+                int pilihan = JOptionPane.showConfirmDialog(merkbarang, "Data belum tersimpan. Tetap pindah ke menu transaksi?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+                if (pilihan == JOptionPane.NO_OPTION) {
+                    merkbarang.setTabelMerk(mBarang.bacaTabelMerk());
+                } else if (pilihan == JOptionPane.YES_OPTION) {
+                    merkbarang.dispose();
+                    new controller.cBarang(3, 4, username);
+                }
+
             }
+
         }
     }
 
@@ -646,13 +691,27 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(jenisbarang, "Pindah menu ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
-            if (pilihan == JOptionPane.NO_OPTION) {
+            String jenis = jenisbarang.getjenis();
 
-            } else if (pilihan == JOptionPane.YES_OPTION) {
-                jenisbarang.dispose();
-                new controller.cBarang(3, 4, username);
+            if (jenis.equalsIgnoreCase("")) {
+                int pilihan2 = JOptionPane.showConfirmDialog(jenisbarang, "Pindah ke menu transaksi?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+                if (pilihan2 == JOptionPane.NO_OPTION) {
+                    jenisbarang.setTabelJenis(mBarang.bacaTabelJenis());
+                } else if (pilihan2 == JOptionPane.YES_OPTION) {
+                    jenisbarang.dispose();
+                    new controller.cBarang(3, 4, username);
+                }
+            } else {
+                int pilihan = JOptionPane.showConfirmDialog(jenisbarang, "Data belum tersimpan. Tetap pindah ke menu barang?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+                if (pilihan == JOptionPane.NO_OPTION) {
+                    jenisbarang.setTabelJenis(mBarang.bacaTabelJenis());
+                } else if (pilihan == JOptionPane.YES_OPTION) {
+                    jenisbarang.dispose();
+                    new controller.cBarang(3, 4, username);
+                }
+
             }
+
         }
     }
 
@@ -663,7 +722,8 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(ubahbarang, "Data tidak akan tersimpan. Keluar ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+
+            int pilihan = JOptionPane.showConfirmDialog(ubahbarang, "Apabila Anda belum menyimpan data baru, data tidak akan tersimpan. Tetap ingin keluar? ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
 
             } else if (pilihan == JOptionPane.YES_OPTION) {
@@ -680,7 +740,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(ubahbarang, "Data tidak akan tersimpan. Pindah menu ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(ubahbarang, "Apabila Anda belum menyimpan data baru, data tidak akan tersimpan. Tetap ingin pindah menu?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
 
             } else if (pilihan == JOptionPane.YES_OPTION) {
@@ -697,7 +757,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(ubahbarang, "Data tidak akan tersimpan. Pindah menu ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(ubahbarang, "Apabila Anda belum menyimpan data baru, data tidak akan tersimpan. Tetap ingin pindah menu? ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
 
             } else if (pilihan == JOptionPane.YES_OPTION) {
@@ -714,7 +774,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(tambahbarang, "Apakah anda ingin yakin ingin keluar ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(tambahbarang, "Apabila Anda belum menyimpan data baru, data tidak akan tersimpan. Apakah anda yakin ingin keluar?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
 
             } else if (pilihan == JOptionPane.YES_OPTION) {
@@ -731,7 +791,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(tambahbarang, "Apakah anda ingin yakin ingin keluar dari halaman ini ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(tambahbarang, "Apabila Anda belum menyimpan data baru, data tidak akan tersimpan. Tetap ingin pindah menu?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
 
             } else if (pilihan == JOptionPane.YES_OPTION) {
@@ -748,7 +808,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(tambahbarang, "Apakah anda ingin yakin ingin keluar ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(tambahbarang, "Apabila Anda belum menyimpan data baru, data tidak akan tersimpan. Tetap pindah menu?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
 
             } else if (pilihan == JOptionPane.YES_OPTION) {
@@ -765,7 +825,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(viewbarang, "Apakah anda ingin yakin ingin keluar ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(viewbarang, "Apakah anda yakin ingin keluar?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
                 viewbarang.setTabelBarang(mBarang.bacaTabelBarang());
             } else if (pilihan == JOptionPane.YES_OPTION) {
@@ -782,9 +842,14 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            int pilihan = JOptionPane.showConfirmDialog(viewbarang, "Pindah ke menu karyawan?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+                viewbarang.setTabelBarang(mBarang.bacaTabelBarang());
+            } else if (pilihan == JOptionPane.YES_OPTION) {
 
-            viewbarang.dispose();
-            new controller.cOwner(2, username);
+                viewbarang.dispose();
+                new controller.cOwner(2, username);
+            }
 
         }
     }
@@ -796,9 +861,14 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            int pilihan = JOptionPane.showConfirmDialog(viewbarang, "Pindah ke menu transaksi?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+                viewbarang.setTabelBarang(mBarang.bacaTabelBarang());
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+                viewbarang.dispose();
+                new cBarang(2, 2, username);
 
-            viewbarang.dispose();
-            new cBarang(2, 2, username);
+            }
 
         }
     }
@@ -810,9 +880,14 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            int pilihan = JOptionPane.showConfirmDialog(jenisbarang, "Apakah anda yakin ingin keluar?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+                jenisbarang.setTabelJenis(mBarang.bacaTabelJenis());
+            } else if (pilihan == JOptionPane.YES_OPTION) {
 
-            new controller.cUser();
-            jenisbarang.dispose();
+                new controller.cUser();
+                jenisbarang.dispose();
+            }
         }
     }
 
@@ -823,7 +898,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(jenisbarang, "Apakah anda ingin yakin meninggalkan halaman ini ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(jenisbarang, "Pindah ke menu karyawan?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
                 jenisbarang.setTabelJenis(mBarang.bacaTabelJenis());
             } else if (pilihan == JOptionPane.YES_OPTION) {
@@ -840,7 +915,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(jenisbarang, "Apakah anda ingin yakin meninggalkan halaman ini ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(jenisbarang, "Pindah ke menu barang?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
                 jenisbarang.setTabelJenis(mBarang.bacaTabelJenis());
             } else if (pilihan == JOptionPane.YES_OPTION) {
@@ -871,11 +946,11 @@ public class cBarang {
         public void actionPerformed(ActionEvent e) {
             String merk = merkbarang.getmerk();
             if (merk.equalsIgnoreCase("")) {
-                JOptionPane.showMessageDialog(merkbarang, "Jenis barang tidak boleh kosong");
+                JOptionPane.showMessageDialog(merkbarang, "Merk barang tidak boleh kosong.");
             } else {
                 boolean tambah = mBarang.tambahMerk(merk);
                 if (tambah) {
-                    JOptionPane.showMessageDialog(merkbarang, "Data berhasil dimasukkan");
+                    JOptionPane.showMessageDialog(merkbarang, "Data berhasil dimasukkan.");
                     merkbarang.jenis().setText("");
                     merkbarang.setTabelMerk(mBarang.bacaTabelMerk());
                 } else {
@@ -892,8 +967,14 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            new cBarang(username);
-            jenisbarang.dispose();
+            int pilihan = JOptionPane.showConfirmDialog(jenisbarang, "Apabila Anda belum menyimpan data baru, data tidak akan tersimpan. Kembali ke menu barang?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+                jenisbarang.setTabelJenis(mBarang.bacaTabelJenis());
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+
+                new cBarang(username);
+                jenisbarang.dispose();
+            }
         }
     }
 
@@ -906,11 +987,11 @@ public class cBarang {
         public void actionPerformed(ActionEvent e) {
             String jenis = jenisbarang.getjenis();
             if (jenis.equalsIgnoreCase("")) {
-                JOptionPane.showMessageDialog(jenisbarang, "Jenis barang tidak boleh kosong");
+                JOptionPane.showMessageDialog(jenisbarang, "Jenis barang tidak boleh kosong.");
             } else {
                 boolean tambah = mBarang.tambahJenis(jenis);
                 if (tambah) {
-                    JOptionPane.showMessageDialog(jenisbarang, "Data berhasil dimasukkan");
+                    JOptionPane.showMessageDialog(jenisbarang, "Data berhasil dimasukkan.");
                     jenisbarang.jenis().setText("");
                     jenisbarang.setTabelJenis(mBarang.bacaTabelJenis());
                 } else {
@@ -1093,8 +1174,14 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            new controller.cBarang(username);
-            tambahbarang.dispose();
+            int pilihan = JOptionPane.showConfirmDialog(tambahbarang, "Apabila Anda belum menyimpan data baru, data tidak akan tersimpan. Tetap kembali ke menu barang?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (pilihan == JOptionPane.NO_OPTION) {
+                tambahbarang.nama().setText("");
+            } else if (pilihan == JOptionPane.YES_OPTION) {
+
+                new controller.cBarang(username);
+                tambahbarang.dispose();
+            }
         }
     }
 
@@ -1141,11 +1228,13 @@ public class cBarang {
         public void actionPerformed(ActionEvent e) {
             String jenis = JOptionPane.showInputDialog("Masukkan jenis barang");
             System.out.println(jenis);
+
             boolean tambah = mBarang.tambahJenis(jenis);
             String jenis_Barang[][];
             jenis_Barang = mBarang.getJenis();
             tambahbarang.setJenis(jenis_Barang);
             tambahbarang.jenisbaru(jenis);
+
         }
     }
 
@@ -1158,11 +1247,13 @@ public class cBarang {
         public void actionPerformed(ActionEvent e) {
             String merk = JOptionPane.showInputDialog("Masukkan merk barang");
             System.out.println(merk);
+
             boolean tambah = mBarang.tambahMerk(merk);
             String merk_Barang[][];
             merk_Barang = mBarang.getMerk();
             tambahbarang.setMerk(merk_Barang);
             tambahbarang.merkbaru(merk);
+
 //            tambahbarang.merk().setModel(new DefaultComboBoxModel<>(merk_Barang[1]));
         }
     }
@@ -1212,7 +1303,7 @@ public class cBarang {
                 JOptionPane.showMessageDialog(ownerTransaksi, "Diskon tidak boleh kosong");
             } else {
                 if (qty == 0) {
-                    JOptionPane.showMessageDialog(ownerTransaksi, "Quantity tidak boleh kosong");
+                    JOptionPane.showMessageDialog(ownerTransaksi, "Jumlah tidak boleh 0");
                 } else {
                     int idTransaksi = Integer.valueOf(mTransaksi.getIDTransaksi(idMember));
                     String idBarang = ownerTransaksi.getBarang();
@@ -1318,7 +1409,7 @@ public class cBarang {
 
             String idTransaksi = String.valueOf(mTransaksi.getIDTransaksi(idMember));
             System.out.println(idTransaksi + "kembalinya ya");
-            int pilihan = JOptionPane.showConfirmDialog(adminTransaksi, "mau balik ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(adminTransaksi, "Transaksi tidak akan tersimpan. Tetap kembali?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (pilihan == JOptionPane.NO_OPTION) {
                 bacaTabelTransaksi();
                 bacaTotalTransaksi();
@@ -1327,7 +1418,7 @@ public class cBarang {
                 boolean hapus = mTransaksi.hapusTransaksi(Integer.valueOf(idTransaksi));
                 boolean hapusjuga = mTransaksi.hapusTransaksi2(Integer.valueOf(idTransaksi));
 
-                JOptionPane.showMessageDialog(adminTransaksi, "Transaksi batal masuk coy");
+                JOptionPane.showMessageDialog(adminTransaksi, "Transaksi batal masuk.");
                 new controller.cAdmin(username, vtabeladmin);
                 adminTransaksi.dispose();
             } else {
@@ -1347,7 +1438,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "mau balik ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Transaksi tidak akan tersimpan. Tetap kembali?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
             if (idTransaksi != null) {
                 if (pilihan == JOptionPane.NO_OPTION) {
                     bacaTabelTransaksi2();
@@ -1357,7 +1448,7 @@ public class cBarang {
                     System.out.println(idTransaksi + "kembalinya ya");
                     boolean hapus = mTransaksi.hapusTransaksi(Integer.valueOf(idTransaksi));
                     boolean hapusjuga = mTransaksi.hapusTransaksi2(Integer.valueOf(idTransaksi));
-                    JOptionPane.showMessageDialog(ownerTransaksi, "Transaksi batal masuk coy");
+                    JOptionPane.showMessageDialog(ownerTransaksi, "Transaksi batal masuk.");
                     new controller.cOwner(username, owner);
                     ownerTransaksi.dispose();
                 } else {
@@ -1369,7 +1460,7 @@ public class cBarang {
             } else if (idTransaksi == null) {
                 if (pilihan == JOptionPane.YES_OPTION) {
 
-                    JOptionPane.showMessageDialog(ownerTransaksi, "Transaksi batal masuk coy");
+                    JOptionPane.showMessageDialog(ownerTransaksi, "Transaksi batal masuk.");
                     new controller.cOwner(username, owner);
                     ownerTransaksi.dispose();
                 }
@@ -1428,7 +1519,7 @@ public class cBarang {
                 JOptionPane.showMessageDialog(adminTransaksi, "Diskon tidak boleh kosong");
             } else {
                 if (qty == 0) {
-                    JOptionPane.showMessageDialog(adminTransaksi, "Quantity tidak boleh kosong");
+                    JOptionPane.showMessageDialog(adminTransaksi, "Jumlah tidak boleh 0");
                 } else {
                     int idTransaksi = Integer.valueOf(mTransaksi.getIDTransaksi(idMember));
                     String idBarang = adminTransaksi.getBarang();
@@ -1504,7 +1595,7 @@ public class cBarang {
             System.out.println(username);
             String diskon2 = adminTransaksi.getDiskon();
             if (qty == 0) {
-                JOptionPane.showMessageDialog(adminTransaksi, "Quantity tidak boleh kosong");
+                JOptionPane.showMessageDialog(adminTransaksi, "Jumlah tidak boleh 0");
             } else {
                 if (diskon2.equalsIgnoreCase("")) {
                     JOptionPane.showMessageDialog(adminTransaksi, "Diskon tidak boleh kosong");
@@ -1591,7 +1682,7 @@ public class cBarang {
 
             String diskon2 = ownerTransaksi.getDiskon();
             if (qty == 0) {
-                JOptionPane.showMessageDialog(ownerTransaksi, "Quantity tidak boleh kosong");
+                JOptionPane.showMessageDialog(ownerTransaksi, "Jumlah tidak boleh 0");
             } else {
                 if (diskon2.equalsIgnoreCase("")) {
                     JOptionPane.showMessageDialog(ownerTransaksi, "Diskon tidak boleh kosong");
@@ -1842,7 +1933,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "selessai ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(ownerTransaksi, "Apakah transaksi sudah selesai?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
 
             if (pilihan == JOptionPane.NO_OPTION) {
                 bacaTabelTransaksi2();
@@ -1867,7 +1958,7 @@ public class cBarang {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int pilihan = JOptionPane.showConfirmDialog(adminTransaksi, "selessai ta ", " Konfirmasi", JOptionPane.YES_NO_OPTION);
+            int pilihan = JOptionPane.showConfirmDialog(adminTransaksi, "Apakah transaksi sudah selesai?", " Konfirmasi", JOptionPane.YES_NO_OPTION);
 
             if (pilihan == JOptionPane.NO_OPTION) {
                 bacaTabelTransaksi();

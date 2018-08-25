@@ -131,7 +131,6 @@ public class ownerJenis extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelJenis = new javax.swing.JTable();
         jenis = new javax.swing.JTextField();
-        logout = new javax.swing.JButton();
         tambah = new javax.swing.JButton();
         hapus = new javax.swing.JButton();
         kembali = new javax.swing.JButton();
@@ -142,6 +141,8 @@ public class ownerJenis extends javax.swing.JFrame {
         cari = new javax.swing.JTextField();
         cariButton = new javax.swing.JButton();
         id = new javax.swing.JLabel();
+        logout = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -162,10 +163,6 @@ public class ownerJenis extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 560, 200));
         getContentPane().add(jenis, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 230, 30));
-
-        logout.setBorderPainted(false);
-        logout.setContentAreaFilled(false);
-        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 29, 130, 40));
 
         tambah.setBackground(new java.awt.Color(27, 179, 133));
         tambah.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
@@ -231,10 +228,33 @@ public class ownerJenis extends javax.swing.JFrame {
 
         id.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         id.setForeground(new java.awt.Color(102, 0, 0));
-        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, 80, 20));
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, 70, 30));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/04. owner tambah jenis barang 2.png"))); // NOI18N
+        logout.setBackground(new java.awt.Color(27, 179, 133));
+        logout.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        logout.setForeground(new java.awt.Color(255, 255, 255));
+        logout.setText("LOGOUT");
+        logout.setBorder(null);
+        logout.setBorderPainted(false);
+        logout.setContentAreaFilled(false);
+        logout.setOpaque(true);
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, 110, 40));
+
+        jLabel4.setFont(new java.awt.Font("Candara", 0, 22)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 0, 0));
+        jLabel4.setText("Hai,");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/04. owner tambah jenis barang new.png"))); // NOI18N
         jLabel2.setText(" ");
+        jLabel2.setMaximumSize(new java.awt.Dimension(900, 600));
+        jLabel2.setMinimumSize(new java.awt.Dimension(900, 600));
+        jLabel2.setPreferredSize(new java.awt.Dimension(900, 600));
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
         pack();
@@ -243,6 +263,10 @@ public class ownerJenis extends javax.swing.JFrame {
     private void tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tambahActionPerformed
+
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,6 +311,7 @@ public class ownerJenis extends javax.swing.JFrame {
     private javax.swing.JButton hapus;
     private javax.swing.JLabel id;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jenis;
     private javax.swing.JButton karyawan;
