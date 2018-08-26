@@ -280,6 +280,7 @@ public class ownerBarang extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/new 2.png"))); // NOI18N
+        jLabel1.setPreferredSize(new java.awt.Dimension(900, 600));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 600));
 
         pack();

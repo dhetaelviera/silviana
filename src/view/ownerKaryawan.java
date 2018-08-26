@@ -145,6 +145,7 @@ public class ownerKaryawan extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(900, 599));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabelKaryawan.setModel(new javax.swing.table.DefaultTableModel(
@@ -241,9 +242,9 @@ public class ownerKaryawan extends javax.swing.JFrame {
         jLabel4.setText(" ");
         jLabel4.setMaximumSize(new java.awt.Dimension(900, 600));
         jLabel4.setMinimumSize(new java.awt.Dimension(900, 600));
-        jLabel4.setPreferredSize(new java.awt.Dimension(900, 600));
+        jLabel4.setPreferredSize(new java.awt.Dimension(900, 599));
         jLabel4.setRequestFocusEnabled(false);
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

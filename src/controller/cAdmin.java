@@ -82,8 +82,33 @@ public class cAdmin {
         this.vtabelTrans.tanggalbulan(new aktif());
         this.vtabelTrans.akhir(new aktif2());
         this.vtabelTrans.reset(new resetTabel());
-//     
+        this.vtabelTrans.cariListener(new searchEngine());
         this.vtabelTrans.setTabel(mTransaksi.bacaTabelAdmin(username));
+    }
+
+    private void bacaTabelCari() {
+        String cari = vtabelTrans.getCari();
+        System.out.println(cari);
+        if (cari.equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(vtabelTrans, "Masukkan nama pembeli atau invoice yang ingin dicari");
+        } else {
+            vtabelTrans.setTabel(mTransaksi.cariPembeli(cari));
+
+        }
+    }
+
+    private class searchEngine implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            bacaTabelCari();
+            int data = vtabelTrans.getJumlahBaris();
+            if (data == 0) {
+                JOptionPane.showMessageDialog(vtabelTrans, "Data yang dicari kosong.");
+                vtabelTrans.setTabel(mTransaksi.bacaTabelAdmin(username));
+            }
+
+        }
     }
 
     private class resetTabel implements ActionListener {

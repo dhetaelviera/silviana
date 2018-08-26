@@ -1950,9 +1950,10 @@ public class cBarang {
 
             System.out.println(namaPembeli);
 
-            if (namaPembeli.equalsIgnoreCase("")) {
-                JOptionPane.showMessageDialog(ownerTransaksi, "Nama pembeli tidak boleh kosong");
-            } else {
+            if (namaPembeli.equalsIgnoreCase("")&&invoice.equalsIgnoreCase("")) {
+                JOptionPane.showMessageDialog(ownerTransaksi, "Nama pembeli dan invoice tidak boleh kosong");
+            }  
+            else {
                 System.out.println(namaPembeli);
                 mTransaksi.tambahTransaksi1(idMember, username1, kurir, invoice);
                 JOptionPane.showMessageDialog(ownerTransaksi, "Silahkan masukkan barang yang dibeli");
@@ -1966,6 +1967,8 @@ public class cBarang {
                 ownerTransaksi.getNamaBarang().setEnabled(true);
                 ownerTransaksi.getDiskonVisible().setEnabled(true);
                 ownerTransaksi.getJumlahBarang().setEnabled(true);
+                ownerTransaksi.kurir().disable();
+                
                 ownerTransaksi.setDiskon("0");
 
             }

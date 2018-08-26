@@ -146,6 +146,8 @@ public class ownerJenis extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(900, 599));
+        setPreferredSize(new java.awt.Dimension(900, 599));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabelJenis.setModel(new javax.swing.table.DefaultTableModel(

@@ -173,8 +173,7 @@ public class ownerBarangTambah extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(900, 600));
-        setPreferredSize(new java.awt.Dimension(900, 600));
+        setMinimumSize(new java.awt.Dimension(900, 599));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(hargaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, 250, 30));
         getContentPane().add(stokBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 240, 30));
@@ -204,6 +203,9 @@ public class ownerBarangTambah extends javax.swing.JFrame {
         simpan.setText("simpan");
         getContentPane().add(simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 490, 110, 30));
 
+        jenisBarang.setBackground(new java.awt.Color(255, 75, 109));
+        jenisBarang.setFont(new java.awt.Font("Candara", 0, 12)); // NOI18N
+        jenisBarang.setForeground(new java.awt.Color(255, 255, 255));
         jenisBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jenisBarangActionPerformed(evt);
@@ -211,6 +213,9 @@ public class ownerBarangTambah extends javax.swing.JFrame {
         });
         getContentPane().add(jenisBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 240, 20));
 
+        merkBarang.setBackground(new java.awt.Color(255, 75, 109));
+        merkBarang.setFont(new java.awt.Font("Candara", 0, 12)); // NOI18N
+        merkBarang.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(merkBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 240, -1));
 
         transaksi.setBackground(new java.awt.Color(255, 75, 109));

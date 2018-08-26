@@ -30,20 +30,17 @@ import view.ownerDashboard;
  *
  * @author Dheta
  */
-public class transaksi implements NewInterface{
+public class transaksi implements NewInterface {
 
     Connection konek;
     JasperReport jasperReport;
     JasperDesign jasperDesign;
     JasperPrint jasperPrint;
-    
-    
+
     public transaksi() {
         konek = new koneksi().getKoneksi();
     }
 
-    
-    
     public boolean tambahTransaksi1(String idMember, String username, String kurir, String invoice) {
         String query = "insert into `transaksi` (`idMember`,`tanggalBeli`,`pegawai`,`kurir`,`invoice`)VALUES(?,CURRENT_DATE,?,?,?)";
         try {
@@ -180,7 +177,7 @@ public class transaksi implements NewInterface{
 
     }
 
-       public String[][] getKurir() {
+    public String[][] getKurir() {
         String query = "select idkurir, nama from kurir";
         String jenis[][] = null;
 
@@ -225,8 +222,7 @@ public class transaksi implements NewInterface{
         }
         return jenis;
     }
-    
-    
+
     public String[][] getMerk() {
         String query = "SELECT idMerk, namamerk from merk";
         String merk[][] = null;
@@ -265,13 +261,13 @@ public class transaksi implements NewInterface{
         }
         return barang;
     }
-    
+
     public int getIDMember() {
         String query = "select idMember from member order by idMember desc";
         int barang = 0;
         try {
             PreparedStatement st = konek.prepareStatement(query);
-            
+
             ResultSet rs = st.executeQuery();
             rs.next();
             barang = rs.getInt("idMember");
@@ -332,7 +328,7 @@ public class transaksi implements NewInterface{
     public DefaultTableModel bacaTabelTransaksiOwner() {
         String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli, t.invoice, u.nama"
                 + "  FROM transaksi t JOIN member m ON m.idmember=t.idMember JOIN user u on u.username=t.pegawai ORDER BY tanggalBeli desc";
-        String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "invoice","Pegawai", "Total Harga"};
+        String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "invoice", "Pegawai", "Total Harga"};
         DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
         try {
             PreparedStatement st = konek.prepareStatement(query);
@@ -355,29 +351,29 @@ public class transaksi implements NewInterface{
         }
         return tabel;
     }
+
     public DefaultTableModel bacaTabelAdmin(String username) {
 
-        
-        String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "Pegawai", "Total Harga"};
-       
-        
+        String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "invoice", "Pegawai", "Total Harga"};
+
         DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
         for (int i = tabel.getRowCount() - 1; i >= 0; i--) {
             tabel.removeRow(i);
         }
-        String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli, t.pegawai"
-                + "  FROM transaksi t JOIN member m ON m.idmember=t.idMember where t.pegawai='"+username+"' ORDER BY tanggalBeli desc";
+        String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli, t.invoice, u.nama"
+                + "  FROM transaksi t JOIN member m ON m.idmember=t.idMember JOIN user u on u.username=t.pegawai where t.pegawai='" + username + "' ORDER BY tanggalBeli desc";
         try {
             Statement st = konek.createStatement();
             ResultSet rs = st.executeQuery(query);
-             while (rs.next()) {
-                Object data[] = new Object[5];
+            while (rs.next()) {
+                Object data[] = new Object[6];
 
                 data[0] = rs.getString(1);
                 data[1] = rs.getString(2);
                 data[2] = rs.getString(3);
                 data[3] = rs.getString(4);
-                data[4] = getTotalTransaksi((String) data[0]);
+                data[4] = rs.getString(5);
+                data[5] = getTotalTransaksi((String) data[0]);
                 tabel.addRow(data);
             }
         } catch (SQLException e) {
@@ -388,21 +384,22 @@ public class transaksi implements NewInterface{
     }
 
     public DefaultTableModel bacaTabelTransaksiAdmin(String username) {
-        String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli, t.pegawai"
-                + "  FROM transaksi t JOIN member m ON m.idmember=t.idMember where t.pegawai=? ORDER BY tanggalBeli desc";
-        String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "Pegawai", "Total Harga"};
+        String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli, t.invoice, u.nama"
+                + "  FROM transaksi t JOIN member m ON m.idmember=t.idMember JOIN user u on u.username=t.pegawai ORDER BY tanggalBeli desc";
+        String namaKolom[] = {"ID Transaksi", "Nama Pembeli", "Tanggal Pembelian", "invoice", "Pegawai", "Total Harga"};
         DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
         try {
             PreparedStatement st = konek.prepareStatement(query);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Object data[] = new Object[5];
+                Object data[] = new Object[6];
 
                 data[0] = rs.getString(1);
                 data[1] = rs.getString(2);
                 data[2] = rs.getString(3);
                 data[3] = rs.getString(4);
-                data[4] = getTotalTransaksi((String) data[0]);
+                data[4] = rs.getString(5);
+                data[5] = getTotalTransaksi((String) data[0]);
                 tabel.addRow(data);
             }
 
@@ -471,7 +468,7 @@ public class transaksi implements NewInterface{
         }
         return tabel;
     }
-    
+
     public DefaultTableModel bacaTabelTransaksiAdminbyDate(String username, Date tanggal) throws ParseException {
         String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli"
                 + "  FROM transaksi t JOIN member m ON m.idMember=t.idMember WHERE t.tanggalBeli=? and t.pegawai=? ORDER BY t.tanggalBeli desc;";
@@ -504,8 +501,6 @@ public class transaksi implements NewInterface{
         }
         return tabel;
     }
-    
-    
 
     public DefaultTableModel bacaTabelTransaksiManajerbyDateRange(Date tanggal1, Date tanggal2) throws ParseException {
         String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli  FROM transaksi t JOIN member m ON m.idMember=t.idMember"
@@ -527,7 +522,7 @@ public class transaksi implements NewInterface{
             System.out.println(sqlDate2);
             System.out.println(tanggal1);
             System.out.println(tanggal2);
-            
+
             st.setDate(1, sqlDate1);
             st.setDate(2, sqlDate2);
             System.out.println(query);
@@ -569,7 +564,7 @@ public class transaksi implements NewInterface{
             System.out.println(sqlDate2);
             System.out.println(tanggal1);
             System.out.println(tanggal2);
-            
+
             st.setString(1, username);
             st.setDate(2, sqlDate1);
             st.setDate(3, sqlDate2);
@@ -591,7 +586,7 @@ public class transaksi implements NewInterface{
         }
         return tabel;
     }
-    
+
     public DefaultTableModel bacaTabelTransaksiManajerbyMonth(Date tanggal) throws ParseException {
         String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli"
                 + "  FROM transaksi t JOIN member m ON m.idMember=t.idMember WHERE SUBSTRING(tanggalBeli,6,2)=? ORDER BY tanggalBeli  desc;";
@@ -626,7 +621,7 @@ public class transaksi implements NewInterface{
         }
         return tabel;
     }
-    
+
     public DefaultTableModel bacaTabelTransaksiAdminbyMonth(String username, Date tanggal) throws ParseException {
         String query = "SELECT t.idTransaksi, m.nama, t.tanggalBeli"
                 + "  FROM transaksi t JOIN member m ON m.idMember=t.idMember WHERE SUBSTRING(tanggalBeli,6,2)=? and t.pegawai=? ORDER BY tanggalBeli  desc;";
@@ -677,38 +672,7 @@ public class transaksi implements NewInterface{
             while (rs.next()) {
                 Object data[] = new Object[6];
                 int i = 0;
-                
-                data[0] = rs.getString(1);
-                data[1] = rs.getString(2);
-                data[2] = rs.getString(3);
-                data[3] = rs.getString(4);
-                data[4] = rs.getString(5);
-                data[5] = getTotalTransaksi(String.valueOf(data[0]));
 
-                tabel.addRow(data);
-            }
-
-        } catch (SQLException e) {
-            e.getMessage();
-            e.printStackTrace();
-        }
-        return tabel;
-    }
-
-    public DefaultTableModel cariInvoice(String cari) {
-        String query = "SELECT t.idtransaksi, m.nama, t.tanggalbeli, t.invoice, t.pegawai  FROM transaksi t join member m on m.idmember=t.idmember "
-                + "WHERE (t.invoice LIKE '" + cari + "%' or t.invoice LIKE '%" + cari + "%' or t.invoice LIKE '%" + cari + "')";
-        String namaKolom[] = {"ID Transaski", "Nama pembeli", "Tanggal beli", "invoice", "pegawai", "total harga"};
-        DefaultTableModel tabel = new DefaultTableModel(null, namaKolom);
-        System.out.println(query);
-        try {
-            PreparedStatement st = konek.prepareStatement(query);
-            ResultSet rs = st.executeQuery();
-
-            while (rs.next()) {
-                Object data[] = new Object[6];
-                int i = 0;
-                
                 data[0] = rs.getString(1);
                 data[1] = rs.getString(2);
                 data[2] = rs.getString(3);
@@ -728,10 +692,10 @@ public class transaksi implements NewInterface{
 
     public void cetak(ownerDashboard od) throws SQLException {
         try {
-            File report_file=new File("src/report/report1.jrxml");
-            jasperDesign=JRXmlLoader.load(report_file);
-            jasperReport=JasperCompileManager.compileReport(jasperDesign);
-            jasperPrint = JasperFillManager.fillReport(jasperReport,null,konek);
+            File report_file = new File("src/report/report1.jrxml");
+            jasperDesign = JRXmlLoader.load(report_file);
+            jasperReport = JasperCompileManager.compileReport(jasperDesign);
+            jasperPrint = JasperFillManager.fillReport(jasperReport, null, konek);
             JasperViewer.viewReport(jasperPrint, false);
         } catch (Exception e) {
             System.out.println(e.getMessage());

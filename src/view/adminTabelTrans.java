@@ -30,6 +30,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JTextField;
 
 /**
  *
@@ -65,6 +66,12 @@ public class adminTabelTrans extends javax.swing.JFrame {
         Date tgllahir1 = (calender2.getDate());
         return tgllahir1;
     }
+     public int getJumlahBaris() {
+        return tabel.getRowCount();
+    }
+    public String getCari(){
+        return cari.getText();
+    }
 
     public void setTabel(DefaultTableModel t) {
         tabel.setModel(t);
@@ -72,6 +79,10 @@ public class adminTabelTrans extends javax.swing.JFrame {
 
     public void backListener(ActionListener a) {
         kembali.addActionListener(a);
+    }
+    
+    public void cariListener(ActionListener a) {
+        cariButton.addActionListener(a);
     }
 
     public void hapusListener(ActionListener a) {
@@ -120,6 +131,14 @@ public class adminTabelTrans extends javax.swing.JFrame {
 
     public JTable tabel() {
         return tabel;
+    }
+
+    public JTextField cari() {
+        return cari;
+    }
+    
+    public JButton cariButton(){
+        return cariButton;
     }
 
     public JButton tambah() {
@@ -200,11 +219,13 @@ public class adminTabelTrans extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         logout = new javax.swing.JButton();
         id = new javax.swing.JLabel();
+        cari = new javax.swing.JTextField();
+        cariButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(900, 600));
-        setPreferredSize(new java.awt.Dimension(900, 600));
+        setMinimumSize(new java.awt.Dimension(900, 599));
+        setPreferredSize(new java.awt.Dimension(900, 599));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabel.setModel(new javax.swing.table.DefaultTableModel(
@@ -220,7 +241,7 @@ public class adminTabelTrans extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabel);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 510, 380));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 510, 350));
 
         hapus.setBackground(new java.awt.Color(153, 0, 0));
         hapus.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
@@ -370,6 +391,16 @@ public class adminTabelTrans extends javax.swing.JFrame {
 
         id.setText(" ");
         getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 40, 60, 20));
+
+        cari.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 260, 30));
+
+        cariButton.setBackground(new java.awt.Color(27, 179, 133));
+        cariButton.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        cariButton.setForeground(new java.awt.Color(255, 255, 255));
+        cariButton.setText("cari");
+        cariButton.setBorder(null);
+        getContentPane().add(cariButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 50, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/png/new 2.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 590));
@@ -638,6 +669,8 @@ public class adminTabelTrans extends javax.swing.JFrame {
     private org.jdesktop.swingx.JXDatePicker calender;
     private org.jdesktop.swingx.JXDatePicker calender1;
     private org.jdesktop.swingx.JXDatePicker calender2;
+    private javax.swing.JTextField cari;
+    private javax.swing.JButton cariButton;
     private javax.swing.JButton cetak;
     private javax.swing.JButton hapus;
     private javax.swing.JLabel id;

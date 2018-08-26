@@ -158,8 +158,13 @@ public class ownerUbahBarang extends javax.swing.JFrame {
         idbarang = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(900, 599));
+        setPreferredSize(new java.awt.Dimension(900, 599));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        merkBarang.setBackground(new java.awt.Color(255, 75, 109));
+        merkBarang.setFont(new java.awt.Font("Candara", 0, 12)); // NOI18N
+        merkBarang.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(merkBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 190, -1));
 
         simpan.setBackground(new java.awt.Color(27, 179, 133));
@@ -174,6 +179,9 @@ public class ownerUbahBarang extends javax.swing.JFrame {
         kembali.setText("kembali");
         getContentPane().add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 460, -1, -1));
 
+        jenisBarang.setBackground(new java.awt.Color(255, 75, 109));
+        jenisBarang.setFont(new java.awt.Font("Candara", 0, 12)); // NOI18N
+        jenisBarang.setForeground(new java.awt.Color(255, 255, 255));
         jenisBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jenisBarangActionPerformed(evt);

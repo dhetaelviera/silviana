@@ -258,6 +258,10 @@ public class ownerTransaksi extends javax.swing.JFrame {
     public JComboBox kurir() {
         return pilihkurir;
     }
+    
+    public JTextField invoice(){
+        return invoice;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -296,8 +300,8 @@ public class ownerTransaksi extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(900, 600));
-        setPreferredSize(new java.awt.Dimension(900, 600));
+        setMinimumSize(new java.awt.Dimension(900, 599));
+        setPreferredSize(new java.awt.Dimension(900, 599));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(diskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, 120, -1));
 
@@ -320,7 +324,7 @@ public class ownerTransaksi extends javax.swing.JFrame {
         tambahKurir.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
         tambahKurir.setForeground(new java.awt.Color(255, 255, 255));
         tambahKurir.setText("+");
-        getContentPane().add(tambahKurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 30, 20));
+        getContentPane().add(tambahKurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, -1, 20));
 
         tambahBarang.setBackground(new java.awt.Color(27, 179, 133));
         tambahBarang.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
@@ -361,6 +365,8 @@ public class ownerTransaksi extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 630, 190));
 
+        jenisBarang.setBackground(new java.awt.Color(255, 75, 109));
+        jenisBarang.setForeground(new java.awt.Color(255, 255, 255));
         jenisBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jenisBarangActionPerformed(evt);
@@ -368,6 +374,8 @@ public class ownerTransaksi extends javax.swing.JFrame {
         });
         getContentPane().add(jenisBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 120, -1));
 
+        merkBarang.setBackground(new java.awt.Color(255, 75, 109));
+        merkBarang.setForeground(new java.awt.Color(255, 255, 255));
         merkBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 merkBarangActionPerformed(evt);
@@ -375,6 +383,8 @@ public class ownerTransaksi extends javax.swing.JFrame {
         });
         getContentPane().add(merkBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 120, -1));
 
+        namaBarang.setBackground(new java.awt.Color(255, 75, 109));
+        namaBarang.setForeground(new java.awt.Color(255, 255, 255));
         namaBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 namaBarangActionPerformed(evt);
@@ -383,6 +393,9 @@ public class ownerTransaksi extends javax.swing.JFrame {
         getContentPane().add(namaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 120, -1));
         getContentPane().add(invoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 120, -1));
 
+        pilihkurir.setBackground(new java.awt.Color(255, 75, 109));
+        pilihkurir.setFont(new java.awt.Font("Candara", 0, 12)); // NOI18N
+        pilihkurir.setForeground(new java.awt.Color(255, 255, 255));
         pilihkurir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pilihkurirActionPerformed(evt);

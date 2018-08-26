@@ -289,7 +289,8 @@ public class ownerDashboard extends javax.swing.JFrame {
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(900, 600));
+        setMinimumSize(new java.awt.Dimension(900, 599));
+        setPreferredSize(new java.awt.Dimension(900, 599));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sortMonth.setBackground(new java.awt.Color(27, 179, 133));
@@ -353,7 +354,7 @@ public class ownerDashboard extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tabelTransaksi);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 510, 390));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 510, 360));
 
         pegawai.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         pegawai.setForeground(new java.awt.Color(102, 0, 0));
@@ -411,7 +412,8 @@ public class ownerDashboard extends javax.swing.JFrame {
         });
         getContentPane().add(calender1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 310, 130, -1));
 
-        calender.setBackground(new java.awt.Color(153, 153, 153));
+        calender.setBackground(new java.awt.Color(255, 75, 109));
+        calender.setForeground(new java.awt.Color(255, 255, 255));
         calender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calenderActionPerformed(evt);

@@ -239,7 +239,7 @@ public class adminTransaksi extends javax.swing.JFrame {
         jumlahBarang = new javax.swing.JSpinner();
         jenisBarang = new javax.swing.JComboBox(jenis_Barang[1]);
         merkBarang = new javax.swing.JComboBox(merk_Barang[1]);
-        namaBarang = new javax.swing.JComboBox<String>();
+        namaBarang = new javax.swing.JComboBox<>();
         diskon = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelPembayaran = new javax.swing.JTable();
@@ -254,7 +254,8 @@ public class adminTransaksi extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(903, 600));
+        setMinimumSize(new java.awt.Dimension(900, 599));
+        setPreferredSize(new java.awt.Dimension(900, 599));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         total.setFont(new java.awt.Font("Tempus Sans ITC", 0, 18)); // NOI18N
@@ -269,9 +270,12 @@ public class adminTransaksi extends javax.swing.JFrame {
         tambahKurir.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
         tambahKurir.setForeground(new java.awt.Color(255, 255, 255));
         tambahKurir.setText("+");
-        getContentPane().add(tambahKurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 30, 20));
+        getContentPane().add(tambahKurir, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 40, 20));
         getContentPane().add(namaPembeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 120, 20));
 
+        pilihkurir.setBackground(new java.awt.Color(255, 75, 109));
+        pilihkurir.setFont(new java.awt.Font("Candara", 0, 12)); // NOI18N
+        pilihkurir.setForeground(new java.awt.Color(255, 255, 255));
         pilihkurir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pilihkurirActionPerformed(evt);
@@ -283,6 +287,9 @@ public class adminTransaksi extends javax.swing.JFrame {
         jumlahBarang.setFont(new java.awt.Font("Tempus Sans ITC", 0, 12)); // NOI18N
         getContentPane().add(jumlahBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, 110, -1));
 
+        jenisBarang.setBackground(new java.awt.Color(255, 75, 109));
+        jenisBarang.setFont(new java.awt.Font("Candara", 0, 12)); // NOI18N
+        jenisBarang.setForeground(new java.awt.Color(255, 255, 255));
         jenisBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jenisBarangActionPerformed(evt);
@@ -290,6 +297,9 @@ public class adminTransaksi extends javax.swing.JFrame {
         });
         getContentPane().add(jenisBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 120, -1));
 
+        merkBarang.setBackground(new java.awt.Color(255, 75, 109));
+        merkBarang.setFont(new java.awt.Font("Candara", 0, 12)); // NOI18N
+        merkBarang.setForeground(new java.awt.Color(255, 255, 255));
         merkBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 merkBarangActionPerformed(evt);
@@ -297,6 +307,9 @@ public class adminTransaksi extends javax.swing.JFrame {
         });
         getContentPane().add(merkBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 120, -1));
 
+        namaBarang.setBackground(new java.awt.Color(255, 75, 109));
+        namaBarang.setFont(new java.awt.Font("Candara", 0, 12)); // NOI18N
+        namaBarang.setForeground(new java.awt.Color(255, 255, 255));
         namaBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 namaBarangActionPerformed(evt);
